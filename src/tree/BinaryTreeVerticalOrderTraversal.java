@@ -11,10 +11,10 @@ public class BinaryTreeVerticalOrderTraversal {
     if (root == null) {
       return result;
     }
-    // keep tracks of the col position of each node visited
+    // keep track of the col position of each node visited
     // compute only when the node is polled from queue
     Map<TreeNode, Integer> cols = new HashMap<>();
-    // keep tracks of the values of the nodes that belong to each col position
+    // keep track of the values of the nodes that belong to each col position
     // compute only when the node is offered into queue
     Map<Integer, List<Integer>> colToNode = new HashMap<>();
     Queue<TreeNode> queue = new ArrayDeque<>();
@@ -28,7 +28,7 @@ public class BinaryTreeVerticalOrderTraversal {
     while (!queue.isEmpty()) {
       TreeNode cur = queue.poll();
       int col = cols.get(cur);
-       colToNode.computeIfAbsent(col, x -> new ArrayList<>()).add(cur.val);
+       colToNode.computeIfAbsent(col, k -> new ArrayList<>()).add(cur.val);
 //      if (!colToNode.containsKey(col)) {
 //        colToNode.put(col, new ArrayList<>());
 //      }
