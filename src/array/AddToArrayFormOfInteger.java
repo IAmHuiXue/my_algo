@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 /** https://leetcode.com/problems/add-to-array-form-of-integer/ */
-// test
+
 public class AddToArrayFormOfInteger {
     // k could be 10, 100, 1000,
     // so we need to make sure even if index reaches the start of num[]
