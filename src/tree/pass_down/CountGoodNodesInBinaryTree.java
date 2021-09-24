@@ -1,4 +1,4 @@
-package tree;
+package tree.pass_down;
 
 import util.TreeNode;
 
