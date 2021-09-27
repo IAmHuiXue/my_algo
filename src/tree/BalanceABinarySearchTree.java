@@ -1,6 +1,6 @@
 package tree;
 
-import tree.construct.ConvertSortedArrayToBinarySearchTree;
+import util.ConstructBST;
 import util.TreeNode;
 
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import java.util.List;
 public class BalanceABinarySearchTree {
     public TreeNode balanceBST(TreeNode root) {
         int[] array = deconstruct(root);
-        return ConvertSortedArrayToBinarySearchTree.sortedArrayToBST(array);
+        return ConstructBST.constructBST(array);
     }
 
     private int[] deconstruct(TreeNode root) {
