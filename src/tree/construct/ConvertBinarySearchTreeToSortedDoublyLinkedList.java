@@ -1,10 +1,10 @@
-package tree;
+package tree.construct;
 
 /** https://leetcode.com/problems/convert-binary-search-tree-to-sorted-doubly-linked-list/ */
 
 public class ConvertBinarySearchTreeToSortedDoublyLinkedList {
-    Node head = null, pre = null;
-    public Node treeToDoublyList(Node root) {
+    ListNode head = null, pre = null;
+    public ListNode treeToDoublyList(ListNode root) {
         if (root == null) {
             return null;
         }
@@ -14,7 +14,7 @@ public class ConvertBinarySearchTreeToSortedDoublyLinkedList {
         return head;
     }
 
-    private void inorder(Node root) {
+    private void inorder(ListNode root) {
         if (root == null) {
             return;
         }
@@ -25,21 +25,19 @@ public class ConvertBinarySearchTreeToSortedDoublyLinkedList {
         }
         if (pre != null) {
             pre.right = root;
-
         }
         root.left = pre;
         pre = root;
 
-
         inorder(root.right);
     }
 }
-class Node {
+class ListNode {
     public int val;
-    public Node left;
-    public Node right;
+    public ListNode left;
+    public ListNode right;
 
-    public Node(int _val) {
+    public ListNode(int _val) {
         val = _val;
     }
 }
