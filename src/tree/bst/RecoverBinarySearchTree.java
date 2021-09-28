@@ -1,13 +1,16 @@
-package tree;
+package tree.bst;
 
 import util.TreeNode;
 
-/** https://leetcode.com/problems/recover-binary-search-tree/ */
+/**
+ * https://leetcode.com/problems/recover-binary-search-tree/
+ */
 
 public class RecoverBinarySearchTree {
     TreeNode first;
     TreeNode second;
     TreeNode prev;
+
     public void recoverTree(TreeNode root) {
         traverse(root);
         int tmp = first.val;

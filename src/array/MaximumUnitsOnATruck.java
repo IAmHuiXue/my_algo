@@ -32,7 +32,7 @@ public class MaximumUnitsOnATruck {
     // time: O(nlog(n))
 
     public int maximumUnitsWithMaxHeap(int[][] boxTypes, int truckSize) {
-        PriorityQueue<int[]> maxHeap = new PriorityQueue<>((a, b)->b[1] - a[1]);
+        PriorityQueue<int[]> maxHeap = new PriorityQueue<>((a, b) -> b[1] - a[1]);
         for (int[] boxType : boxTypes) {
             maxHeap.offer(boxType);
         }
@@ -42,7 +42,7 @@ public class MaximumUnitsOnATruck {
             int boxCount = Math.min(truckSize, top[0]);
             unitCount += boxCount * top[1];
             truckSize -= boxCount;
-            if(truckSize == 0)
+            if (truckSize == 0)
                 break;
         }
         return unitCount;

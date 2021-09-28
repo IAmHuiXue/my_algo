@@ -5,7 +5,8 @@ import util.TreeNode;
 import java.util.*;
 
 /** https://leetcode.com/problems/binary-tree-vertical-order-traversal/ */
-public class BinaryTreeVerticalOrderTraversal {
+
+public class VerticalOrderTraversalOfBinaryTreeI {
   public List<List<Integer>> verticalOrder(TreeNode root) {
     List<List<Integer>> result = new ArrayList<>();
     if (root == null) {
@@ -28,7 +29,7 @@ public class BinaryTreeVerticalOrderTraversal {
     while (!queue.isEmpty()) {
       TreeNode cur = queue.poll();
       int col = cols.get(cur);
-       colToNode.computeIfAbsent(col, k -> new ArrayList<>()).add(cur.val);
+      colToNode.computeIfAbsent(col, k -> new ArrayList<>()).add(cur.val);
 //      if (!colToNode.containsKey(col)) {
 //        colToNode.put(col, new ArrayList<>());
 //      }

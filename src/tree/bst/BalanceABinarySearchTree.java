@@ -1,4 +1,4 @@
-package tree;
+package tree.bst;
 
 import util.ConstructBST;
 import util.TreeNode;

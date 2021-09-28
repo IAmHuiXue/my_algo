@@ -6,7 +6,9 @@ import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.Queue;
 
-/** https://leetcode.com/problems/serialize-and-deserialize-binary-tree/ */
+/**
+ * https://leetcode.com/problems/serialize-and-deserialize-binary-tree/
+ */
 
 public class SerializeAndDeserializeBinaryTree {
 
@@ -17,6 +19,7 @@ public class SerializeAndDeserializeBinaryTree {
         serializeHelper(sb, root);
         return sb.deleteCharAt(sb.length() - 1).toString();
     }
+
     private void serializeHelper(StringBuilder sb, TreeNode root) {
         if (root == null) {
             // use '#' to represent null
@@ -52,8 +55,4 @@ public class SerializeAndDeserializeBinaryTree {
         root.right = deserializeHelper(queue);
         return root;
     }
-
-  public static void main(String[] args) {
-    System.out.println(new SerializeAndDeserializeBinaryTree().deserialize("#"));
-  }
 }

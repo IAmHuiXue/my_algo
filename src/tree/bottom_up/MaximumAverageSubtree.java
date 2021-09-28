@@ -5,7 +5,7 @@ import util.TreeNode;
 /** https://leetcode.com/problems/maximum-average-subtree/ */
 
 /* this question requires multi answers from subtrees, so one way is to create a class to wrap it, or use array such
-*  as int[] {a, b} if a and b are the same data type */
+as int[] {a, b} if a and b are the same data type */
 
 public class MaximumAverageSubtree {
     public double maximumAverageSubtree(TreeNode root) {

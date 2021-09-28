@@ -9,13 +9,15 @@ import java.util.List;
 
 public class BinaryTreePaths {
     List<String> ans;
+
     public List<String> binaryTreePaths(TreeNode root) {
         ans = new ArrayList<>();
         solve(root, new StringBuilder());
         return ans;
     }
-    public void solve(TreeNode root, StringBuilder res){
-        if(root == null)
+
+    public void solve(TreeNode root, StringBuilder res) {
+        if (root == null)
             return;
 
         // sometimes it is good to record the length first before appending new elements
@@ -23,20 +25,18 @@ public class BinaryTreePaths {
         // or -1 -> '-','1'
         int len = res.length();
         res.append(root.val);
-        if(root.left == null && root.right == null){
+        if (root.left == null && root.right == null) {
             ans.add(res.toString());
-        }
-        else{
+        } else {
             res.append("->");
-            if(root.left != null)
+            if (root.left != null)
                 solve(root.left, res);
-            if(root.right != null)
+            if (root.right != null)
                 solve(root.right, res);
         }
         // this API is easier to set the length back to initial stage
         res.setLength(len);
     }
-
 
 //    public List<String> binaryTreePaths(TreeNode root) {
 //         List<String> result = new ArrayList<>();

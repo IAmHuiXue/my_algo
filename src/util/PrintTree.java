@@ -6,16 +6,20 @@ import java.util.List;
 import java.util.Queue;
 
 public class PrintTree {
+    private PrintTree() {}
+
     static final List<Integer> result = new ArrayList<>();
+
     public static void printTree(TreeNode root) {
         if (root != null) {
             levelOrder(root);
-            while (result.get(result.size() - 1) == null) {
+            while (result.get(result.size() - 1) == null) { // trim the trailing null
                 result.remove(result.size() - 1);
             }
         }
         System.out.println(result);
     }
+
     private static void levelOrder(TreeNode root) {
 
         Queue<TreeNode> q = new LinkedList<>();

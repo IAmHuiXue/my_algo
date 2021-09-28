@@ -2,7 +2,7 @@ package util;
 
 public class ConstructBST {
 
-    /** construct a BST via an ascending sorted array without null node */
+    /** construct a balanced BST via an ascending sorted array without null node */
 
     public static TreeNode constructBST(int[] nums) {
         return helper(nums, 0, nums.length - 1);

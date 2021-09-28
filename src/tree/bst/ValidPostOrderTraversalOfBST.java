@@ -1,4 +1,4 @@
-package tree;
+package tree.bst;
 
 /**
  * https://app.laicode.io/app/problem/304?plan=16

@@ -6,7 +6,7 @@ import java.util.*;
 
 /** https://leetcode.com/problems/vertical-order-traversal-of-a-binary-tree/ */
 
-public class VerticalOrderTraversalOfBinaryTree {
+public class VerticalOrderTraversalOfBinaryTreeII {
     public List<List<Integer>> verticalTraversal(TreeNode root) {
         List<List<Integer>> result = new ArrayList<>();
         if (root == null) {
@@ -44,6 +44,7 @@ public class VerticalOrderTraversalOfBinaryTree {
         return result;
 
     }
+
     static class Cell implements Comparable<Cell> {
         TreeNode node;
         int row;
@@ -54,6 +55,7 @@ public class VerticalOrderTraversalOfBinaryTree {
             row = r;
             col = c;
         }
+
         // rowIndex most priority
         // then value
         @Override

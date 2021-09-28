@@ -11,7 +11,7 @@ public class RobotBoundedInCircle {
         int[][] dirs = new int[][] {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
         int x = 0, y = 0;
 
-        // this is a smart way to define directions when we need to turn to a known direction
+        /** this is a smart way to define directions when we need to pick a specified direction */
         int idx = 0; // facing north
         for (char instr : instructions.toCharArray()) {
             if (instr == 'L') {
