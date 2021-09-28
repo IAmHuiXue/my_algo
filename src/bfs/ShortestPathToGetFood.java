@@ -3,14 +3,19 @@ package bfs;
 import java.util.ArrayDeque;
 import java.util.Queue;
 
+/**
+ * https://leetcode.com/problems/shortest-path-to-get-food/
+ */
+
 public class ShortestPathToGetFood {
     static final int[][] DIRS = {{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
+
     static class Cell {
         int x;
         int y;
         int dis;
 
-        Cell (int x, int y, int dis) {
+        Cell(int x, int y, int dis) {
             this.x = x;
             this.y = y;
             this.dis = dis;
@@ -64,7 +69,7 @@ public class ShortestPathToGetFood {
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
                 if (grid[i][j] == '*') {
-                    queue.offer(new int[] {i, j});
+                    queue.offer(new int[]{i, j});
                     break OuterLoop;
                 }
             }
@@ -82,7 +87,7 @@ public class ShortestPathToGetFood {
                     int nextY = cur[1] + dir[1];
                     // not out of bound, not barrier, and not visited
                     if (nextX >= 0 && nextX < m && nextY >= 0 && nextY < n && grid[nextX][nextY] != 'X' && !visited[nextX][nextY]) {
-                        queue.offer(new int[] {nextX, nextY});
+                        queue.offer(new int[]{nextX, nextY});
                         visited[nextX][nextY] = true;
                     }
                 }

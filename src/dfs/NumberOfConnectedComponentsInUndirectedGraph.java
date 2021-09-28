@@ -31,13 +31,11 @@ public class NumberOfConnectedComponentsInUndirectedGraph {
     }
 
     private void dfs(int curNode, List<List<Integer>> graph, boolean[] visited) {
-        if (visited[curNode]) {
-            return;
-        }
-
         visited[curNode] = true;
         for (int nei : graph.get(curNode)) {
-            dfs(nei, graph, visited);
+            if (!visited[nei]) {
+                dfs(nei, graph, visited);
+            }
         }
     }
 }

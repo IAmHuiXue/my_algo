@@ -1,11 +1,40 @@
 package string;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
 /** https://leetcode.com/problems/goat-latin */
 
 public class GoatLatin {
+    static class WithStringBuilder {
+        public String toGoatLatin(String sentence) {
+//            Set<Character> set = new HashSet<>();
+//            String vowels = "aeiouAEIOU";
+//            for (char ch : vowels.toCharArray()) {
+//                set.add(ch);
+//            }
+            Set<Character> set = new HashSet<>(Arrays.asList('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'));
+            StringBuilder sb = new StringBuilder();
+            String[] words = sentence.split(" ");
+            int count = 0;
+            for (String word : words) {
+                if (set.contains(word.charAt(0))) {
+                    sb.append(word);
+                } else {
+                    sb.append(word.substring(1)).append(word.charAt(0));
+                }
+                sb.append("ma");
+                count++;
+                for (int i = 1; i <= count; i++) {
+                    sb.append('a');
+                }
+                sb.append(' ');
+            }
+            return sb.deleteCharAt(sb.length() - 1).toString();
+        }
+    }
+
     static class TwoPointers {
         public String toGoatLatin(String sentence) {
             // 1. traverse the string from left to right
@@ -45,33 +74,6 @@ public class GoatLatin {
             char c = Character.toLowerCase(ch);
             return c == 'a' || c == 'e' || c == 'i'
                     || c == 'o' || c == 'u';
-        }
-    }
-
-    static class WithStringBuilder {
-        public String toGoatLatin(String sentence) {
-            String vowels = "aeiouAEIOU";
-            Set<Character> set = new HashSet<>();
-            for (char ch : vowels.toCharArray()) {
-                set.add(ch);
-            }
-            StringBuilder sb = new StringBuilder();
-            String[] words = sentence.split(" ");
-            int count = 0;
-            for (String word : words) {
-                if (set.contains(word.charAt(0))) {
-                    sb.append(word);
-                } else {
-                    sb.append(word.substring(1)).append(word.charAt(0));
-                }
-                sb.append("ma");
-                count++;
-                for (int i = 1; i <= count; i++) {
-                    sb.append('a');
-                }
-                sb.append(' ');
-            }
-            return sb.deleteCharAt(sb.length() - 1).toString();
         }
     }
 }

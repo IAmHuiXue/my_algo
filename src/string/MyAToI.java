@@ -22,7 +22,7 @@ public class MyAToI {
      *      Integer.MAX_VALUE/Integer.MIN_VALUE
      * 6. overflow a long
      */
-    public int MyAToI(String s) {
+    public static int MyAToI(String s) {
         // let us assume the num will not overflow a long
         if (s == null || s.length() == 0) { // case 1
             return 0;
@@ -43,7 +43,6 @@ public class MyAToI {
         // be prevented to go into the while loop
         while (index < len && Character.isDigit(s.charAt(index))) {
             sum = sum * 10 + (s.charAt(index) - '0'); // cast!
-            //
             if (isPositive && sum > (long) Integer.MAX_VALUE) {
                 return Integer.MAX_VALUE;
             }

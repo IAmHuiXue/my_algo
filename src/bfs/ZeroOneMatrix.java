@@ -9,7 +9,7 @@ public class ZeroOneMatrix {
     /*
     solution 1: for each element in mat (m * n), perform BFS to update the distance (m * n) -> (m * n)^2
 
-    solution 2: we reversely solve the problem by starting from all 0 elements considering then as the initial layer,
+    solution 2: we reversely solve the problem by starting from all 0 elements considering them as the initial layer,
         updating the distances of all the 1 in the path,
         so we perform BFS only once (m * n * 2)
      */
@@ -25,8 +25,6 @@ public class ZeroOneMatrix {
             for (int j = 0; j < n; j++) {
                 if (mat[i][j] == 0) {
                     visited[i][j] = true;
-
-                    // faster node representation for queue storage when the graph is 2D matrix
                     q.offer(new int[] {i, j});
                 }
             }

@@ -46,7 +46,7 @@ public class MinimumRemoveToMakeValidParentheses {
             }
         }
 
-        // put any indices remaining on stack into the set.
+        // put any indices remaining left bracket on stack into the set.
         while (!stack.isEmpty()) {
             indicesToRemove.add(stack.pollFirst());
         }
