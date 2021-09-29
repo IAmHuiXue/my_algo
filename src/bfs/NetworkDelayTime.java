@@ -64,21 +64,5 @@ public class NetworkDelayTime {
         public int compareTo(Cell anotherC) {
             return Integer.compare(this.time, anotherC.time);
         }
-
-        // I think the reason we do have to override these two methods becuase
-        // in the map, the key stored is Integer, not Cell, and we only use map methods related to Key
-
-//         @Override
-//         public boolean equals(Object o) {
-//             if (this == o) return true;
-//             if (o == null || getClass() != o.getClass()) return false;
-//             Cell cell = (Cell) o;
-//             return node == cell.node && time == cell.time;
-//         }
-
-//         @Override
-//         public int hashCode() {
-//             return Objects.hash(node, time);
-//         }
     }
 }
