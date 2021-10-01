@@ -14,7 +14,10 @@ public class GraphValidTree {
      */
 
     public boolean validTree(int n, int[][] edges) {
-        // 1. no circle
+
+        /** a tree is an undirected graph in which any two vertices are connected by exactly one path.
+         * In other words, any connected graph without simple cycles is a tree */
+        // 1. no cycle
         // 2. node from 0 to n - 1 should be all connected
 
         if (edges.length == 0) {
