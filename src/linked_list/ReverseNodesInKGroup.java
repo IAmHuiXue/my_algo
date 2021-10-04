@@ -26,9 +26,10 @@ public class ReverseNodesInKGroup {
     private ListNode reverseKGroupHelper(ListNode head, int k) {
         // find k nodes
         ListNode cur = head;
-        int count = 0;
-        while (cur != null && count++ < k - 1) {
+        int count = 1;
+        while (cur != null && count < k) {
             cur = cur.next;
+            count++;
         }
         // if cur = null -> k > the num of node partition
         if (cur == null) {
