@@ -1,4 +1,4 @@
-package dq;
+package sliding_window.dq;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;

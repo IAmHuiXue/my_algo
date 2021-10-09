@@ -1,8 +1,7 @@
-package dq;
+package sliding_window.dq;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.Map;
 
 /** https://leetcode.com/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/ */
 

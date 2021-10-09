@@ -1,4 +1,4 @@
-package dq;
+package sliding_window.dq;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -7,6 +7,9 @@ import java.util.Deque;
 
 public class ShortestSubarrayWithSumAtLeastK {
     static class Dq {
+
+        /** 核心：在 deque 里面 maintain 一个单调递增 的 prefix 的 元素的 index */
+
         public int shortestSubarray(int[] nums, int k) {
             int N = nums.length;
             int res = N + 1;
@@ -28,7 +31,7 @@ public class ShortestSubarrayWithSumAtLeastK {
         }
     }
 
-    static class PreFixSum {
+    static class PrefixSum {
         public static int shortestSubarray(int[] nums, int k) {
             if (nums.length == 1) {
                 return nums[0] >= k ? 1 : -1;
