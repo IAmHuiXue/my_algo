@@ -2,6 +2,7 @@ package data_structure;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.PriorityQueue;
 
 /**
  * https://leetcode.com/problems/lfu-cache/
@@ -118,4 +119,66 @@ public class LFUCache {
  * int param_1 = obj.get(key);
  * obj.put(key,value);
  */
+}
+
+class StockPrice {
+    Map<Integer, Node> map;
+    PriorityQueue<Node> minHeap;
+    PriorityQueue<Node> maxHeap;
+    int latestTime;
+
+    static class Node {
+        int time;
+        int price;
+
+        Node (int t, int p) {
+            time = t;
+            price = p;
+        }
+    }
+
+
+    public StockPrice() {
+        map = new HashMap<>();
+        minHeap = new PriorityQueue<>((a, b) -> Integer.compare(a.price, b.price));
+        maxHeap = new PriorityQueue<>((a, b) -> Integer.compare(b.price, a.price));
+
+    }
+
+    public void update(int timestamp, int price) {
+        Node node = map.get(timestamp);
+        if (node != null) {
+            node.price = price;
+        } else {
+            node = new Node(timestamp, price);
+            map.put(timestamp, node);
+            minHeap.offer(node);
+            maxHeap.offer(node);
+            latestTime = Math.max(latestTime, timestamp);
+        }
+
+    }
+
+    public int current() {
+        return map.get(latestTime).price;
+    }
+
+    public int maximum() {
+        return maxHeap.peek().price;
+    }
+
+    public int minimum() {
+        return minHeap.peek().price;
+
+    }
+
+    public static void main(String[] args) {
+        StockPrice t = new StockPrice();
+        t.update(1, 10);
+        t.update(2, 5);
+        t.update(1, 3);
+        System.out.println(t.maximum());
+
+
+    }
 }
