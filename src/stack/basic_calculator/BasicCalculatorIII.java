@@ -1,4 +1,4 @@
-package basic_calculator;
+package stack.basic_calculator;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -52,8 +52,5 @@ public class BasicCalculatorIII {
         }
         return res;
 
-    }
-    public static void main(String[] args) {
-        System.out.println(calculate("6 - 4 / 2 "));
     }
 }

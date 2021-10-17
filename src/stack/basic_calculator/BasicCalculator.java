@@ -1,4 +1,4 @@
-package basic_calculator;
+package stack.basic_calculator;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
