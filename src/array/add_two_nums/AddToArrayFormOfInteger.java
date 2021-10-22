@@ -1,4 +1,4 @@
-package array;
+package array.add_two_nums;
 
 import java.util.ArrayList;
 import java.util.Collections;

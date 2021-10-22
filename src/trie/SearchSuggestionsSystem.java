@@ -1,7 +1,10 @@
-package amazon;
+package trie;
+
+import util.Trie;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -42,13 +45,29 @@ public class SearchSuggestionsSystem {
         // time: O(n(log(n) for sort + n for 2 pointers' move) if we ignore the length of words
     }
 
+    static class WithTrie {
+        public List<List<String>> suggestedProducts(String[] products, String searchWord) {
+            Trie trie = new Trie(products);
+            List<List<String>> result = new ArrayList<>(searchWord.length());
+            StringBuilder prefix = new StringBuilder();
+            for (char c : searchWord.toCharArray()) {
+                prefix.append(c);
+                List<String> res = trie.findAllWordsWithPrefix(prefix.toString());
+                Collections.sort(res);
+                if (res.size() > 3) {
+                    result.add(res.subList(0, 3));
+                } else {
+                    result.add(res);
+                }
+            }
+            return result;
+        }
+    }
+
     // TODO
     static class SortWithBS {
 
     }
 
-    // TODO
-    static class Trie {
 
-    }
 }

@@ -1,4 +1,4 @@
-package array;
+package array.add_two_nums;
 
 /** https://leetcode.com/problems/add-binary/ */
 

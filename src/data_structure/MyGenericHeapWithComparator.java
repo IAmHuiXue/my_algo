@@ -1,6 +1,7 @@
 package data_structure;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.NoSuchElementException;
 
 /**
@@ -10,29 +11,35 @@ import java.util.NoSuchElementException;
  *
  */
 
-public class MyMinHeap {
-    private int[] array;
+// for demonstration of passing comparator
+    // here we require passing in a comparator in order to use the data structure
+
+public class MyGenericHeapWithComparator<E> {
+    private E[] array;
     private int size;
     private static final byte DEFAULT_CAPACITY = 10;
+    private final Comparator<E> comparator;
 
-    public MyMinHeap(int[] array) {
+    public MyGenericHeapWithComparator(E[] array, Comparator<E> comparator) {
         if (array == null || array.length == 0) {
             throw new IllegalArgumentException("input array can not be null or empty");
         }
         this.array = array;
+        this.comparator = comparator;
         size = array.length; // !
         heapify();
     }
 
-    public MyMinHeap() {
-        this(DEFAULT_CAPACITY);
+    public MyGenericHeapWithComparator(Comparator<E> comparator) {
+        this(DEFAULT_CAPACITY, comparator);
     }
 
-    public MyMinHeap(int cap) {
+    public MyGenericHeapWithComparator(int cap, Comparator<E> comparator) {
         if (cap <= 0) {
             throw new IllegalArgumentException("capacity can not be <= 0");
         }
-        array = new int[cap];
+        this.comparator = comparator;
+        array = (E[])(new Object[cap]);
     }
 
     public void heapSort() {
@@ -42,18 +49,18 @@ public class MyMinHeap {
          */
     }
 
-    public int peek() { // O(1)
+    public E peek() { // O(1)
         if (size == 0) {
             throw new NoSuchElementException("heap is empty");
         }
         return array[0];
     }
 
-    public int poll() { // O(log(n))
+    public E poll() { // O(log(n))
         if (size == 0) {
             throw new NoSuchElementException("heap is empty");
         }
-        int res = array[0];
+        E res = array[0];
         array[0] = array[--size];
         // we need to firstly size-- to make sure the array
         // now is legal before percolating
@@ -61,7 +68,7 @@ public class MyMinHeap {
         return res;
     }
 
-    public void offer(int ele) { // O(log(n))
+    public void offer(E ele) { // O(log(n))
         if (size == array.length) {
             expand();
         }
@@ -72,14 +79,14 @@ public class MyMinHeap {
         percolateUp(size - 1);
     }
 
-    public int update(int index, int ele) {
+    public E update(int index, E ele) {
         // return the original value
         if (index < 0 || index >= size) {
             throw new ArrayIndexOutOfBoundsException("invalid index range");
         }
-        int res = array[index];
+        E res = array[index];
         array[index] = ele;
-        if (ele > res) {
+        if (comparator.compare(ele, res) > 0) { // if ele 的优先级低
             percolateDown(index);
         } else {
             percolateUp(index);
@@ -87,7 +94,7 @@ public class MyMinHeap {
         return res;
     }
 
-    public boolean replace(int source, int target) {
+    public boolean replace(E source, E target) {
         if (size == 0) {
             throw new NoSuchElementException("heap is empty");
         }
@@ -119,7 +126,7 @@ public class MyMinHeap {
         // the heap property is maintained
         while (index > 0) { // index == 0 --> becomes parent
             int parentIndex = (index - 1) / 2;
-            if (array[parentIndex] > array[index]) {
+            if (comparator.compare(array[parentIndex], array[index]) > 0) {
                 swap(index, parentIndex);
                 index = parentIndex;
             } else {
@@ -144,10 +151,10 @@ public class MyMinHeap {
             // determine if right child exists
             // then compare with rChild and determine whether to swap
             // the ONLY possible case where rChild does not exist is when the last node is a left child
-            if (rightChild < size && array[rightChild] < array[childCandidate]) {
+            if (rightChild < size && comparator.compare(array[rightChild], array[childCandidate]) < 0) {
                 childCandidate = rightChild;
             }
-            if (array[childCandidate] < array[index]) {
+            if (comparator.compare(array[childCandidate], array[index]) < 0) {
                 swap(childCandidate, index);
                 index = childCandidate;
             } else {
@@ -157,7 +164,7 @@ public class MyMinHeap {
     }
 
     private void swap(int i, int j) {
-        int tmp = array[i];
+        E tmp = array[i];
         array[i] = array[j];
         array[j] = tmp;
     }

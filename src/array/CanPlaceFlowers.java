@@ -1,6 +1,6 @@
 package array;
 
-/** https://leetcode.com/problems/beautiful-arrangement/ */
+/** https://leetcode.com/problems/can-place-flowers/ */
 
 public class CanPlaceFlowers {
     public boolean canPlaceFlowers(int[] flowerbed, int n) {
