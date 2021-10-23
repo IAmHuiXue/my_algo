@@ -11,8 +11,8 @@ public class LRUCache {
     private Map<Integer, Node> records;
     // 以下对于 head 和 tail 的用法就是
     // 两个 pointer 相当于两个 dummy
-    private static final Node HEAD = new Node(0, 0); // add to head
-    private static final Node TAIL = new Node(0, 0); // evict from tail
+    private final Node head = new Node(0, 0); // add to head
+    private final Node tail = new Node(0, 0); // evict from tail
     private int capacity;
 
     static class Node {
@@ -30,8 +30,8 @@ public class LRUCache {
     public LRUCache(int capacity) {
         records = new HashMap<>();
         this.capacity = capacity;
-        HEAD.next = TAIL;
-        TAIL.prev = HEAD;
+        head.next = tail;
+        tail.prev = head;
     }
 
     public int get(int key) {
@@ -50,10 +50,12 @@ public class LRUCache {
             if (records.size() < capacity) {
                 node = new Node(key, value);
             } else {
-                node = TAIL.prev;
+                node = tail.prev;
                 evict(node);
                 node.key = key;
                 node.value = value;
+                // evict(node); put it here is wrong
+                // because this way, the original key of the tail.prev is not removed from map
             }
         } else {
             node.value = value;
@@ -71,12 +73,14 @@ public class LRUCache {
 
     private void addHead(Node node) {
         records.put(node.key, node);
-        HEAD.next.prev = node;
-        node.next = HEAD.next;
-        HEAD.next = node;
-        node.prev = HEAD;
+        head.next.prev = node;
+        node.next = head.next;
+        head.next = node;
+        node.prev = head;
     }
+
 }
+
 
 /**
  * Your LRUCache object will be instantiated and called as such:

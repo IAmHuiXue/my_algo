@@ -55,6 +55,8 @@ public class LRUCacheGenerics<K, V> {
                 evict(node);
                 node.key = key;
                 node.value = value;
+                // evict(node); put it here is wrong
+                // because this way, the original key of the tail.prev is not removed from map
             }
         } else {
             node.value = value;
