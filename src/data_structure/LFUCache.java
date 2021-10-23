@@ -2,7 +2,6 @@ package data_structure;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.PriorityQueue;
 
 /**
  * https://leetcode.com/problems/lfu-cache/
@@ -12,6 +11,9 @@ import java.util.PriorityQueue;
 
 public class LFUCache {
     private Map<Integer, Node> nodeMap;
+
+    // 在 lfu 里，每一个 node 存在一个 list 里面，而有不同多个 list，按照 frequency 来区分：
+    // 同时每个 list 里面 the least recently used node 在 tail
     private Map<Integer, DLList> countMap;
     private int limit;
     private int leastFreq;
@@ -19,7 +21,7 @@ public class LFUCache {
     static class Node {
         int key;
         int value;
-        int count;
+        int count; // ！
         Node next;
         Node prev;
 
@@ -33,20 +35,20 @@ public class LFUCache {
     static class DLList {
         // 以下对于 head 和 tail 的用法就是
         // 两个 pointer 相当于两个 dummy, size 来控制实际 node 个数
-        static final Node HEAD = new Node(0, 0);// add to head
-        static final Node TAIL = new Node(0, 0); // remove from tail
+        final Node head = new Node(0, 0); // add to head
+        final Node tail = new Node(0, 0); // remove from tail
         int size;
 
         public DLList() {
-            HEAD.next = TAIL;
-            TAIL.prev = HEAD;
+            head.next = tail;
+            tail.prev = head;
         }
 
         void addHead(Node node) {
-            node.next = HEAD.next;
-            HEAD.next.prev = node;
-            HEAD.next = node;
-            node.prev = HEAD;
+            node.next = head.next;
+            head.next.prev = node;
+            head.next = node;
+            node.prev = head;
             size++;
         }
 
@@ -59,7 +61,7 @@ public class LFUCache {
 
         Node removeLast() {
             if (size != 0) {
-                Node node = TAIL.prev;
+                Node node = tail.prev;
                 remove(node);
                 return node;
             }
@@ -91,26 +93,29 @@ public class LFUCache {
             node = new Node(key, value);
             nodeMap.put(key, node);
             if (nodeMap.size() > limit) {
-                DLList oldList = countMap.get(leastFreq);
-                nodeMap.remove(oldList.removeLast().key);
+                DLList leastFreqList = countMap.get(leastFreq);
+                nodeMap.remove(leastFreqList.removeLast().key);
             }
-            leastFreq = 1;
-            DLList newList = countMap.getOrDefault(node.count, new DLList());
-            newList.addHead(node);
-            countMap.put(node.count, newList);
+            leastFreq = 1; // because the newly added node's freq is 1
+            countMap.computeIfAbsent(leastFreq, k -> new DLList()).addHead(node);
+//            DLList leastFreqList = countMap.getOrDefault(leastFreq, new DLList());
+//            leastFreqList.addHead(node);
+//            countMap.putIfAbsent(leastFreq, leastFreqList);
         }
     }
 
     private void update(Node node) {
+        // node needs to be updated with the new frequency -> switched to another DLList
         DLList oldList = countMap.get(node.count);
         oldList.remove(node);
         if (node.count == leastFreq && oldList.size == 0) {
-            leastFreq++;
+            leastFreq++; // update leastFreq is needed
         }
         node.count++;
-        DLList newList = countMap.getOrDefault(node.count, new DLList());
-        newList.addHead(node);
-        countMap.put(node.count, newList);
+        countMap.computeIfAbsent(node.count, k -> new DLList()).addHead(node);
+//        DLList newList = countMap.getOrDefault(node.count, new DLList());
+//        newList.addHead(node);
+//        countMap.put(node.count, newList);
     }
 
 /**
@@ -121,64 +126,3 @@ public class LFUCache {
  */
 }
 
-class StockPrice {
-    Map<Integer, Node> map;
-    PriorityQueue<Node> minHeap;
-    PriorityQueue<Node> maxHeap;
-    int latestTime;
-
-    static class Node {
-        int time;
-        int price;
-
-        Node (int t, int p) {
-            time = t;
-            price = p;
-        }
-    }
-
-
-    public StockPrice() {
-        map = new HashMap<>();
-        minHeap = new PriorityQueue<>((a, b) -> Integer.compare(a.price, b.price));
-        maxHeap = new PriorityQueue<>((a, b) -> Integer.compare(b.price, a.price));
-
-    }
-
-    public void update(int timestamp, int price) {
-        Node node = map.get(timestamp);
-        if (node != null) {
-            node.price = price;
-        } else {
-            node = new Node(timestamp, price);
-            map.put(timestamp, node);
-            minHeap.offer(node);
-            maxHeap.offer(node);
-            latestTime = Math.max(latestTime, timestamp);
-        }
-
-    }
-
-    public int current() {
-        return map.get(latestTime).price;
-    }
-
-    public int maximum() {
-        return maxHeap.peek().price;
-    }
-
-    public int minimum() {
-        return minHeap.peek().price;
-
-    }
-
-    public static void main(String[] args) {
-        StockPrice t = new StockPrice();
-        t.update(1, 10);
-        t.update(2, 5);
-        t.update(1, 3);
-        System.out.println(t.maximum());
-
-
-    }
-}
