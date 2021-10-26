@@ -2,14 +2,17 @@ package topK;
 
 import java.util.PriorityQueue;
 
-/** https://leetcode.com/problems/kth-largest-element-in-a-stream/ */
+/**
+ * https://leetcode.com/problems/kth-largest-element-in-a-stream/
+ */
 
 public class KthLargestElementInAStream {
     private PriorityQueue<Integer> minHeap;
     private int k;
+
     public KthLargestElementInAStream(int k, int[] nums) {
         // will maintain a minHeap of size k
-        // this way we make sure minHeap.peek() is the kth biggest element
+        // this way we make sure minHeap.peek() is the-kth biggest element
         minHeap = new PriorityQueue<>();
         this.k = k;
         for (int num : nums) {
@@ -30,7 +33,8 @@ public class KthLargestElementInAStream {
     static class MySolution {
         private PriorityQueue<Integer> minHeap;
         private int k;
-    public MySolution(int k, int[] nums) {
+
+        public MySolution(int k, int[] nums) {
             // will maintain a minHeap of size k
             // this way we make sure minHeap.peek() is the kth the biggest element
             minHeap = new PriorityQueue<>();

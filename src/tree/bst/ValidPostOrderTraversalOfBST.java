@@ -12,25 +12,25 @@ public class ValidPostOrderTraversalOfBST {
         return solve(post, 0, post.length - 1);
     }
 
-    private boolean solve(int[] arr, int strt, int end) {
-        if (strt >= end) {
+    private boolean solve(int[] arr, int start, int end) {
+        if (start >= end) {
             return true;
         }
 
         int x = arr[end], index = end - 1;
-        while (index >= strt && arr[index] > x) {
+        while (index >= start && arr[index] > x) {
             index--;
         }
         int temp = index;
-        while (index >= strt) {
+        while (index >= start) {
             if (arr[index] > x) {
                 return false;
             }
             index--;
         }
-//        if (temp == strt) {
-//            return solve(arr, strt, end - 1);
+//        if (temp == start) {
+//            return solve(arr, start, end - 1);
 //        }
-        return solve(arr, strt, temp) && solve(arr, temp + 1, end - 1);
+        return solve(arr, start, temp) && solve(arr, temp + 1, end - 1);
     }
 }

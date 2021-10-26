@@ -43,4 +43,61 @@ public class WordLadder {
         }
         return 0;
     }
+
+    public int ladderLength2(String beginWord, String endWord, List<String> wordList) {
+        // Write your solution here
+        if (!wordList.contains(endWord)) {
+            return 0;
+        }
+        if (!wordList.contains(beginWord)) {
+            wordList.add(beginWord);
+        }
+
+        Set<String> dict = new HashSet<>(wordList);
+
+        Map<String, List<String>> graph = new HashMap<>();
+        for (String word : dict) {
+            graph.put(word, new ArrayList<>());
+        }
+        for (String word : wordList) {
+            StringBuilder sb = new StringBuilder(word);
+            for (int i = 0; i < word.length(); i++) {
+                char org = word.charAt(i);
+                for (char ch = 'a'; ch <= 'z'; ch++) {
+                    if (ch != org) {
+                        sb.setCharAt(i, ch);
+                        String next = sb.toString();
+                        if (dict.contains(next)) {
+                            graph.get(word).add(next);
+                        }
+                    }
+                }
+                sb.setCharAt(i, org);
+            }
+        }
+
+        Queue<String> q = new ArrayDeque<>();
+        int steps = 1;
+        q.offer(beginWord);
+        dict.remove(beginWord);
+
+        while (!q.isEmpty()) {
+            int size = q.size();
+            for (int i = 0; i < size; i++) {
+                String cur = q.poll();
+                if (cur.equals(endWord)) {
+                    return steps;
+                }
+                for (String nei : graph.get(cur)) {
+                    if (dict.remove(nei)) {
+                        q.offer(nei);
+                    }
+                }
+            }
+            steps++;
+        }
+
+        return 0;
+    }
+
 }
