@@ -28,9 +28,10 @@ public class OpenTheLock {
                     return steps;
                 }
                 sb = new StringBuilder(cur);
+                // find neighbors
                 for (int j = 0; j < sb.length(); j++) {
                     char org = sb.charAt(j);
-                    // 2 cases
+                    // 2 cases because of two directions
                     char next = org == '9' ? '0' : (char) (org + 1);
                     sb.setCharAt(j, next);
                     String nxt = sb.toString();

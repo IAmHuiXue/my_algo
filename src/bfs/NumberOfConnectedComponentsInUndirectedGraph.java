@@ -22,7 +22,6 @@ public class NumberOfConnectedComponentsInUndirectedGraph {
         }
 
         int count = 0;
-        // Queue<Integer> q = new ArrayDeque<>();
         boolean[] visited = new boolean[n];
         for (int i = 0; i < n; i++) {
             if (!visited[i]) {

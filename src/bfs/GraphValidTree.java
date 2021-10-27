@@ -5,18 +5,19 @@ import java.util.*;
 /** https://app.laicode.io/app/problem/497?plan=25 */
 
 public class GraphValidTree {
-    /*
+    /**
     Given n nodes labeled from 0 to n - 1 and a list of undirected edges (each edge is a pair of nodes),
     write a function to check whether these edges make up a valid tree.
-
+    <p>
     Note: you can assume that no duplicate edges will appear in edges. Since all edges are undirected,
     [0, 1] is the same as [1, 0]and thus will not appear together in edges.
      */
 
     public boolean validTree(int n, int[][] edges) {
 
-        /** a tree is an undirected graph in which any two vertices are connected by exactly one path.
-         * In other words, any connected graph without simple cycles is a tree */
+        /* a tree is an undirected graph in which any two vertices are connected by exactly one path.
+          In other words, any connected graph without simple cycles is a tree */
+
         // 1. no cycle
         // 2. node from 0 to n - 1 should be all connected
 

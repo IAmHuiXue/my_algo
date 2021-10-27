@@ -10,8 +10,8 @@ import java.util.Queue;
 
 public class ShortestDistanceFromAllBuildings {
 
-    // need to think about -> is num of buildings more or num of free lands ?
-    // bfs require traversing the entire graph from one point
+    // need to think about -> is num of buildings more or num of free lands more?
+    // bfs requires traversing the entire graph from one point
     // if fewer houses, bfs from house points, and vise versa
 
     private static final int[][] DIRS = {{0, 1}, {1, 0}, {-1, 0}, {0, -1}};
