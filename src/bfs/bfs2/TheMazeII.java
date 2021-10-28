@@ -1,4 +1,4 @@
-package bfs;
+package bfs.bfs2;
 
 import java.util.Arrays;
 import java.util.PriorityQueue;
@@ -11,12 +11,12 @@ public class TheMazeII {
     static final int[][] DIRS = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
 
     public int shortestDistance(int[][] maze, int[] start, int[] destination) {
-        // distance[i][j] represents the distance from start position to (i, j)
+        // distance[i][j] represents the minimum distance from start position to (i, j)
         int[][] distance = new int[maze.length][maze[0].length];
         for (int[] row : distance) {
             Arrays.fill(row, Integer.MAX_VALUE);
         }
-        dijkstra(maze, start, distance);
+        dijkstra(maze, start, distance, destination);
         // we need to perform an entire dijkstra to get the final result.
         // during the operation, distance[destination[0]][destination[1]] may be updated to shorter answer
         // at later steps
@@ -24,7 +24,7 @@ public class TheMazeII {
                 -1 : distance[destination[0]][destination[1]];
     }
 
-    private void dijkstra(int[][] maze, int[] start, int[][] distance) {
+    private void dijkstra(int[][] maze, int[] start, int[][] distance, int[] destination) {
         distance[start[0]][start[1]] = 0;
         int m = maze.length;
         int n = maze[0].length;
@@ -33,6 +33,14 @@ public class TheMazeII {
         q.offer(new int[]{start[0], start[1], 0});
         while (!q.isEmpty()) {
             int[] cur = q.poll();
+            // because of BFS2, we can early return
+            if (cur[0] == destination[0] && cur[1] == destination[1]) {
+                return;
+            }
+            // because of BFS, we do not re-expand the same node
+            if (distance[cur[0]][cur[1]] < cur[2]) {
+                continue;
+            }
             for (int[] dir : DIRS) {
                 int nr = cur[0] + dir[0];
                 int nc = cur[1] + dir[1];

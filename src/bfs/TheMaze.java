@@ -27,7 +27,7 @@ public class TheMaze {
                     int nr = cur[0] + dir[0];
                     int nc = cur[1] + dir[1];
                     // as long as the ball does not meet a wall, keep moving towards this direction
-                    while (nr >= 0 && nr < m && nc >= 0 && nc < n && maze[nr][nc] == 0) {
+                    while (nr >= 0 && nr < m && nc >= 0 && nc < n && maze[nr][nc] != 1) {
                         nr += dir[0];
                         nc += dir[1];
                     }
@@ -50,17 +50,17 @@ public class TheMaze {
             return dfs(maze, start, destination, visited);
         }
 
-        private static boolean dfs(int[][] maze, int[] start, int[] destination, boolean[][] visited) {
-            if (visited[start[0]][start[1]]) {
+        private static boolean dfs(int[][] maze, int[] curStop, int[] destination, boolean[][] visited) {
+            if (visited[curStop[0]][curStop[1]]) {
                 return false;
             }
-            if (start[0] == destination[0] && start[1] == destination[1]) {
+            if (curStop[0] == destination[0] && curStop[1] == destination[1]) {
                 return true;
             }
-            visited[start[0]][start[1]] = true; // only when we stop here we need to mark as visited
+            visited[curStop[0]][curStop[1]] = true; // only when we stop here we need to mark as visited
             for (int[] dir : DIRS) {
-                int x = start[0] + dir[0];
-                int y = start[1] + dir[1];
+                int x = curStop[0] + dir[0];
+                int y = curStop[1] + dir[1];
                 while (x >= 0 && x < maze.length && y >= 0 && y < maze[0].length && maze[x][y] == 0) {
                     x += dir[0]; // while we traverse, we should not mark as visited until we stop
                     y += dir[1];
