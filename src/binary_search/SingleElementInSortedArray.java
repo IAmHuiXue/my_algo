@@ -8,6 +8,7 @@ public class SingleElementInSortedArray {
         int right = nums.length - 1;
         while (left < right) {
             int mid = left + (right - left) / 2;
+            // 利用其中一个 half 的 size 的单复数来确定落单的元素到底在哪边
             boolean halvesAreEven = (right - mid) % 2 == 0;
             if (nums[mid] == nums[mid + 1]) {
                 if (halvesAreEven) {

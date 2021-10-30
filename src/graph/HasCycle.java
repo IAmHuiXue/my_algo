@@ -71,6 +71,11 @@ public class HasCycle {
                 return numExpanded != n;
             }
         }
+
+        //todo:
+        static class DFS {
+
+        }
     }
 
     static class UAG {

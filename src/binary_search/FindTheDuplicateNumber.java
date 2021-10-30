@@ -37,11 +37,11 @@ public class FindTheDuplicateNumber {
             int duplicate = -1;
 
             while (low <= high) {
-                int cur = (low + high) / 2;
+                int cur = low + (high - low) / 2;
 
                 // Count how many numbers in 'nums' are less than or equal to 'cur'
                 int count = 0;
-                for (int num : nums) {
+                for (int num : nums) { //n
                     if (num <= cur)
                         count++;
                 }

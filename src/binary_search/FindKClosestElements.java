@@ -10,7 +10,7 @@ public class FindKClosestElements {
     static class SortWithCustomComparator {
         public List<Integer> findClosestElements(int[] arr, int k, int x) {
             // Convert from array to list first to make use of Collections.sort()
-            List<Integer> sortedArr = new ArrayList<Integer>();
+            List<Integer> sortedArr = new ArrayList<>();
             for (int num: arr) {
                 sortedArr.add(num);
             }
