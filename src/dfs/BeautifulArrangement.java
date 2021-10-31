@@ -20,11 +20,6 @@ public class BeautifulArrangement {
 
     private void dfs(int[] array, int[] num, int index) {
         if (index == array.length) {
-            for (int i = 1; i <= array.length - 1; i++) {
-                if (array[i] % i != 0 && i % array[i] != 0) {
-                    return;
-                }
-            }
             num[0]++;
             return;
         }
