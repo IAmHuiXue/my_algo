@@ -1,9 +1,12 @@
 package dfs;
 
-/** https://leetcode.com/problems/check-if-word-can-be-placed-in-crossword/ */
+/**
+ * https://leetcode.com/problems/check-if-word-can-be-placed-in-crossword/
+ */
 
 public class CheckIfWordCanBePlacedInCrossword {
     static final int[][] DIRS = {{0, 1}, {1, 0}, {-1, 0}, {0, -1}};
+
     public boolean placeWordInCrossword(char[][] board, String word) {
         int rows = board.length, cols = rows > 0 ? board[0].length : 0;
         for (int row = 0; row < rows; row++) {
@@ -17,7 +20,7 @@ public class CheckIfWordCanBePlacedInCrossword {
     }
 
     private static boolean isPossible(char[][] grid, String word, int row, int col, int rows, int cols) {
-//        The start character should not '#', or when is it not empty, it should be the same char as the first char of word
+//        The start character should not be '#', or when is it not empty, it should be the same char as the first char of word
         if (grid[row][col] == '#' || (grid[row][col] != ' ' && grid[row][col] != word.charAt(0))) {
             return false;
         }

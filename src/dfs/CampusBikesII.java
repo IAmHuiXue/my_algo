@@ -3,7 +3,7 @@ package dfs;
 /** https://leetcode.com/problems/campus-bikes-ii/ */
 
 public class CampusBikesII {
-    // Maximum number of bikes is 10
+    // Maximum number of bikes is 10, this information is provided by the problem
     private boolean visited [] = new boolean[10];
     private int smallestDistanceSum = Integer.MAX_VALUE;
 
