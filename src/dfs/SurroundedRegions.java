@@ -4,12 +4,15 @@ import java.util.ArrayDeque;
 import java.util.Queue;
 
 /**
- * https://leetcode.com/problems/surrounded-regions/solution/
+ * https://leetcode.com/problems/surrounded-regions/
  */
 
 public class SurroundedRegions {
     private static final int[][] DIRS = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
 
+    /** 先扫一遍，把不符合的 O 转化成一个中间值
+     *  然后再 扫一遍把剩下的 O 变成 X，中间值变回 O
+     */
     static class DFS {
         public static void solve(char[][] board) {
             // corner case
@@ -23,18 +26,18 @@ public class SurroundedRegions {
             // start from boarders, if an 'O' is found, dfs and render all adjacent 'O's
             for (int i = 0; i < m; i++) {
                 if (board[i][0] == 'O') {
-                    dfs(board, i, 0, m, n);
+                    render(board, i, 0, m, n);
                 }
                 if (board[i][n - 1] == 'O') {
-                    dfs(board, i, n - 1, m, n);
+                    render(board, i, n - 1, m, n);
                 }
             }
             for (int j = 0; j < n; j++) {
                 if (board[0][j] == 'O') {
-                    dfs(board, 0, j, m, n);
+                    render(board, 0, j, m, n);
                 }
                 if (board[m - 1][j] == 'O') {
-                    dfs(board, m - 1, j, m, n);
+                    render(board, m - 1, j, m, n);
                 }
             }
 
@@ -54,13 +57,13 @@ public class SurroundedRegions {
             }
         }
 
-        private static void dfs(char[][] board, int r, int c, int R, int C) {
+        private static void render(char[][] board, int r, int c, int R, int C) {
             board[r][c] = 'E';
             for (int[] dir : DIRS) {
                 int nr = r + dir[0];
                 int nc = c + dir[1];
                 if (nr >= 0 && nr < R && nc >= 0 && nc < C && board[nr][nc] == 'O') {
-                    dfs(board, nr, nc, R, C);
+                    render(board, nr, nc, R, C);
                 }
             }
         }

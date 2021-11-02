@@ -21,7 +21,6 @@ public class WordBreakII {
             result.add(sb.deleteCharAt(sb.length() - 1).toString());
             return;
         }
-
         for (int i = index; i < word.length(); i++) {
             String cur = word.substring(index, i + 1);
             int len = sb.length();
