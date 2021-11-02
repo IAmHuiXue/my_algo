@@ -66,7 +66,8 @@ public class FloodFill {
                     for (int[] dir : DIRS) {
                         int nextX = dir[0] + cur[0];
                         int nextY = dir[1] + cur[1];
-                        if (nextX >= 0 && nextX < image.length && nextY >= 0 && nextY < image[0].length && image[nextX][nextY] == curColor) {
+                        if (nextX >= 0 && nextX < image.length && nextY >= 0 &&
+                                nextY < image[0].length && image[nextX][nextY] == curColor) {
                             queue.offer(new int[]{nextX, nextY});
                         }
                     }

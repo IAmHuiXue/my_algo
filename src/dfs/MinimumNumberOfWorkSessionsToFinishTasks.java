@@ -6,10 +6,13 @@ import java.util.Arrays;
 
 public class MinimumNumberOfWorkSessionsToFinishTasks {
     public int minSessions(int[] tasks, int sessionTime) {
-        // max(tasks[i]) <= sessionTime <= 15
+
         Arrays.sort(tasks); // 剪枝
         int[] result = new int[]{tasks.length};
         // int[] sessions -> trick
+        //  根据题意，max(tasks[i]) <= sessionTime <= 15，意味着 worst case 也不会超过 tasks.length 个 sessions
+        // new int[tasks.length] 的 length 代表了一个 sessions 的 capacity
+        // 通过 dfs 里面新增 session 后，每一个 sessions[i] 就代表对应 session 此时所花费的时间
         dfs(tasks, result, tasks.length - 1, sessionTime, new int[tasks.length], 0);
         return result[0];
     }

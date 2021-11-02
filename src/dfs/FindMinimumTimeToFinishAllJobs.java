@@ -5,6 +5,14 @@ import java.util.Arrays;
 /** https://leetcode.com/problems/find-minimum-time-to-finish-all-jobs/ */
 
 public class FindMinimumTimeToFinishAllJobs {
+
+    // 模型就是 subset
+    // level 指 每一个 job
+    // branches 指对于每一个 job 来说，有 k 种分配的选择
+
+    // 然后在 dfs 过程中，通过 sort，early return，de-dup 来优化剪枝
+
+
     public int minimumTimeRequired(int[] jobs, int k) {
         Arrays.sort(jobs);
         int[] result = new int[]{Integer.MAX_VALUE}; // 剪枝：descending order 开始 dfs
@@ -38,5 +46,6 @@ public class FindMinimumTimeToFinishAllJobs {
             sums[i] -= jobs[index];
         }
     }
-    // time: O(
+    // time: O(nlog(n) for sort + k^n for dfs)
+    // space: O(k for sums array + n for call stack)
 }
