@@ -2,7 +2,9 @@ package bfs.bfs2;
 
 import java.util.*;
 
-/** https://leetcode.com/problems/network-delay-time/ */
+/**
+ * https://leetcode.com/problems/network-delay-time/
+ */
 
 public class NetworkDelayTime {
     public int networkDelayTime(int[][] times, int n, int k) {
@@ -10,16 +12,12 @@ public class NetworkDelayTime {
         // 这道题可以转化为，通过 bfs2 来求出从 k 点到所有点的最短距离
         // 1，如果有点没有 reach 到， 根据题意，return -1
         // 2，所有距离中，最大值就是结果，因为可以理解为，当 reach 到这个点时，其他点已经都 reach 到了
-            // 而且通过 bfs2 的算法，我们已经可以确保 reach 每一个点已经是最小距离了
-
+        // 而且通过 bfs2 的算法，我们已经可以确保 reach 每一个点已经是最小距离了
 
         // build the graph
         // the V of map needs to include 2 states: neighbor node and its cost
         Map<Integer, List<Cell>> graph = new HashMap<>();
         for (int[] edge : times) {
-//            List<Cell> neighbors = graph.getOrDefault(edge[0], new ArrayList<>());
-//            neighbors.add(new Cell(edge[1], edge[2]));
-//            graph.put(edge[0], neighbors);
             graph.computeIfAbsent(edge[0], x -> new ArrayList<>()).add(new Cell(edge[1], edge[2]));
         }
 
@@ -35,15 +33,9 @@ public class NetworkDelayTime {
             // this is BFS2, therefore we should check one's expand state as soon as we poll it out
             if (!costs.containsKey(cur.node)) { // it has not been expanded before
                 costs.put(cur.node, cur.time);
-                List<Cell> neighbors = graph.get(cur.node);
-                // dest nodes will not have outgoing edges, so they will not have neighbors in graph map
-                if (neighbors != null) {
-                    for (Cell nei : neighbors) {
-                        // it could be ignored because for BFS2, nodes could be generated multiple times but
-                        // will only be expanded once. But here we perform this to reduce the times of heap operations
-//                        if (!costs.containsKey(nei.node)) {
-                            minHeap.offer(new Cell(nei.node, cur.time + nei.time)); // !
-//                        }
+                for (Cell nei : graph.getOrDefault(cur.node, new ArrayList<>())) {
+                    if (!costs.containsKey(nei.node)) { // only generate the nei node if it has not been expanded yet
+                        minHeap.offer(new Cell(nei.node, cur.time + nei.time));
                     }
                 }
             }
