@@ -33,6 +33,9 @@ public class SubarraySumEqualsK {
             // convert to we are at j and have prefixSum(j), if there is a prefixSum(i) before us == prefixSum(j) - k
             // we store prefixSum and the frequency of each prefixSum value in a map
 
+            // 从左往右，左边 scan 过记录过，所以 i, j 我们应该 对于 prefixSum(j) 找 一个 prefixSum(i) which = prefixSum(j) - k
+            // 而不是反过来
+
             // <key=prefixSum, value=frequency>
             Map<Integer, Integer> map = new HashMap<>();
             map.put(0, 1); // !

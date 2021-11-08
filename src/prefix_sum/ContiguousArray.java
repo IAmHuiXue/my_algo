@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class ContiguousArray {
     public int findMaxLength(int[] nums) {
-        // 巧解： 把 0 翻成 -1，当 sliding window 的和 为 0， 那么此时的 subarray 就是一个 candidate 解
+        // 巧解： 把 0 翻成 -1，当 sliding window 的和为0， 那么此时的 subarray 就是一个 candidate 解
         for (int i = 0; i < nums.length; i++) {
             if (nums[i] == 0) {
                 nums[i] = -1;
@@ -23,8 +23,8 @@ public class ContiguousArray {
             if (map.containsKey(prefix)) {
                 res = Math.max(res, i - map.get(prefix));
             } else {
-                // we put it only if there is not this prefix
-                // because if there is one, the index of it must be smaller than the current one
+                // we put it only if there is not this prefix in the map
+                // because if there is one, it must be the leftmost one compared with the current one,
                 // and it could potentially form a longer result
                 map.put(prefix, i);
             }

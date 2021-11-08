@@ -3,7 +3,7 @@ package linked_list;
 import util.ListNode;
 
 /**
- * Given a linked list and an sorted array of integers as the indices in the list.
+ * Given a linked list and a sorted array of integers as the indices in the list.
  * Delete all the nodes at the indices in the original list.
  *
  * Examples
@@ -12,7 +12,7 @@ import util.ListNode;
  *
  * Assumptions
  *
- * the given indices array is not null and it is guaranteed to contain non-negative integers sorted in ascending order.
+ * the given indices array is not null, and it is guaranteed to contain non-negative integers sorted in ascending order.
  */
 
 public class DeleteNodesAtIndices {

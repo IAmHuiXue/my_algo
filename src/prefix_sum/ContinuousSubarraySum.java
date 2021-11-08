@@ -10,6 +10,7 @@ public class ContinuousSubarraySum {
     public boolean checkSubarraySum(int[] nums, int k) {
         // 相同余数两次出现我们可以知道之间的 subarray 是可以被 k 整除的，因为余数没有变化
         Map<Integer, Integer> map = new HashMap<>();
+        // <index, remainder>
         map.put(0, -1); // !
         int prefix = 0;
 

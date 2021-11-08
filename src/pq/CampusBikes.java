@@ -21,16 +21,14 @@ public class CampusBikes {
                 if (a[1] == b[1]) {
                     return Integer.compare(a[2], b[2]);
                 }
-
                 return Integer.compare(a[1], b[1]);
             }
-
             return comp;
         });
 
         // loop through every possible pairs of bikes and people,
         // calculate their distance, and then throw it to the pq.
-        for (int i = 0; i < workers.length; i++) {
+        for (int i = 0; i < workers.length; i++) { // O(m * n)
             int[] worker = workers[i];
             for (int j = 0; j < bikes.length; j++) {
                 int[] bike = bikes[j];
@@ -45,10 +43,11 @@ public class CampusBikes {
 
         // assign the bikes.
         Set<Integer> bikeAssigned = new HashSet<>();
-        while (bikeAssigned.size() < n) {
+
+        while (bikeAssigned.size() < n) { // worse case: poll all m * n nodes? -> m * n * log(m * n)
             int[] workerAndBikePair = q.poll();
-            if (res[workerAndBikePair[1]] == -1
-                    && !bikeAssigned.contains(workerAndBikePair[2])) {
+            if (res[workerAndBikePair[1]] == -1 // the worker has not been assigned with a bike
+                    && !bikeAssigned.contains(workerAndBikePair[2])) { // the specified bike has not been assigned
                 res[workerAndBikePair[1]] = workerAndBikePair[2];
                 bikeAssigned.add(workerAndBikePair[2]);
             }

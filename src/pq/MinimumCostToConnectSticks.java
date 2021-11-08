@@ -22,9 +22,14 @@ public class MinimumCostToConnectSticks {
             int secondSmallest = minHeap.poll();
             int newStick = smallest + secondSmallest;
             cost += newStick;
-            minHeap.offer(newStick);
+            minHeap.offer(newStick); // !
         }
         return cost;
     }
+
+    // sort array will not be as good as pq
+    // because after a new stick gets created, it needs to be compared with the rest of the sticks to find the
+    // shortest one at each step. By offering the newStick back into pq, this can be achieved.
+
     // time: O(nlog(n))
 }
