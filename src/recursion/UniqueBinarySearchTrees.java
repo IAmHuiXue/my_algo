@@ -18,8 +18,7 @@ public class UniqueBinarySearchTrees {
 
     class WithMemo {
         public int numTrees(int n) {
-            Integer[] memo = new Integer[n + 1];
-            return numTrees(n, memo);
+            return numTrees(n, new Integer[n + 1]);
         }
 
         private int numTrees(int n, Integer[] memo) {

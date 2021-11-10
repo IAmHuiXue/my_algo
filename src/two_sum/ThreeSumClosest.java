@@ -6,8 +6,8 @@ import java.util.Arrays;
 
 public class ThreeSumClosest {
     public int threeSumClosest(int[] nums, int target) {
-        Integer result = null;
         Arrays.sort(nums);
+        int result = Integer.MAX_VALUE;
         for (int i = 0; i < nums.length - 2; i++) {
             int j = i + 1;
             int k = nums.length - 1;
@@ -15,15 +15,15 @@ public class ThreeSumClosest {
                 int cur = nums[j] + nums[k] + nums[i];
                 if (cur == target) {
                     return cur;
-                } else if (cur < target) {
+                }
+                // update result at each step
+                if (Math.abs(target - cur) < Math.abs(target - result)) {
+                    result = cur;
+                }
+                if (cur < target) {
                     j++;
                 } else {
                     k--;
-                }
-                if (result == null) {
-                    result = cur;
-                } else if (Math.abs(target - cur) < Math.abs(target - result)) {
-                    result = cur;
                 }
             }
         }
