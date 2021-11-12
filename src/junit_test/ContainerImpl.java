@@ -9,34 +9,26 @@ import java.util.*;
 public class ContainerImpl implements Container {
     List<Integer> list;
     public ContainerImpl() {
-        // write your code here
         list = new ArrayList<>();
     }
 
     @Override
     public void add(int value) {
-        // write your code here
         list.add(value);
-
-        // throw new UnsupportedOperationException();
     }
 
     @Override
     public boolean delete(int value) {
-        // write your code here
         int index = list.indexOf(value);
         if (index != -1) {
             list.remove(index);
             return true;
         }
         return false;
-
-        // throw new UnsupportedOperationException();
     }
 
     @Override
     public int getMedian() {
-        // write your code here
         if (list.isEmpty()) {
             throw new UnsupportedOperationException();
         }

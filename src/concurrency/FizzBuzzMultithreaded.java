@@ -18,10 +18,21 @@ public class FizzBuzzMultithreaded {
     // printFizz.run() outputs "fizz".
     public synchronized void fizz(Runnable printFizz) throws InterruptedException {
         while (currentNumber <= n) {
+            // the reason we did not use while-loop below is because, when wait() finishes, we would need to
+            // check if cur <= n still
             if (currentNumber % 3 != 0 || currentNumber % 5 == 0) {
                 wait();
-                continue;
+                continue; // this keyword will lead the program back to check while-loop condition
             }
+
+            // or
+//            while (currentNumber % 3 != 0 || currentNumber % 5 == 0) {
+//                wait();
+//                if (currentNumber > n) {    //!!!! otherwise wrong
+//                    return;
+//                }
+//            }
+
             // only if divisible by 3 but not 5
             printFizz.run();
             currentNumber += 1;
