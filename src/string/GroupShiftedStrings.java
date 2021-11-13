@@ -9,12 +9,11 @@ import java.util.Map;
 
 public class GroupShiftedStrings {
     public List<List<String>> groupStrings(String[] strings) {
-        // List<List<String>> result = new ArrayList<>();
         Map<String, List<String>> map = new HashMap<>();
         for (String str : strings) {
             StringBuilder sb = new StringBuilder();
 
-            // the idea is to find the 相对关系 for each str
+            // the idea is to find the 相对关系 among the characters of each str
             //  abc -> a=0, b=1, c=2 -> pattern=(0-0),(1-0),(2-0) -> 0,1,2
             //  def -> d=3, e=4, f=5 -> pattern=(3-3),(4-3),(5-3) -> 0,1,2
 

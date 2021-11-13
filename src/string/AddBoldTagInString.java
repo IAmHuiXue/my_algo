@@ -4,7 +4,6 @@ import sun.jvm.hotspot.utilities.Interval;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -17,7 +16,7 @@ import java.util.List;
 //      aaa     aab      bc
 //    then combine these intervals
 
-//    After merged, we got [0,6], so we know "aaabbc" needs to be surrounded by tag.
+//    After merge, we got [0,6], so we know "aaabbc" needs to be surrounded by tag.
 
 public class AddBoldTagInString {
     static class Interval {
@@ -33,7 +32,7 @@ public class AddBoldTagInString {
         List<Interval> list = new ArrayList<>();
         for (String str : dict) {
             int index = s.indexOf(str);
-            while (index != -1) {
+            while (index != -1) { // while-loop ! 这个会找到每一个 word 在 s 里所有出现的情况
                 list.add(new Interval(index, index + str.length()));
                 index = s.indexOf(str, index + 1);
             }
@@ -44,10 +43,11 @@ public class AddBoldTagInString {
         int prev = 0;
         StringBuilder sb = new StringBuilder();
         for (Interval interval : list) {
+            // remember to firstly append pre-interval part
             sb.append(s, prev, interval.start).append("<b>").append(s, interval.start, interval.end).append("</b>");
             prev = interval.end;
         }
-        if (prev < s.length()) {
+        if (prev < s.length()) { // remember to append the post-interval part if appicable
             sb.append(s.substring(prev));
         }
         return sb.toString();

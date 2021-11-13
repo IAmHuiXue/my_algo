@@ -40,7 +40,7 @@ public class GroupAnagrams {
                 for(int co : count) {
                     sb.append(co).append(',');
                 }
-                String key = sb.toString();
+                String key = sb.toString(); // "1, 2, 3, 0 ..."
                 groups.computeIfAbsent(key, k -> new ArrayList<>()).add(str);
 //                groups.putIfAbsent(key, new ArrayList<>());
 //                groups.get(key).add(str);

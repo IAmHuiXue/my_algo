@@ -16,7 +16,7 @@ public class GoatLatin {
 //            }
             Set<Character> set = new HashSet<>(Arrays.asList('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'));
             StringBuilder sb = new StringBuilder();
-            String[] words = sentence.split(" ");
+            String[] words = sentence.split("\\s");
             int count = 0;
             for (String word : words) {
                 if (set.contains(word.charAt(0))) {
