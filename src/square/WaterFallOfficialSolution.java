@@ -6,8 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class WaterFall {
-    /*
+/*
 
 This is a 2D "waterfall" simulation problem (really more like simulating sand).
 
@@ -63,6 +62,10 @@ Iteration 4    Iteration 5
 
 
 Or, with a slightly different board set-up:
+Notice here: a, r, e are initially are stacked at the same col
+in this case, the bottom-most particle should move first, followed by the higher ones
+so that in Iteration 1, a did not move to left or right, but downwards because r has moved
+its way for a
 
 Iteration 0    Iteration 1    Iteration 2    Iteration 3
 | s q u a |    |  s   u  |    | s       |    |s        |
@@ -78,13 +81,45 @@ Iteration 4    Iteration 5
 |    qr  e|    |   q  re |
 -----------    -----------
 
-
  */
 
+class WaterFallTest {
+    public static void main(String[] args) {
+        String[] INPUT = {
+                "| s q u a |",
+                "| ==  = r |",
+                "|   = ==e |",
+                "|         |",
+                "-----------"
+        };
+        WaterFall game = new WaterFall(INPUT);
+        game.print();
+        game.move();
+        game.print();
+        game.move();
+        game.print();
+        game.move();
+        game.print();
+        game.move();
+        game.print();
+        game.move();
+        game.print();
+
+//        WaterFallOfficialSolution waterfall = new WaterFallOfficialSolution(INPUT);
+//        System.out.println(waterfall);
+//        for (int i = 0; i < 5; i++) {
+//            waterfall.step();
+//            System.out.println(waterfall);
+//        }
+    }
+
+}
+
+public class WaterFallOfficialSolution {
     private char[][] grid;
     private Set<Point> particles = new HashSet<>();
 
-    public WaterFall(String[] input) {
+    public WaterFallOfficialSolution(String[] input) {
         grid = new char[input.length][];
         for (int i = 0; i < input.length; i++) {
             grid[i] = input[i].toCharArray();
@@ -134,49 +169,15 @@ Iteration 4    Iteration 5
     }
 }
 
-class Solution {
-    public static void main(String[] args) {
-        String[] INPUT = {
-                "| a b c d |",
-                "| ==  =   |",
-                "|   = ==  |",
-                "|         |",
-                "-----------"
-        };
-        Game game = new Game(INPUT);
-        game.print();
-        game.move();
-        game.print();
-        game.move();
-        game.print();
-        game.move();
-        game.print();
-        game.move();
-        game.print();
-        game.move();
-        game.print();
-
-        WaterFall waterfall = new WaterFall(INPUT);
-        System.out.println(waterfall);
-        for (int i = 0; i < 5; i++) {
-            waterfall.step();
-            System.out.println(waterfall);
-        }
-    }
-
-
-}
-
-
-class Game {
+class WaterFall {
     /*
 rectangle
 letter is water lower case
 empty space
-obstacle cannot move
+obstacle cannot move,
 no end
 5 iteration each state print
-move the botom one first
+move the bottom one first
 
 grid[][] char
 Map<Integer, Position> ->
@@ -193,10 +194,10 @@ else {
     char[][] grid;
     int rows;
     int cols;
-    List<Water> waters;
+    List<Particle> particles;
 
-    public Game(String[] input) {
-        waters = new ArrayList<>();
+    public WaterFall(String[] input) {
+        particles = new ArrayList<>();
         cols = input[0].length() - 2;
         rows = input.length - 1;
         grid = new char[rows][cols];
@@ -204,7 +205,7 @@ else {
             for (int j = 0; j < cols; j++) {
                 char cur = input[i].charAt(j + 1);
                 if (cur >= 'a' && cur <= 'z') {
-                    waters.add(new Water(cur, new int[]{i, j}));
+                    particles.add(new Particle(cur, new int[]{i, j}));
                 }
                 grid[i][j] = cur;
             }
@@ -213,8 +214,8 @@ else {
 
     public void move() {
         int[][] dirs = {{0, 1}, {0, -1}};
-        waters.sort((a, b) -> Integer.compare(b.po[0], a.po[0]));
-        for (Water w : waters) {
+        particles.sort((a, b) -> Integer.compare(b.po[0], a.po[0]));
+        for (Particle w : particles) {
             int[] po = w.po;
             int r = po[0], c = po[1];
             if (r + 1 < rows && grid[r + 1][c] == ' ') {
@@ -223,12 +224,9 @@ else {
                 grid[po[0]][c] = w.id;
                 continue;
             }
-            int index = (int) Math.random() + 1;
+            int index = (int) (Math.random() * 2);
             int[] dir = dirs[index];
             int[] anotherDir = dirs[1 - index];
-
-            int left = c + anotherDir[1];
-            int right = c + dir[1];
 
             if (c + dir[1] >= 0 && c + dir[1] < cols && grid[r][c + dir[1]] == ' ') {
                 grid[r][c] = ' ';
@@ -255,11 +253,11 @@ else {
 
 }
 
-class Water {
+class Particle {
     final Character id;
     int[] po;
 
-    Water(Character i, int[] p) {
+    Particle(Character i, int[] p) {
         id = i;
         po = p;
     }

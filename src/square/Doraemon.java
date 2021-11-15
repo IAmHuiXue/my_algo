@@ -108,7 +108,7 @@ public class Doraemon {
     }
 }
 
-class Test {
+class DoraemonTest {
     public static void main(String[] args) {
 
         //{{'v', ' ', ' ', ' '},
