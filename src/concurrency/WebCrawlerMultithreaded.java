@@ -117,7 +117,7 @@ public class WebCrawlerMultithreaded extends WebCrawler {
 
             // multi-thread
             Crawler crawler = new Crawler(startUrl, hostname, htmlParser);
-            crawler.map = new ConcurrentHashMap<>(); // reset result as static property belongs to class, it will go through all of the test cases
+            crawler.map = new ConcurrentHashMap<>(); // reset result as static property belongs to class, it will go through all the test cases
             crawler.result = crawler.map.newKeySet();
             Thread thread = new Thread(crawler);
             thread.start();

@@ -1,8 +1,7 @@
-package concurrency;
+package concurrency.thread_pool;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 public class ThreadPoolDemo {
     public static void main(String[] args) {
@@ -12,11 +11,11 @@ public class ThreadPoolDemo {
             executor.execute(t); // execute() to process the runnable task submitted to the executor service
         }
         System.out.println("submitted all tasks");
-        // when we have all the tasks submitted, we need to let the service shut down when it
-        // completes all the tasks, so that it will not keep waiting for tasks.
+
+        // Initiates an orderly shutdown in which previously submitted tasks are executed, but no new tasks will be accepted
         executor.shutdown();
 
-        // terminate teh executor service immediately, without awaiting all the tasks submitted
+        // shutdownNow() terminates the executor service immediately, without awaiting all the tasks submitted
         // to be completed
 //        executor.shutdownNow();
 
@@ -25,7 +24,7 @@ public class ThreadPoolDemo {
         while (!executor.isTerminated()) {
 
         }
-        // or a awaitTermination() for a specified time period:
+        // or an awaitTermination() for a specified time period:
 //        try {
 //            executor.awaitTermination(10, TimeUnit.SECONDS);
 //        } catch (InterruptedException e) {

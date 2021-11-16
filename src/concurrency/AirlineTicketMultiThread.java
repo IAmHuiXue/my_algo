@@ -125,8 +125,8 @@ public class AirlineTicketMultiThread {
         }
 
         List<Point> lines = pricesMap.get(src);
-        List<Integer> priceList = Collections.synchronizedList(new ArrayList<>());
-        Set<String> newSet = new HashSet<>(visited);
+        List<Integer> priceList = Collections.synchronizedList(new ArrayList<>()); // why
+        Set<String> newSet = new HashSet<>(visited); // why
         newSet.add(src);
         List<Thread> threads = new ArrayList<>();
 
