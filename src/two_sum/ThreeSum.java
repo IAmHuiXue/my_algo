@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/** https://leetcode.com/problems/3sum/ */
+/**
+ * https://leetcode.com/problems/3sum/
+ */
 
 public class ThreeSum {
     public List<List<Integer>> threeSum(int[] array) {
@@ -19,16 +21,16 @@ public class ThreeSum {
             while (j < k) {
                 if (j > i + 1 && array[j] == array[j - 1]) { // j > i + 1!
                     j++;
+                    continue;
+                }
+                int sum = array[j] + array[k];
+                int curTarget = -array[i];
+                if (sum == curTarget) {
+                    result.add(Arrays.asList(array[i], array[j++], array[k--]));
+                } else if (sum < curTarget) {
+                    j++;
                 } else {
-                    int sum = array[j] + array[k];
-                    int curTarget = -array[i];
-                    if (sum == curTarget) {
-                        result.add(Arrays.asList(array[i], array[j++], array[k--]));
-                    } else if (sum < curTarget) {
-                        j++;
-                    } else {
-                        k--;
-                    }
+                    k--;
                 }
             }
         }

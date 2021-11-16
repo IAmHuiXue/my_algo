@@ -1,6 +1,8 @@
 package trie;
 
-/** https://leetcode.com/problems/design-add-and-search-words-data-structure/ */
+/**
+ * https://leetcode.com/problems/design-add-and-search-words-data-structure/
+ */
 
 public class DesignAddAndSearchWordsDataStructure {
     static class TrieNode {
@@ -12,6 +14,7 @@ public class DesignAddAndSearchWordsDataStructure {
             children = new TrieNode[LENGTH];
         }
     }
+
     TrieNode root;
 
     public DesignAddAndSearchWordsDataStructure() {
@@ -24,7 +27,7 @@ public class DesignAddAndSearchWordsDataStructure {
             TrieNode next = cur.children[ch - 'a'];
             if (next == null) {
                 next = new TrieNode();
-                cur.children[ch - 'a'] = next;
+                cur.children[ch - 'a'] = next; // put next into cur.children[ch - 'a']
             }
             cur = next;
         }

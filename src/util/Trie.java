@@ -31,8 +31,9 @@ public class Trie {
         }
         TrieNode cur = root;
         for (char ch : word.toCharArray()) {
-            cur.children.putIfAbsent(ch, new TrieNode());
-            cur = cur.children.get(ch);
+//            cur.children.putIfAbsent(ch, new TrieNode());
+//            cur = cur.children.get(ch);
+            cur = cur.children.computeIfAbsent(ch, k -> new TrieNode());
         }
         cur.isWord = true;
         return true;
@@ -50,10 +51,10 @@ public class Trie {
     private TrieNode searchPrefix(String prefix) { // O(l)
         TrieNode cur = root;
         for (char ch : prefix.toCharArray()) {
-            if (cur.children.get(ch) == null) {
+            cur = cur.children.get(ch);
+            if (cur == null) {
                 return null;
             }
-            cur = cur.children.get(ch);
         }
         return cur;
     }
@@ -68,12 +69,17 @@ public class Trie {
     }
 
     private void findAllWordsWithPrefix(TrieNode cur, StringBuilder curPath, List<String> result) {
+        // no need to check cur is null
+        // cur will not be null, or say in the for loop, if there is no more child TrieNode exists
+        // no further dfs will be called.
+
         if (cur.isWord) {
             result.add(curPath.toString());
         }
 
         for (Map.Entry<Character, TrieNode> child : cur.children.entrySet()) {
-            findAllWordsWithPrefix(child.getValue(), curPath.append(child.getKey()), result);
+            curPath.append(child.getKey());
+            findAllWordsWithPrefix(child.getValue(), curPath, result);
             curPath.deleteCharAt(curPath.length() - 1);
         }
     }

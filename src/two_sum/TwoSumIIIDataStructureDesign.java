@@ -26,7 +26,7 @@ public class TwoSumIIIDataStructureDesign {
             nums = new HashSet<>();
         }
 
-        public void add(int number) { // O(n^2)
+        public void add(int number) { // O(n)
             for (int num : nums) {
                 sums.add(num + number);
             }
@@ -39,6 +39,7 @@ public class TwoSumIIIDataStructureDesign {
     }
 
     static class TwoSumMoreAdd {
+        // key=num, value=freq
         private Map<Integer, Integer> nums;
 
         public TwoSumMoreAdd() {

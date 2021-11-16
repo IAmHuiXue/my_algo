@@ -10,15 +10,14 @@ public class TrieNode {
     public TrieNode() {
         children = new HashMap<>();
     }
-
-    /*
-
-    public TrieNode[] children;
-    public boolean isWord;
-    static final int LENG = 26;
-
-    public TrieNode() {
-        children = new TrieNode[LENG];
-
-     */
 }
+
+//class TrieNode {
+//    public TrieNode[] children;
+//    public boolean isWord;
+//    static final int LEN = 26;
+//
+//    public TrieNode() {
+//        children = new TrieNode[LEN];
+//    }
+//}

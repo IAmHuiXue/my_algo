@@ -7,7 +7,7 @@ import java.util.Map;
  * https://leetcode.com/problems/4sum-ii/
  */
 
-public class FourSumII {
+public class FourSumIIMultipleInputArray {
     // the elements are in the different arrays, cannot use sort + two pointers
     // by enumerating elements, we could naturally avoid duplicates
     static class Naive {
@@ -32,8 +32,6 @@ public class FourSumII {
         public int fourSumCount(int[] A, int[] B, int[] C, int[] D) {
             return KSumII.kSumCount(new int[][]{A, B, C, D});
         }
-
-
     }
 
 }

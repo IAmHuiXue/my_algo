@@ -6,13 +6,14 @@ import java.util.List;
 import java.util.Queue;
 
 public class PrintTree {
-    private PrintTree() {}
-
-    static final List<Integer> result = new ArrayList<>();
+    private PrintTree() { // prevent instantiating the class
+    }
 
     public static void printTree(TreeNode root) {
+        // introduce a result list so that we could pre-process the trailing 'null' before print
+        List<Integer> result = new ArrayList<>();
         if (root != null) {
-            levelOrder(root);
+            levelOrder(root, result);
             while (result.get(result.size() - 1) == null) { // trim the trailing null
                 result.remove(result.size() - 1);
             }
@@ -20,8 +21,7 @@ public class PrintTree {
         System.out.println(result);
     }
 
-    private static void levelOrder(TreeNode root) {
-
+    private static void levelOrder(TreeNode root, List<Integer> result) {
         Queue<TreeNode> q = new LinkedList<>();
         q.offer(root);
         while (!q.isEmpty()) {

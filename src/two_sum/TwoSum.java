@@ -47,13 +47,13 @@ public class TwoSum {
          * target 是 double 怎么办
          *  - 用高精度去做
          *      - target - tmp < 0.01
-         *
-         * @param array
-         * @param target
-         * @return
          */
 
         public static int[] twoSum(int[] array, int target) {
+            // why? because after sort, the indices got changed.
+            // since the problem asks to return the indices of the pair
+            // we need to firstly find the elements that suffices the values
+            // and go back to the original array to find the indices accordingly
             int[] cur = array.clone();
             Arrays.sort(cur);
             int l = 0;

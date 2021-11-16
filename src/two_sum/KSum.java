@@ -2,39 +2,50 @@ package two_sum;
 
 import java.util.*;
 
-/** find all possible k integers where their sum is target */
+/**
+ * find all possible k integers where their sum is the target
+ */
 
 public class KSum {
-
+    /**
+     * All K Sum problem can be divided into two problems:
+     * - 2 Sum Problem
+     * - Reduce K Sum problem to K – 1 Sum Problem
+     *
+     * 从4Sum和3Sum，我们可以看出对于KSum的通用套路：将KSum转化为K-1 Sum，最后用2Sum的Two Pointer求解。
+     * 注意要点：先排序，去除/跳过重复元素
+     */
     static class ClassicTwoPointer {
-        public static  List<List<Integer>> kSum(int[] nums, int k, int target) {
+        public static List<List<Integer>> kSum(int[] nums, int k, int target) {
+            // assume k > 1
             Arrays.sort(nums);
+            // from 2Sum, 3Sum, to kSum
+            // kSum 的时候 instead of tediously using i, j, k ...，使用一个 start pointer，recursively 的表示左挡板
             return kSumHelper(nums, k, 0, target);
         }
 
         private static List<List<Integer>> kSumHelper(int[] nums, int k, int start, int target) {
-            // 去重 [111111]
-            Set<List<Integer>> res = new HashSet<>();
-            if (start == nums.length) {
-                return new ArrayList<>(res);
-            }
+            // base case
             if (k == 2) {
                 return twoSum(nums, start, target);
             }
+            List<List<Integer>> res = new ArrayList<>();
             // 就是 two sum 的变种，只是由于是 k sum，用 for loop 加一个 start pointer 用来表示
-            for (int i = start; i < nums.length; i++) {
-                if (start > 0 && nums[start] == nums[start - 1]) {
-                    start++;
+            for (int i = start; i < nums.length - (k - 1); i++) { // !
+                if (i > start && nums[i] == nums[i - 1]) {
                     continue;
                 }
-                List<Integer> tmp;
-                for (List<Integer> subset : kSumHelper(nums, k - 1, i + 1, target - nums[i])) {
-                    tmp = new ArrayList<>(subset);
-                    tmp.add(nums[i]);
-                    res.add(tmp);
+                List<List<Integer>> cur = kSumHelper(nums, k - 1, i + 1, target - nums[i]);
+                for (List<Integer> tmp : cur) {
+                    tmp.add(0, nums[i]);
                 }
+                res.addAll(cur);
+                // addAll() the same as below
+//                for (List<Integer> c : cur) {
+//                    res.add(c);
+//                }
             }
-            return new ArrayList<>(res);
+            return res;
         }
 
         private static List<List<Integer>> twoSum(int[] nums, int start, int target) {
@@ -48,7 +59,13 @@ public class KSum {
                 }
                 int sum = nums[i] + nums[j];
                 if (sum == target) {
-                    res.add(Arrays.asList(nums[i++], nums[j--]));
+                    List<Integer> cur = new ArrayList<>();
+                    cur.add(nums[i++]);
+                    cur.add(nums[j--]);
+                    res.add(new LinkedList<>(cur));
+                    // cannot use Arrays.asList() here, which returns a fixed size of list.
+                    // However, we need to expand and build the list later recursively.
+//                    res.add(Arrays.asList(nums[i++], nums[j--]));
                 } else if (sum < target) {
                     i++;
                 } else {
@@ -94,6 +111,6 @@ public class KSum {
     }
 
     public static void main(String[] args) {
-        System.out.println(ClassicTwoPointer.kSum(new int[]{1,1,1,1,1,1,1,1,1,1,1}, 3, 3));
+        System.out.println(ClassicTwoPointer.kSum(new int[]{3,4,0,-1,2,0,5}, 3, 5));
     }
 }
