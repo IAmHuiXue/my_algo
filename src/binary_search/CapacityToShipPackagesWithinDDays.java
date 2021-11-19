@@ -1,6 +1,8 @@
 package binary_search;
 
-/** https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/ */
+/**
+ * https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/
+ */
 
 public class CapacityToShipPackagesWithinDDays {
     /*
@@ -21,13 +23,13 @@ Finally, when our left == right, we reach our answer
      */
     public int shipWithinDays(int[] weights, int days) {
         int minCap = 0, maxCap = 0;
-        for (int w: weights) {
+        for (int w : weights) {
             minCap = Math.max(minCap, w);
             maxCap += w;
         }
         while (minCap < maxCap) {
             int midCap = minCap + (maxCap - minCap) / 2, daysNeeded = 1, capacity = 0;
-            for (int w: weights) {
+            for (int w : weights) {
                 if (capacity + w > midCap) { // if the current cap is more than the proposed cap
                     daysNeeded += 1;
                     capacity = 0;

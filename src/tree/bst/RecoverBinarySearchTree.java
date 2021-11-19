@@ -12,18 +12,18 @@ public class RecoverBinarySearchTree {
     TreeNode prev;
 
     public void recoverTree(TreeNode root) {
-        traverse(root);
+        inOrderTraverse(root);
         int tmp = first.val;
         first.val = second.val;
         second.val = tmp;
 
     }
 
-    private void traverse(TreeNode root) {
+    private void inOrderTraverse(TreeNode root) {
         if (root == null) {
             return;
         }
-        traverse(root.left);
+        inOrderTraverse(root.left);
         if (prev != null && prev.val >= root.val) {
 
             // code below is wrong
@@ -40,14 +40,18 @@ public class RecoverBinarySearchTree {
             // we record the both prev and cur by first and second
             // set a rule to always let first record prev and let second record cur
             // so next when prev is not null, we know we have found both
-            second = root;
+
             if (first == null) {
                 first = prev;
+                second = root;
             } else {
+                second = root;
                 return;
             }
+
+            // or
         }
         prev = root;
-        traverse(root.right);
+        inOrderTraverse(root.right);
     }
 }

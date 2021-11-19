@@ -30,8 +30,9 @@ public class MinimumRemoveToMakeValidParentheses {
             2. Build a new string with removed indexes.
          */
 
+        // the stack will store the indices of the left brackets only
         Deque<Integer> stack = new ArrayDeque<>();
-        // first pass identify all indexes that should be removed
+        // first pass identifies all indexes that should be removed
         Set<Integer> indicesToRemove = new HashSet<>();
         for (int i = 0; i < s.length(); i++) {
             if (s.charAt(i) == '(') {
@@ -45,7 +46,7 @@ public class MinimumRemoveToMakeValidParentheses {
                 }
             }
         }
-
+        // now if the stack is not empty, then they all are the indices of the left bracket to be removed
         // put any indices remaining left bracket on stack into the set.
         while (!stack.isEmpty()) {
             indicesToRemove.add(stack.pollFirst());

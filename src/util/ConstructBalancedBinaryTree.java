@@ -1,10 +1,10 @@
 package util;
 
-public class ConstructBST {
+public class ConstructBalancedBinaryTree {
 
-    /** construct a balanced BST via an ascending sorted array without null node */
+    /** construct a balanced binary tree via an array WITHOUT null node */
 
-    public static TreeNode constructBST(int[] nums) {
+    public static TreeNode constructBalancedBinaryTree(int[] nums) {
         return helper(nums, 0, nums.length - 1);
     }
 

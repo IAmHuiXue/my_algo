@@ -17,7 +17,7 @@ public class WebCrawlerMultithreaded extends WebCrawler {
             List<String> res = new ArrayList<>();
             Set<String> visited = new HashSet<>();
             ConcurrentLinkedQueue<String> queue = new ConcurrentLinkedQueue<>();
-            Deque<Future> tasks = new ArrayDeque<>();
+            Deque<Future<String>> tasks = new ArrayDeque<>();
 
             queue.offer(startUrl);
 
@@ -37,7 +37,7 @@ public class WebCrawlerMultithreaded extends WebCrawler {
                         res.add(url);
                         visited.add(url);
                         // Use a thread in thread pool to fetch new URLs and put them into the queue.
-                        tasks.add(executor.submit(() -> {
+                        tasks.add((Future<String>) executor.submit(() -> {
                             List<String> newUrls = htmlParser.getUrls(url);
                             for (String newUrl : newUrls) {
                                 queue.offer(newUrl);

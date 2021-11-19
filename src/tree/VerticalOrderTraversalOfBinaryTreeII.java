@@ -30,7 +30,7 @@ public class VerticalOrderTraversalOfBinaryTreeII {
             }
         }
         while (colsToNode.containsKey(min)) {
-            List<Cell> list = colsToNode.get(min);
+            List<Cell> list = colsToNode.get(min++);
             // sort the list based on the pre-defined rule of class Cell
             Collections.sort(list);
             List<Integer> subResult = new ArrayList<>();
@@ -39,10 +39,8 @@ public class VerticalOrderTraversalOfBinaryTreeII {
                 subResult.add(c.node.val);
             }
             result.add(subResult);
-            min++;
         }
         return result;
-
     }
 
     static class Cell implements Comparable<Cell> {
@@ -59,11 +57,11 @@ public class VerticalOrderTraversalOfBinaryTreeII {
         // rowIndex most priority
         // then value
         @Override
-        public int compareTo(Cell c1) {
-            if (this.row != c1.row) {
-                return Integer.compare(this.row, c1.row);
+        public int compareTo(Cell anotherC) {
+            if (this.row != anotherC.row) {
+                return Integer.compare(this.row, anotherC.row);
             }
-            return Integer.compare(this.node.val, c1.node.val);
+            return Integer.compare(this.node.val, anotherC.node.val);
         }
     }
 }

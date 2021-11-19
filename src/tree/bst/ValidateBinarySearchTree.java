@@ -14,6 +14,7 @@ public class ValidateBinarySearchTree {
         public static boolean isValidBST(TreeNode root) {
             return isValidBST(root, null, null);
         }
+
         private static boolean isValidBST(TreeNode root, Integer min, Integer max) {
             if (root == null) {
                 return true;

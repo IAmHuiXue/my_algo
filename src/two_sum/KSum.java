@@ -27,28 +27,29 @@ public class KSum {
         private static List<List<Integer>> kSumHelper(int[] nums, int k, int start, int target) {
             // base case
             if (k == 2) {
-                return twoSum(nums, start, target);
+                return twoSumWithPointer(nums, start, target);
             }
             List<List<Integer>> res = new ArrayList<>();
             // 就是 two sum 的变种，只是由于是 k sum，用 for loop 加一个 start pointer 用来表示
-            for (int i = start; i < nums.length - (k - 1); i++) { // !
+            for (int i = start; i < nums.length - k + 1; i++) { // !
                 if (i > start && nums[i] == nums[i - 1]) {
                     continue;
                 }
-                List<List<Integer>> cur = kSumHelper(nums, k - 1, i + 1, target - nums[i]);
-                for (List<Integer> tmp : cur) {
-                    tmp.add(0, nums[i]);
+                List<List<Integer>> tmp = kSumHelper(nums, k - 1, i + 1, target - nums[i]);
+                for (List<Integer> t : tmp) {
+                    t.add(0, nums[i]);
                 }
-                res.addAll(cur);
+                res.addAll(tmp);
                 // addAll() the same as below
-//                for (List<Integer> c : cur) {
-//                    res.add(c);
+//                for (List<Integer> t : tmp) {
+//                    res.add(t);
 //                }
             }
             return res;
         }
 
-        private static List<List<Integer>> twoSum(int[] nums, int start, int target) {
+        private static List<List<Integer>> twoSumWithPointer(int[] nums, int start, int target) {
+            // to perform 2Sum in the range of nums[start, nums.length - 1]
             List<List<Integer>> res = new ArrayList<>();
             int i = start;
             int j = nums.length - 1;
@@ -59,13 +60,15 @@ public class KSum {
                 }
                 int sum = nums[i] + nums[j];
                 if (sum == target) {
+                    // cannot use Arrays.asList() here, which returns a fixed size of list.
+                    // However, we need to expand and build the list later recursively.
+//                    res.add(Arrays.asList(nums[i++], nums[j--]));
+
                     List<Integer> cur = new ArrayList<>();
                     cur.add(nums[i++]);
                     cur.add(nums[j--]);
                     res.add(new LinkedList<>(cur));
-                    // cannot use Arrays.asList() here, which returns a fixed size of list.
-                    // However, we need to expand and build the list later recursively.
-//                    res.add(Arrays.asList(nums[i++], nums[j--]));
+
                 } else if (sum < target) {
                     i++;
                 } else {

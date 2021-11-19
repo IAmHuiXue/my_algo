@@ -13,6 +13,9 @@ public class BinaryTreeLongestConsecutiveSequenceII {
         return maxVal[0];
     }
 
+    // int[]{a, b} ->
+    // a represents the longest ascending includes the caller node
+    // b represents the longest descending includes the caller node
     public int[] longestPath(TreeNode root, int[] maxVal) {
         if (root == null) {
             return new int[]{0, 0};
@@ -37,7 +40,7 @@ public class BinaryTreeLongestConsecutiveSequenceII {
             }
         }
 
-        maxVal[0] = Math.max(maxVal[0], dcr + inr - 1);
+        maxVal[0] = Math.max(maxVal[0], dcr + inr - 1); // !
         return new int[]{inr, dcr};
     }
 }

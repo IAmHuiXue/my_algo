@@ -12,7 +12,7 @@ public class DesignTicTacToe {
         players[2] = 2;
     }
 
-    // return 1 to represent win, 0 to represent no win
+    // return player to represent win, 0 to represent no win
     public int move(int row, int col, int player) {
         grid[row][col] = players[player];
         return win(player, row, col) ? player : 0;
@@ -22,12 +22,12 @@ public class DesignTicTacToe {
         return validInRow(player, row) || validInCol(player, col)
                 || validInDiagonal(player, row, col) || validInAntiDiagonal(player, row, col);
         // NOTICE:
-        // when row == col, as long as it meets either diagonal or anti-diagonal condition we should cal winner
+        // when row == col, as long as it meets either diagonal or anti-diagonal condition we should call winner
         // do not directly return false when it only fails one of the conditions!
     }
 
     private boolean validInRow(int player, int row) {
-        for (int i = 0; i < grid.length; i++) {
+        for (int i = 0; i < grid[0].length; i++) {
             if (grid[row][i] != players[player]) {
                 return false;
             }
@@ -45,7 +45,7 @@ public class DesignTicTacToe {
     }
 
     private boolean validInDiagonal(int player, int row, int col) {
-        if (row != col) {
+        if (row != col) { // the position is not on the diagonal line
             return false;
         }
         for (int i = 0; i < grid.length; i++) {

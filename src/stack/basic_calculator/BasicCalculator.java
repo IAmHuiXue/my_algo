@@ -3,14 +3,16 @@ package stack.basic_calculator;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-/** https://leetcode.com/problems/basic-calculator/ */
+/**
+ * https://leetcode.com/problems/basic-calculator/
+ */
 
 public class BasicCalculator {
 
     // s consists of digits, '+', '-', '(', ')', and ' '.
 
-
     private static int i = 0;
+
     public static int calculate(String s) {
         Deque<Integer> stack = new ArrayDeque<>();
         int sum = 0;

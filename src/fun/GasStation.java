@@ -1,6 +1,8 @@
 package fun;
 
-/** https://leetcode.com/problems/gas-station/ */
+/**
+ * https://leetcode.com/problems/gas-station/
+ */
 
 public class GasStation {
 
@@ -8,17 +10,13 @@ public class GasStation {
 
     // [3, 4, 5, 1, 2]
 
-
-
-
     public int canCompleteCircuit(int[] gas, int[] cost) {
-
         int n = gas.length;
-
+        // eventually, total gas needs to be larger than or equal to the total cost
         int total_tank = 0;
         int curr_tank = 0;
         int starting_station = 0;
-        for (int i = 0; i < n; ++i) {
+        for (int i = 0; i < n; i++) {
             total_tank += gas[i] - cost[i];
             curr_tank += gas[i] - cost[i];
             // If one couldn't get here,
@@ -30,27 +28,25 @@ public class GasStation {
             }
         }
         return total_tank >= 0 ? starting_station : -1;
+    }
+    // time O(n)
 
-        // time O(n)
-
-
-        // brute force
-        // int index = -1;
-        // for (int i = 0; i < gas.length; i++) {
-        //     index = i;
-        //     int amount = gas[i];
-        //     for (int k = 0; k < gas.length; k++) {
-        //         amount -= cost[index];
-        //         if (amount < 0) {
-        //             break;
-        //         }
-        //         index = index + 1 == gas.length ? 0 : index + 1;
-        //         amount += gas[index];
-        //     }
-        //     if (amount >= 0) {
-        //         return index;
-        //     }
-        // }
-        // return -1;
+    public int canCompleteCircuitBruteForce(int[] gas, int[] cost) {
+        for (int i = 0; i < gas.length; i++) {
+            int index = i;
+            int amount = gas[i];
+            for (int k = 0; k < gas.length; k++) {
+                amount -= cost[index];
+                if (amount < 0) {
+                    break;
+                }
+                index = index + 1 == gas.length ? 0 : index + 1;
+                amount += gas[index];
+            }
+            if (amount >= 0) {
+                return index;
+            }
+        }
+        return -1;
     }
 }

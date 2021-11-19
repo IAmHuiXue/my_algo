@@ -3,6 +3,8 @@ package concurrency;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class AirlineTicketMultiThread {
     Map<String, List<Point>> pricesMap;
@@ -19,17 +21,16 @@ public class AirlineTicketMultiThread {
     // TOKYO - DELHI - BEIJING - MOSCOW - LONDON - TORONTO - LA - NYC
     // TOKYO - MOSCOW - BARCELONA - TORONTO - NYC
     public static void main(String[] args) {
-        // ConcurrentHashMap<String, Integer> map = new ConcurrentHashMap<>();
-        // Set<String> visited = ConcurrentHashMap.newKeySet();
+//        System.out.println(futureRun());
+//        System.out.println(futureOnSetRun());
+        System.out.println(noFutureOneSetRun());
+//        System.out.println(threadPoolRun());
+//        test();
 
-        // AirlineTicketMultiThread test = new AirlineTicketMultiThread();
-        // List<Integer> result = Collections.synchronizedList(new ArrayList<Integer>());
-        // Set<String> set = new HashSet<>();
-        // test.getLowPriceOneSet("TOKYO", "NYC", visited, result, 0);
-        // // test.getAllPrices("TOKYO", "NYC", 0, "TOKYO", new HashSet<>());
-        // System.out.println(result);
+    }
 
-        int res = 2780;
+    static void test() {
+        int res = 2780; // this is the correct result
         List<Long> futureTimes = new ArrayList<>();
         List<Long> oldRunTimes = new ArrayList<>();
         List<Long> oldRunOneSetTimes = new ArrayList<>();
@@ -46,14 +47,14 @@ public class AirlineTicketMultiThread {
             long future = after - now;
 
             now = System.currentTimeMillis();
-            if (run() != res) {
+            if (noFutureRun() != res) {
                 System.out.println("run - Wrong!!!!!!!");
             }
             after = System.currentTimeMillis();
             long oldRun = after - now;
 
             now = System.currentTimeMillis();
-            if (oneSetRun() != res) {
+            if (noFutureOneSetRun() != res) {
                 System.out.println("oneSetRun - Wrong!!!!!!!");
             }
             after = System.currentTimeMillis();
@@ -72,8 +73,8 @@ public class AirlineTicketMultiThread {
             oldRunOneSetTimes.add(oneSetRun);
             oldRunTimes.add(oldRun);
             syncRunTimes.add(syncRun);
-            // System.out.println("Future - " + future + ", oldRun - " + oldRun + ", oneSetRun - " + oneSetRun);
-            // System.out.println("###############");
+            System.out.println("Future - " + future + ", oldRun - " + oldRun + ", oneSetRun - " + oneSetRun);
+            System.out.println("###############");
         }
 
         System.out.println("Future - " + futureTimes.stream().mapToDouble(val -> val).average() +
@@ -83,35 +84,87 @@ public class AirlineTicketMultiThread {
         );
     }
 
-    public static int run() {
-        AirlineTicketMultiThread test = new AirlineTicketMultiThread();
-        List<Integer> result = Collections.synchronizedList(new ArrayList<>());
-        Set<String> set = new HashSet<>();
-        test.getLowPrice("TOKYO", "NYC", set, result, 0);
-        // System.out.println(result);
-        return result.get(0);
-    }
-
-    public static int futureRun() {
-        Set<String> visited = ConcurrentHashMap.newKeySet();
-        AirlineTicketMultiThread test = new AirlineTicketMultiThread();
-        // return test.getLowPriceWithFuture("TOKYO", "NYC", visited);
-        return test.getLowPriceWithFuture("TOKYO", "NYC", visited);
-    }
-
     public static int syncRun() {
         AirlineTicketMultiThread test = new AirlineTicketMultiThread();
         return test.getLowPriceSync("TOKYO", "NYC", new HashMap<>());
     }
 
-    public static int oneSetRun() {
-        Set<String> visited = ConcurrentHashMap.newKeySet();
+    public static int noFutureRun() {
         AirlineTicketMultiThread test = new AirlineTicketMultiThread();
         List<Integer> result = Collections.synchronizedList(new ArrayList<>());
-
-        test.getLowPriceOneSet("TOKYO", "NYC", visited, result, 0);
-        // System.out.println(result);
+        test.getLowPrice("TOKYO", "NYC", new HashSet<>(), result, 0);
         return result.get(0);
+    }
+
+    public static int noFutureOneSetRun() {
+        // there is not yet a ConcurrentHashSet class in Java yet.
+        // one could be created by calling ConcurrentHashMap.newKeySet();
+        AirlineTicketMultiThread test = new AirlineTicketMultiThread();
+        List<Integer> result = Collections.synchronizedList(new ArrayList<>());
+        test.getLowPriceOneSet("TOKYO", "NYC", new HashSet<>(), result, 0);
+        return result.get(0);
+    }
+
+    public static int futureRun() {
+        AirlineTicketMultiThread test = new AirlineTicketMultiThread();
+        return test.getLowPriceWithFuture("TOKYO", "NYC", new HashSet<>());
+    }
+
+    public static int threadPoolRun() {
+        AirlineTicketMultiThread test = new AirlineTicketMultiThread();
+        return test.getLowPriceWithFutureAndThreadPool("TOKYO", "NYC", new HashSet<>());
+    }
+
+    // this gives out wrong result irregularly
+    public static int futureOnSetRun() {
+        // there is not yet a ConcurrentHashSet class in Java yet.
+        // one could be created by calling ConcurrentHashMap.newKeySet();
+        AirlineTicketMultiThread test = new AirlineTicketMultiThread();
+        return test.getLowPriceWithFutureOneSet("TOKYO", "NYC", ConcurrentHashMap.newKeySet());
+    }
+
+    public int getLowPriceWithFutureAndThreadPool(String src, String dest, Set<String> visited) {
+        if (src.equals(dest)) {
+            return 0;
+        }
+
+        if (visited.contains(src)) {
+            return -1;
+        }
+
+        List<Point> lines = pricesMap.get(src);
+        Set<String> newSet = new HashSet<>(visited);
+        newSet.add(src);
+
+        ExecutorService executor = Executors.newFixedThreadPool(5);
+        List<CompletableFuture<Integer>> futures = new ArrayList<>();
+        for (Point line : lines) {
+            CompletableFuture<Integer> myFuture = new CompletableFuture<>();
+            futures.add(myFuture);
+            executor.submit(() -> {
+                int cost = getLowPriceWithFuture(line.dest, dest, newSet);
+                if (cost >= 0) {
+                    myFuture.complete( cost + line.price);
+                } else {
+                    myFuture.complete(-1);
+                }
+            });
+        }
+        executor.shutdown();
+        CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
+        int min = Integer.MAX_VALUE;
+        for (CompletableFuture<Integer> f : futures) {
+            Integer result = -1;
+            try {
+                result = f.get();
+            } catch (Exception  e) {
+                e.printStackTrace();
+            }
+            if (result >= 0 && result < min) {
+                min = result;
+            }
+        }
+        return min == Integer.MAX_VALUE ? -1 : min;
     }
 
     public void getLowPrice(String src, String dest, Set<String> visited, List<Integer> result, int currentPrice) {
@@ -205,10 +258,10 @@ public class AirlineTicketMultiThread {
                 } else {
                     myFuture.complete(-1);
                 }
-            }).start();
+            }).start(); // when to join the thread?
         }
 
-        CompletableFuture.allOf(futures.toArray(new CompletableFuture[futures.size()])).join();
+        CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
 
         int min = Integer.MAX_VALUE;
         for (CompletableFuture<Integer> f : futures) {
@@ -253,7 +306,7 @@ public class AirlineTicketMultiThread {
             }).start();
         }
 
-        CompletableFuture.allOf(futures.toArray(new CompletableFuture[futures.size()])).join();
+        CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
 
         int min = Integer.MAX_VALUE;
         for (CompletableFuture<Integer> f : futures) {
@@ -290,14 +343,14 @@ public class AirlineTicketMultiThread {
         }
         map.put(src, Integer.MAX_VALUE);
         int min = Integer.MAX_VALUE;
-        for (Point line : pricesMap.get(src)) {
+        for (Point line : pricesMap.getOrDefault(src, new ArrayList<>())) {
             int cost = getLowPriceSync(line.dest, dest, map);
             if (cost < min && cost + line.price < min) {
                 min = cost + line.price;
             }
         }
         map.put(src, min);
-        // map.remove(src);
+//         map.remove(src);
         return min;
     }
 

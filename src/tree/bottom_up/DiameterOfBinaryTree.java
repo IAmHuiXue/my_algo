@@ -1,4 +1,4 @@
-package tree;
+package tree.bottom_up;
 
 import util.TreeNode;
 
@@ -7,17 +7,17 @@ import util.TreeNode;
 public class DiameterOfBinaryTree {
     public int diameterOfBinaryTree(TreeNode root) {
         int[] dia = new int[1];
-        dfs(root, dia);
+        helper(root, dia);
         return dia[0];
     }
 
-    private int dfs(TreeNode root, int[] dia) {
+    private int helper(TreeNode root, int[] dia) {
         if (root == null) {
             return 0;
         }
-        // dfs() -> return the longest dia from root to the leaf node in one side
-        int left = dfs(root.left, dia);
-        int right = dfs(root.right, dia);
+        // helper() -> return the longest dia from root to the leaf node in one side
+        int left = helper(root.left, dia);
+        int right = helper(root.right, dia);
 
         dia[0] = Math.max(left + right, dia[0]);
         return Math.max(left, right) + 1;

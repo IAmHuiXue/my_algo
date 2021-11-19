@@ -19,6 +19,8 @@ public class TwoSum {
      * 5. what is the size of the input
      */
 
+    // 如果 return 的是 index，且使用的是 sort 方法的话，就要提前保存好原始数据的 index，因为 sort 之后 index 会改变
+
     static class WithMap {
         public int[] twoSum(int[] array, int target) {
             // key=ele, value=index

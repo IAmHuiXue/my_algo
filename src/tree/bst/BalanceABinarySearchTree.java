@@ -1,6 +1,6 @@
 package tree.bst;
 
-import util.ConstructBST;
+import util.ConstructBalancedBinaryTree;
 import util.TreeNode;
 
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import java.util.List;
 public class BalanceABinarySearchTree {
     public TreeNode balanceBST(TreeNode root) {
         int[] array = deconstruct(root);
-        return ConstructBST.constructBST(array);
+        return ConstructBalancedBinaryTree.constructBalancedBinaryTree(array);
     }
 
     private int[] deconstruct(TreeNode root) {

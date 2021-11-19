@@ -84,7 +84,7 @@ public class BasicCalculatorZero {
 
     public int calculate3(String s) {
 
-        // where there are parentheses, we should use recursion to deal with t
+        // where there are parentheses, we should use recursion to deal with it
         // when we meet (, we go into a recursion to deal with it, when we meet ),
         // we jump out of the recursion
 
@@ -92,7 +92,7 @@ public class BasicCalculatorZero {
         int sum = 0;
         char operator = '+';
         while (i < s.length()) { // change it to while loop
-            char cur = s.charAt(i++); // here i has been updated
+            char cur = s.charAt(i++); // here 'i' has been updated
             if (Character.isDigit(cur)) {
                 sum = 10 * sum + (cur - '0');
             }
@@ -106,7 +106,6 @@ public class BasicCalculatorZero {
                 } else if (operator == '-') {
                     stack.offerFirst(-sum);
                 } else if (operator == '*') {
-                    // 比上一个多的就是如果当前的数字前面是 * or / 就需要 poll 出栈顶元素，进行运算后 offer 进栈
                     stack.offerFirst(stack.pollFirst() * sum);
                 } else {
                     stack.offerFirst(stack.pollFirst() / sum);

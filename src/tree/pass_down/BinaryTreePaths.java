@@ -12,11 +12,11 @@ public class BinaryTreePaths {
 
     public List<String> binaryTreePaths(TreeNode root) {
         ans = new ArrayList<>();
-        solve(root, new StringBuilder());
+        backtrack(root, new StringBuilder());
         return ans;
     }
 
-    public void solve(TreeNode root, StringBuilder res) {
+    public void backtrack(TreeNode root, StringBuilder res) {
         if (root == null)
             return;
 
@@ -25,14 +25,15 @@ public class BinaryTreePaths {
         // or -1 -> '-','1'
         int len = res.length();
         res.append(root.val);
+        // let leaf node be a base case is better
         if (root.left == null && root.right == null) {
             ans.add(res.toString());
         } else {
             res.append("->");
             if (root.left != null)
-                solve(root.left, res);
+                backtrack(root.left, res);
             if (root.right != null)
-                solve(root.right, res);
+                backtrack(root.right, res);
         }
         // this API is easier to set the length back to initial stage
         res.setLength(len);

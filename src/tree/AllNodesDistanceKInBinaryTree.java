@@ -1,15 +1,21 @@
 package tree;
 
 import util.TreeNode;
+
 import java.util.*;
 
-/** https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/ */
+/**
+ * https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/
+ */
 
 public class AllNodesDistanceKInBinaryTree {
     public List<Integer> distanceK(TreeNode root, TreeNode target, int k) {
 
         // All the values Node.val are unique.
         // target is the value of one of the nodes in the tree.
+
+        // 如果没有树结构的单向 pointer 的限制，那么这道题就可以用 bfs 图 的方法解决
+        // 如何克服限制 - traverse the entire tree and record the parent node of each child node
 
         // traverse the entire tree and record the parent info of each node
         Map<TreeNode, TreeNode> relation = new HashMap<>();
@@ -40,17 +46,18 @@ public class AllNodesDistanceKInBinaryTree {
             if (distance == k) {
                 result.add(curNode.val);
                 // no need to go further this path
-            } else {
-                if (curNode.left != null && seen.add(curNode.left)) {
-                    q.offer(new Cell(curNode.left, distance + 1));
-                }
-                if (curNode.right != null && seen.add(curNode.right)) {
-                    q.offer(new Cell(curNode.right, distance + 1));
-                }
-                if (parent != null && seen.add(parent)) {
-                    q.offer(new Cell(parent, distance + 1));
-                }
+                continue;
             }
+            if (curNode.left != null && seen.add(curNode.left)) {
+                q.offer(new Cell(curNode.left, distance + 1));
+            }
+            if (curNode.right != null && seen.add(curNode.right)) {
+                q.offer(new Cell(curNode.right, distance + 1));
+            }
+            if (parent != null && seen.add(parent)) {
+                q.offer(new Cell(parent, distance + 1));
+            }
+
         }
         return result;
     }
@@ -58,6 +65,7 @@ public class AllNodesDistanceKInBinaryTree {
     static class Cell {
         TreeNode node;
         int distance;
+
         Cell(TreeNode n, int d) {
             node = n;
             distance = d;

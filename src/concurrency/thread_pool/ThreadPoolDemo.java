@@ -22,7 +22,11 @@ public class ThreadPoolDemo {
         // in order not to directly print "finished all tasks",
         // we can either use a while loop
         while (!executor.isTerminated()) {
-
+            // isTerminated():
+            // Returns true if all tasks have completed following shut down.
+            // Note that isTerminated is never true unless either shutdown or shutdownNow was called first.
+            //  Returns:
+            //  true if all tasks have completed following shut down
         }
         // or an awaitTermination() for a specified time period:
 //        try {

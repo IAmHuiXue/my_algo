@@ -1,4 +1,4 @@
-package tree;
+package tree.bottom_up;
 
 import util.TreeNode;
 
