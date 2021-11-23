@@ -13,6 +13,89 @@ public class MineSweeper {
     }
 }
 
+/*
+
+Background
+Minesweeper is a game played on an X-by-Y board of tiles. Hidden among the tiles are M mines. The player is shown the current state of the board, and selects a tile to reveal. If it is revealed to
+be a mine, the game ends and the player loses. Otherwise, a number indicating how many neighboring tiles (in eight directions) contain mines is shown. The player repeats the process by selecting a new tile to reveal, continuing until they successfully reveal all non-mine tiles and win the game.
+For an interactive example, see http://minesweeperonline.com.
+Interview
+For this interview, you'll write code that could be used to implement a text-based Minesweeper game.
+There won't be nearly enough time to build the full game, but let's try to get as far as we can.
+Starter Tasks
+Define a data structure to represent the game board.
+Construct a new board with randomly placed mines.
+Write a method to display which tiles contain mines.
+
+> board = Board(width=5, height=4, mines=3)
+> board.print()
+- - - - -
+- * - - -
+- - - * -
+- - * - -
+
+Main Tasks
+For non-mine tiles, calculate and display neighboring mine counts.
+
+> board.print()
+1 1 1 0 0
+1 * 2 1 1
+1 2 3 * 1
+0 1 * 2 1
+
+
+Set all tiles to be initially hidden. Write a method to reveal a tile.
+
+> board.reveal(x=1, y=2)
+- - - - -
+- - - - -
+- 2 - - -
+- - - - -
+
+Bonus Tasks
+If the revealed tile has a neighboring mine count of zero, also reveal its neighbors.
+
+> board.reveal(x=4, y=0)
+- - 1 0 0
+- - 2 1 1
+- 2 - - -
+- - - - -
+
+
+Write a method to place a flag on a tile, to indicate where a mine is believed to be hidden.
+
+> board.flag(x=3, y=2)
+- - 1 0 0
+- - 2 1 1
+- 2 - # -
+- - - - -
+
+
+Write a method to check flag correctness for an already revealed tile.
+
+> board.check(x=3, y=1)
+- - 1 0 0
+- - 2 1 1
+- 2 3 # 1
+- - - - -
+
+Interviewer Tips
+The candidate is initially given all three starter tasks as a warm-up. Once they have a satisfactory
+starter solution, they are then given the two main tasks to complete. In general, for a candidate to
+score a 4 on the interview, they should be able to produce a coherent solution to both main tasks.
+If the candidate still has time remaining, I can then give them one or more of the bonus tasks to
+try and score a 5.
+When we near the end of the remaining time, I try to help the candidate find a stopping point and
+then discuss some of the following topics before wrapping up.
+Discussion Topics
+How would we determine if the game is over (i.e. if the player has won)?
+How would we write tests to verify the correctness of the code?
+What sort of safety checks are needed, since we are dealing with user input?
+
+
+
+ */
+
 class GameSimulator {
     //todo:
 }
@@ -56,11 +139,11 @@ class Board {
         revealed = new boolean[height][width];
         this.width = width;
         this.height = height;
-        autoGenMines(numMines);
+        autoPlaceMines(numMines);
         arrangeBoard();
     }
 
-    private void autoGenMines(int numMines) {
+    private void autoPlaceMines(int numMines) {
         while (numMines != 0) {
             Point mine = new Point((int) (Math.random() * height), (int) (Math.random() * width));
             if (mines.add(mine)) {
