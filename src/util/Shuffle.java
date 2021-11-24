@@ -1,6 +1,5 @@
 package util;
 
-import javax.smartcardio.Card;
 import java.util.*;
 
 public class Shuffle {
@@ -42,10 +41,11 @@ public class Shuffle {
     public static void shuffle(List<Integer> list) {
         for (int i = list.size() - 1; i > 0; i--) {
             int j = (int) (Math.random() * (i + 1));
-            Integer num1 = list.get(i);
-            Integer num2 = list.get(j);
-            list.set(i, num2);
-            list.set(j, num1);
+            Collections.swap(list, i, j);
+//            Integer num1 = list.get(i);
+//            Integer num2 = list.get(j);
+//            list.set(i, num2);
+//            list.set(j, num1);
         }
     }
 }
