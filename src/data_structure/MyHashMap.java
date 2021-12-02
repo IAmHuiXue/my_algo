@@ -27,12 +27,14 @@ public class MyHashMap {
     }
 
     public MyHashMap(float loadFactor, int capacity) {
+        if (capacity <= 0 || loadFactor <= 0) {
+            throw new IllegalArgumentException("Invalid input");
+        }
         this.loadFactor = loadFactor;
         array = new Entry[capacity];
     }
 
-    // return -1 if there is no key k before
-    public int put(String k, int v) {
+    public Integer put(String k, int v) {
         int hashNum = hash(k);
         int index = getIndex(hashNum);
         Entry entry = array[index];
@@ -53,10 +55,10 @@ public class MyHashMap {
         if (needRehash()) {
             rehash();
         }
-        return -1;
+        return null;
     }
 
-    public int get(String k) {
+    public Integer get(String k) {
         int hashNum = hash(k);
         int index = getIndex(hashNum);
         Entry entry = array[index];
@@ -66,10 +68,10 @@ public class MyHashMap {
             }
             entry = entry.next;
         }
-        return -1;
+        return null;
     }
 
-    public int remove(String k) {
+    public Integer remove(String k) {
         int hashNum = hash(k);
         int index = getIndex(hashNum);
         Entry entry = array[index];
@@ -88,7 +90,7 @@ public class MyHashMap {
             prev = entry;
             entry = entry.next;
         }
-        return -1;
+        return null;
     }
 
     public boolean containsKey(String k) {
@@ -136,17 +138,33 @@ public class MyHashMap {
     private void rehash() {
         // need to create a longer array size is 1.5 times
         // for each entry, rehash -> new index
-        Entry[] newArray = new Entry[(int) (array.length * SCALE_FACTOR)];
-        for (Entry entry : array) {
+        Entry[] oldArray = array;
+        array = new Entry[(int) (array.length * SCALE_FACTOR)];
+        for (Entry entry : oldArray) {
             while (entry != null) {
-                Entry nxt = entry.next;
-                int newIndex = hash(entry.key) % newArray.length; // !
-                entry.next = newArray[newIndex];
-                newArray[newIndex] = entry;
-                entry = nxt;
+                Entry next = entry.next;
+                int newIndex = getIndex(hash(entry.key));
+                entry.next = array[newIndex];
+                array[newIndex] = entry;
+                entry = next;
             }
         }
-        array = newArray;
+
+        // another way
+//        Entry[] newArray = new Entry[(int) (array.length * SCALE_FACTOR)];
+//        for (Entry entry : array) {
+//            while (entry != null) {
+//                // record the next node
+//                Entry nxt = entry.next;
+//                int newIndex = hash(entry.key) % newArray.length; // !
+//                entry.next = newArray[newIndex];
+//                newArray[newIndex] = entry;
+//                entry = nxt;
+//            }
+//        }
+//        array = newArray;
+
+
     }
 
     private boolean needRehash() {
