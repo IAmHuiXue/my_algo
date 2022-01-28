@@ -13,7 +13,8 @@ public class SubdomainVisitCount {
         Map<String, Integer> map = new HashMap<>();
         for (String cp : cpdomains) {
             String[] splits = cp.split(" ");
-            String[] subs = splits[1].split("\\.");
+            int curFreq = Integer.parseInt(splits[0]);
+            String[] subs = splits[1].split("\\."); // not "." !
             String curSub = "";
             for (int i = subs.length - 1; i >= 0; i--) {
                 if (i == subs.length - 1) {
@@ -21,7 +22,7 @@ public class SubdomainVisitCount {
                 } else {
                     curSub = subs[i] + "." + curSub;
                 }
-                map.put(curSub, map.getOrDefault(curSub, 0) + Integer.parseInt(splits[0]));
+                map.put(curSub, map.getOrDefault(curSub, 0) + curFreq);
             }
         }
         List<String> res = new ArrayList<>();

@@ -16,7 +16,7 @@ public class ReorderDataInLogFiles {
 
             // case 1: if both logs are letters
             if (!isDigit1 && !isDigit2) {
-                int cmp = split1[1].compareTo(split2[1]);
+                int cmp = split1[1].compareTo(split2[1]); // use substring compares to substring directly
                 // firstly compare the content
                 if (cmp != 0) {
                     return cmp;

@@ -23,8 +23,7 @@ public class ValidPalindromeII {
         if (input == null) {
             return true;
         }
-        boolean isDeleted = false;
-        return validPalindrome(input, isDeleted, 0, input.length() - 1);
+        return validPalindrome(input, false, 0, input.length() - 1);
     }
 
     private boolean validPalindrome(String input, boolean isDeleted, int start, int end) {
@@ -37,8 +36,8 @@ public class ValidPalindromeII {
         if (isDeleted) {
             return false;
         }
-        isDeleted = true;
-        return validPalindrome(input, isDeleted, start + 1, end)
-                || validPalindrome(input, isDeleted, start, end - 1);
+//        isDeleted = true;
+        return validPalindrome(input, true, start + 1, end)
+                || validPalindrome(input, true, start, end - 1);
     }
 }

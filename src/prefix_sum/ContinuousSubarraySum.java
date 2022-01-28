@@ -10,21 +10,21 @@ public class ContinuousSubarraySum {
     public boolean checkSubarraySum(int[] nums, int k) {
         // 相同余数两次出现我们可以知道之间的 subarray 是可以被 k 整除的，因为余数没有变化
         Map<Integer, Integer> map = new HashMap<>();
-        // <index, remainder>
+        // <mod, index>
         map.put(0, -1); // !
         int prefix = 0;
 
         for (int i = 0; i < nums.length; i++) {
             prefix += nums[i];
-            if (k != 0) {
-                prefix %= k;
-            }
-            if (map.containsKey(prefix)) {
-                if (i - map.get(prefix) > 1) {
+            // k > 0
+            int mod = prefix % k;
+            if (map.containsKey(mod)) {
+                // cover the edge case like [0] & 1
+                if (i - map.get(mod) > 1) {
                     return true;
                 }
             } else {
-                map.put(prefix, i);
+                map.put(mod, i);
             }
         }
         return false;

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /** https://leetcode.com/problems/pairs-of-songs-with-total-durations-divisible-by-60/ */
+
 public class PairsOfSongsWithTotalDurationsDivisible {
 
     /*
@@ -17,6 +18,7 @@ public class PairsOfSongsWithTotalDurationsDivisible {
      */
 
     public int numPairsDivisibleBy60(int[] time) {
+        // <key=element%60, value=freq> !
         Map<Integer, Integer> map = new HashMap<>();
         int count = 0;
         for (int song : time) {
@@ -29,7 +31,7 @@ public class PairsOfSongsWithTotalDurationsDivisible {
                 // otherwise, can make the pairs with all other elements whose mod is 60 - mod
                 count += map.getOrDefault(60 - mod, 0);
             }
-            map.put(mod, num + 1);
+            map.put(mod, num + 1); // !
         }
         return count;
     }

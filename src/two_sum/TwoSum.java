@@ -54,7 +54,7 @@ public class TwoSum {
         public static int[] twoSum(int[] array, int target) {
             // why? because after sort, the indices got changed.
             // since the problem asks to return the indices of the pair
-            // we need to firstly find the elements that suffices the values
+            // we need to firstly find the elements that suffice the values
             // and go back to the original array to find the indices accordingly
             int[] cur = array.clone();
             Arrays.sort(cur);
