@@ -11,13 +11,11 @@ public class AccountsMerge {
     Map<String, List<String>> adjacent = new HashMap<>();
 
     public List<List<String>> accountsMerge(List<List<String>> accountList) {
-        int accountListSize = accountList.size();
-
         for (List<String> account : accountList) {
             int accountSize = account.size();
 
             // Building adjacency list
-            // Adding edge between first email to all other emails in the account
+            // Adding edge between FIRST email to all other emails in the account
             String accountFirstEmail = account.get(1);
             for (int j = 2; j < accountSize; j++) {
                 String accountEmail = account.get(j);
@@ -52,11 +50,7 @@ public class AccountsMerge {
         // Add the email vector that contains the current component's emails
         mergedAccount.add(email);
 
-        if (!adjacent.containsKey(email)) {
-            return;
-        }
-
-        for (String neighbor : adjacent.get(email)) {
+        for (String neighbor : adjacent.getOrDefault(email, new ArrayList<>())) {
             if (!visited.contains(neighbor)) {
                 DFS(mergedAccount, neighbor);
             }

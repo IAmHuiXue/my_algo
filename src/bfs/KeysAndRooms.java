@@ -14,12 +14,9 @@ public class KeysAndRooms {
         unlocked.add(0);
         while (!q.isEmpty()) {
             int cur = q.poll();
-            List<Integer> keys = rooms.get(cur);
-            if (keys != null) { // there could be none in a room
-                for (int key : keys) {
-                    if (unlocked.add(key)) {
-                        q.offer(key);
-                    }
+            for (int key : rooms.get(cur)) {
+                if (unlocked.add(key)) {
+                    q.offer(key);
                 }
             }
         }
