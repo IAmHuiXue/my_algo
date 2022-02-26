@@ -14,8 +14,6 @@ public class GroupAnagrams {
                 Arrays.sort(array);
                 String key = String.valueOf(array);
                 groups.computeIfAbsent(key, k -> new ArrayList<>()).add(str);
-//                groups.putIfAbsent(key, new ArrayList<>());
-//                groups.get(key).add(str);
             }
             return new ArrayList<>(groups.values());
         }
@@ -42,8 +40,6 @@ public class GroupAnagrams {
                 }
                 String key = sb.toString(); // "1, 2, 3, 0 ..."
                 groups.computeIfAbsent(key, k -> new ArrayList<>()).add(str);
-//                groups.putIfAbsent(key, new ArrayList<>());
-//                groups.get(key).add(str);
             }
             return new ArrayList<>(groups.values());
         }

@@ -1,6 +1,5 @@
-package string;
+package interval;
 
-import sun.jvm.hotspot.utilities.Interval;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -38,7 +37,7 @@ public class AddBoldTagInString {
             }
         }
 
-        list = merge(list);
+        list = mergeInterval(list);
 
         int prev = 0;
         StringBuilder sb = new StringBuilder();
@@ -47,19 +46,19 @@ public class AddBoldTagInString {
             sb.append(s, prev, interval.start).append("<b>").append(s, interval.start, interval.end).append("</b>");
             prev = interval.end;
         }
-        if (prev < s.length()) { // remember to append the post-interval part if appicable
+        if (prev < s.length()) { // remember to append the post-interval part if applicable
             sb.append(s.substring(prev));
         }
         return sb.toString();
     }
 
 
-    private List<Interval> merge(List<Interval> list) {
+    private List<Interval> mergeInterval(List<Interval> list) {
         if (list.size() <= 1) {
             return list;
         }
         List<Interval> res = new ArrayList<>();
-        Collections.sort(list, (a, b) -> Integer.compare(a.start, b.start));
+        list.sort((a, b) -> Integer.compare(a.start, b.start));
         res.add(list.get(0));
         for (int i = 1; i < list.size(); i++) {
             Interval temp = list.get(i);

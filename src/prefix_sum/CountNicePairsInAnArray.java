@@ -13,6 +13,7 @@ public class CountNicePairsInAnArray {
         int mod = (int) 1e9 + 7; // memorize this representation
         // int mod = (int) Math.pow(10, 9) + 7;
         int res = 0;
+        // <nums[i] - rev[nums[i]], occurrence>
         Map<Integer, Integer> visited = new HashMap<>();
         for (int num : nums) {
             int freq = visited.getOrDefault(num - rev(num), 0);

@@ -5,6 +5,7 @@ package string;
 */
 
 public class LongestCommonPrefix {
+    // divide and conquer
   public String longestCommonPrefix(String[] strs) {
         if (strs == null || strs.length == 0) {
             return "";

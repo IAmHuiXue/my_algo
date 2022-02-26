@@ -14,19 +14,19 @@ public class ContiguousArray {
             }
         }
 
-        int res = 0, prefix = 0;
-        // key=prefix, value=index
+        int res = 0, prefixSum = 0;
+        // key=prefixSum, value=index
         Map<Integer, Integer> map = new HashMap<>();
         map.put(0, -1); // 为了不错过第一个 element
         for (int i = 0; i < nums.length; i++) {
-            prefix += nums[i]; // 两个 prefix sum == 0， 所以中间夹的部分一定和为 0
-            if (map.containsKey(prefix)) {
-                res = Math.max(res, i - map.get(prefix));
+            prefixSum += nums[i]; // 两个 prefixSum sum == 0， 所以中间夹的部分一定和为 0
+            if (map.containsKey(prefixSum)) {
+                res = Math.max(res, i - map.get(prefixSum));
             } else {
-                // we put it only if there is not this prefix in the map
+                // we put it only if there is not this prefixSum in the map
                 // because if there is one, it must be the leftmost one compared with the current one,
                 // and it could potentially form a longer result
-                map.put(prefix, i);
+                map.put(prefixSum, i);
             }
         }
         return res;
