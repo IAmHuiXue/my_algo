@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class SubstringWithConcatenationOfAllWords {
 
-    // build map 1 for all words and their counts
+    // build map1 for all words and their counts
     // for loop traverse s [0, s.length() - words.length * length of each word]
         // for each section, build map2 to find all matches
 
