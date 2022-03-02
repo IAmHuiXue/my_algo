@@ -33,6 +33,7 @@ public class LongestSubstringWithoutRepeatingCharacters {
                     set.remove(s.charAt(left++)); // 2. 出
                 }
                 longest = Math.max(longest, right - left + 1); // 3. 算
+//                longest = Math.max(longest, set.size());
             }
             return longest;
         }

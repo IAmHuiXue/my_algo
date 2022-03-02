@@ -11,7 +11,7 @@ public class KSum {
      * All K Sum problem can be divided into two problems:
      * - 2 Sum Problem
      * - Reduce K Sum problem to K – 1 Sum Problem
-     *
+     * <p>
      * 从4Sum和3Sum，我们可以看出对于KSum的通用套路：将KSum转化为K-1 Sum，最后用2Sum的Two Pointer求解。
      * 注意要点：先排序，去除/跳过重复元素
      */
@@ -40,10 +40,6 @@ public class KSum {
                     t.add(0, nums[i]);
                 }
                 res.addAll(tmp);
-                // addAll() the same as below
-//                for (List<Integer> t : tmp) {
-//                    res.add(t);
-//                }
             }
             return res;
         }
@@ -63,12 +59,10 @@ public class KSum {
                     // cannot use Arrays.asList() here, which returns a fixed size of list.
                     // However, we need to expand and build the list later recursively.
 //                    res.add(Arrays.asList(nums[i++], nums[j--]));
-
                     List<Integer> cur = new ArrayList<>();
                     cur.add(nums[i++]);
                     cur.add(nums[j--]);
                     res.add(new LinkedList<>(cur));
-
                 } else if (sum < target) {
                     i++;
                 } else {
@@ -103,17 +97,16 @@ public class KSum {
             if (num > curTarget) { // 剪枝，因为 sort 过了，如果此时 num 已经大于剩下的 target，那么后面都不需要考虑
                 return;
             }
-            curTarget -= num;
             cur.add(num);
-            dfs(nums, index + 1, k, curTarget, cur, result);
-            curTarget += num;
+            dfs(nums, index + 1, k, curTarget - num, cur, result);
             cur.remove(cur.size() - 1);
+
             dfs(nums, index + 1, k, curTarget, cur, result);
         }
         // time: O(2^n)
     }
 
     public static void main(String[] args) {
-        System.out.println(ClassicTwoPointer.kSum(new int[]{3,4,0,-1,2,0,5}, 3, 5));
+        System.out.println(ClassicTwoPointer.kSum(new int[]{3, 4, 0, -1, 2, 0, 5}, 3, 5));
     }
 }

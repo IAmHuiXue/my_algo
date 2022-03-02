@@ -4,8 +4,8 @@ package sliding_window;
 
 public class MinimumSizeSubarraySum {
 
-    /** 核心： 如果都是整数，可以考虑使用 sliding window，这样保证扩大 window 和一定变大，缩小 window 和一定减小 */
-
+    /** 核心： 如果都是正整数，可以考虑使用 sliding window，
+     * 这样保证扩大 window 和一定变大，缩小 window 和一定减小 */
 
     public int minSubArrayLen(int target, int[] nums) {
         int left = 0;

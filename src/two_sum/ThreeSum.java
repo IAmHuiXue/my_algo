@@ -37,4 +37,40 @@ public class ThreeSum {
         return result;
         // O(n^2) -> iterate over array, for each element, perform twoSum -> n*n
     }
+
+    public List<List<Integer>> threeSumByTwoSum(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        Arrays.sort(nums);
+        for (int i = 0; i < nums.length - 2; i++) {
+            if (i > 0 && nums[i] == nums[i - 1]) {
+                continue;
+            }
+            List<List<Integer>> tmp = twoSum(nums, i + 1, -nums[i]);
+            for (List<Integer> r : tmp) {
+                r.add(0, nums[i]);
+            }
+            res.addAll(tmp);
+        }
+        return res;
+    }
+
+    private List<List<Integer>> twoSum(int[] nums, int index, int target) {
+        List<List<Integer>> res = new ArrayList<>();
+        int start = index;
+        int end = nums.length - 1;
+        while (start < end) {
+            if (start > index && nums[start] == nums[start - 1]) {
+                start++;
+                continue;
+            }
+            if (nums[start] + nums[end] == target) {
+                res.add(new ArrayList<>(Arrays.asList(nums[start++], nums[end--])));
+            } else if (nums[start] + nums[end] < target) {
+                start++;
+            } else {
+                end--;
+            }
+        }
+        return res;
+    }
 }

@@ -1,4 +1,4 @@
-package binary_search;
+package binary_search.trick;
 
 /**
  * https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/

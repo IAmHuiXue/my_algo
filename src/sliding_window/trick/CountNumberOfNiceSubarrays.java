@@ -1,4 +1,4 @@
-package sliding_window;
+package sliding_window.trick;
 
 /** https://leetcode.com/problems/count-number-of-nice-subarrays/ */
 
