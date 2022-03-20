@@ -21,7 +21,7 @@ public class HasCycle {
      */
 
     /** 用 DFS 可以查 有向图和无向图的成环情况，区别是
-     * 1. 对于无向图，如果当前 node 存在 一个已经 visit 过的 neighbor node，则有环 （避免 revisit parent node！）
+     * 1. 对于无向图，如果当前 node 存在 一个已经 visit 过的 neighbor node 且它不是 parent node，则有环 （避免 revisit parent node！）
      * 2. 对于有向图，
      */
 
@@ -161,7 +161,10 @@ public class HasCycle {
 
             private static boolean dfs(List<List<Integer>> graph, int curNode, int parent, Set<Integer> visited) {
                 for (int nei : graph.get(curNode)) {
-                    if (!visited.add(nei) && nei == parent) {
+                    if (nei == parent) {
+                        continue;
+                    }
+                    if (!visited.add(nei)) {
                         return true;
                     }
                     dfs(graph, nei, curNode, visited);

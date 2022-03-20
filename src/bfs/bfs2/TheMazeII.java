@@ -20,7 +20,6 @@ public class TheMazeII {
         // distance[i][j] represents the minimum distance from start position to (i, j)
         // 即起始点到每一个其他点的距离
 
-
         // bfs2 特点1： 一个 distance[] or cost[]
 
         int[][] distance = new int[m][n];
@@ -40,7 +39,6 @@ public class TheMazeII {
             }
 
             // bfs2 特点2：poll 出后检查是否已经被 expanded 过
-
 
 //          we do not re-expand the same node
             //  > 的情况是存在的 -> 当node第二次进去 queue 之前，第一次的 node 还没有被 expand，所以导致node进了多次
