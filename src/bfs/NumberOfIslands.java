@@ -12,44 +12,31 @@ public class NumberOfIslands {
 
     class BFS {
         public int numIslands(char[][] grid) {
-            int count = 0;
-            boolean[][] visited = new boolean[grid.length][grid[0].length];
-
+            Queue<int[]> q = new ArrayDeque<>();
+            int res = 0;
             for (int i = 0; i < grid.length; i++) {
                 for (int j = 0; j < grid[0].length; j++) {
-                    if (grid[i][j] == '1' && !visited[i][j]) {
-                        count++;
-                        visited[i][j] = true;
-                        Queue<Cell> q = new ArrayDeque<>();
-                        q.offer(new Cell(i, j));
-                        while (!q.isEmpty()) {
-                            Cell cur = q.poll();
-                            for (int[] dir : DIRS) {
-                                int neiX = cur.row + dir[0];
-                                int neiY = cur.col + dir[1];
-                                if (neiX >= 0 && neiX < grid.length &&
-                                        neiY >= 0 && neiY < grid[0].length &&
-                                        !visited[neiX][neiY] &&
-                                        grid[neiX][neiY] == '1') {
-                                    visited[neiX][neiY] = true;
-                                    q.offer(new Cell(neiX, neiY));
-                                }
-                            }
-
-                        }
+                    if (grid[i][j] == '1') {
+                        res++;
+                        q.offer(new int[]{i, j});
+                        bfs(q, grid);
                     }
                 }
             }
-            return count;
+            return res;
         }
 
-        class Cell {
-            int row;
-            int col;
-
-            Cell(int row, int col) {
-                this.row = row;
-                this.col = col;
+        void bfs(Queue<int[]> q, char[][] grid) {
+            while (!q.isEmpty()) {
+                int[] cur = q.poll();
+                for (int[] dir : DIRS) {
+                    int nr = cur[0] + dir[0];
+                    int nc = cur[1] + dir[1];
+                    if (nr >= 0 && nc >= 0 && nr < grid.length && nc < grid[0].length && grid[nr][nc] == '1') {
+                        grid[nr][nc] = '0';
+                        q.offer(new int[]{nr, nc});
+                    }
+                }
             }
         }
     }
@@ -70,16 +57,15 @@ public class NumberOfIslands {
         }
 
         private void dfs(char[][] grid, int row, int col, boolean[][] visited) {
-            // base case
-            if (row < 0 || row >= grid.length ||
-                    col < 0 || col >= grid[0].length ||
-                    visited[row][col] || grid[row][col] == '0') {
-                return;
-            }
             visited[row][col] = true;
             for (int[] dir : DIRS) {
                 int neiR = row + dir[0];
                 int neiC = col + dir[1];
+                if (neiR < 0 || neiR >= grid.length ||
+                        neiC < 0 || neiC >= grid[0].length ||
+                        visited[neiR][neiC] || grid[neiR][neiC] == '0') {
+                    continue;
+                }
                 dfs(grid, neiR, neiC, visited);
             }
         }

@@ -13,7 +13,7 @@ public class LRUCache {
     // 两个 pointer 相当于两个 dummy
     private final Node head = new Node(0, 0); // add to head
     private final Node tail = new Node(0, 0); // evict from tail
-    private int capacity;
+    private final int capacity;
 
     static class Node {
         int key;
@@ -46,20 +46,14 @@ public class LRUCache {
 
     public void put(int key, int value) {
         Node node = records.get(key);
-        if (node == null) {
-            if (records.size() < capacity) {
-                node = new Node(key, value);
-            } else {
-                node = tail.prev;
-                evict(node);
-                node.key = key;
-                node.value = value;
-                // evict(node); put it here is wrong
-                // because this way, the original key of the tail.prev is not removed from map
-            }
-        } else {
+        if (node != null) {
             node.value = value;
             evict(node);
+        } else {
+            node = new Node(key, value);
+            if (records.size() == capacity) {
+                evict(tail.prev);
+            }
         }
         addHead(node);
     }

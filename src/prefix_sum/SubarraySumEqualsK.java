@@ -23,8 +23,7 @@ public class SubarraySumEqualsK {
         int prefixSum = 0, count = 0;
         for (int num : nums) {
             prefixSum += num;
-            int freq = map.getOrDefault(prefixSum - k, 0);
-            count += freq;
+            count += map.getOrDefault(prefixSum - k, 0);;
             // search first then put, to avoiding accidentally counting itself
             map.put(prefixSum, map.getOrDefault(prefixSum, 0) + 1);
         }
