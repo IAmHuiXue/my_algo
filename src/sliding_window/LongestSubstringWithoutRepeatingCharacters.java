@@ -36,6 +36,19 @@ public class LongestSubstringWithoutRepeatingCharacters {
 //                longest = Math.max(longest, set.size());
             }
             return longest;
+
+//            Set<Character> set = new HashSet<>();
+//            int i = 0, j = 0;
+//            char[] array = s.toCharArray();
+//            int res = 0;
+//            while (j < array.length) {
+//                while (set.contains(array[j])) {
+//                    set.remove(array[i++]);
+//                }
+//                set.add(array[j++]);
+//                res = Math.max(res, j - i);
+//            }
+//            return res;
         }
     }
 
