@@ -12,7 +12,7 @@ public class DesignInMemoryFileSystem {
     // a directory can contain files and or sub-directories
     // a file needs to have contents, while a directory does not need
 
-    class Entry {
+    static class Entry {
         boolean isFile = false; // by default the entry is a directory
         HashMap<String, Entry> entries = new HashMap<>(); // <entryName, entryNode>
         String content = ""; // by default
@@ -31,7 +31,7 @@ public class DesignInMemoryFileSystem {
         Entry e = root;
         List<String> res;
         if (!path.equals("/")) { // if the path is "/", do not go into the for loop
-            String[] d = path.split("/");
+            String[] d = resolvePath(path);
             // ["", "a", "b"...] -> the first one is top level which is empty, so 'i' starts from 1
             for (int i = 1; i < d.length; i++) {
                 e = e.entries.get(d[i]);
@@ -50,7 +50,7 @@ public class DesignInMemoryFileSystem {
         // traverse from the root until the last entry
         // if any sub-directory does not exist, create one and continue
         Entry e = root;
-        String[] d = path.split("/");
+        String[] d = resolvePath(path);
         for (int i = 1; i < d.length; i++) {
             e = e.entries.computeIfAbsent(d[i], k -> new Entry());
             // e = e.files.putIfAbsent(d[i], new File()); is wrong, because this API will return null if it puts the pair,
@@ -58,12 +58,16 @@ public class DesignInMemoryFileSystem {
         }
     }
 
+    private String[] resolvePath(String path) {
+        return path.split("/");
+    }
+
     public void addContentToFile(String filePath, String content) {
         // traverse from the root until the last entry
         // if any sub-directory does not exist, create one and continue
         // at the last one, make it a file
         Entry e = root;
-        String[] d = filePath.split("/");
+        String[] d = resolvePath(filePath);
         for (int i = 1; i < d.length; i++) {
             e = e.entries.computeIfAbsent(d[i], k -> new Entry());
         }
@@ -75,7 +79,7 @@ public class DesignInMemoryFileSystem {
         // traverse from the root until the last entry
         // at the last one, return the content of the file
         Entry e = root;
-        String[] d = filePath.split("/");
+        String[] d = resolvePath(filePath);
         for (int i = 1; i < d.length; i++) {
             e = e.entries.get(d[i]); // assume the file path is valid
         }
