@@ -2,21 +2,22 @@ package bfs;
 
 import java.util.*;
 
-/** https://leetcode.com/problems/word-ladder/ */
+/**
+ * https://leetcode.com/problems/word-ladder/
+ */
 
 public class WordLadder {
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
-        if (!wordList.contains(endWord)) {
+        Set<String> set = new HashSet<>(wordList);
+        if (!set.contains(endWord)) {
             return 0;
         }
-        if (!wordList.contains(beginWord)) {
-            wordList.add(beginWord);
-        }
-        Set<String> set = new HashSet<>(wordList);
+        set.add(beginWord);
+
         Queue<String> q = new ArrayDeque<>();
         q.offer(beginWord);
+        set.remove(beginWord);
         int step = 1;
-        int len = beginWord.length();
         while (!q.isEmpty()) {
             int size = q.size();
             for (int i = 0; i < size; i++) {
@@ -25,15 +26,16 @@ public class WordLadder {
                     return step;
                 }
                 StringBuilder sb = new StringBuilder(cur);
-                for (int j = 0; j < len; j++) {
+                for (int j = 0; j < cur.length(); j++) {
                     char org = cur.charAt(j);
                     for (char letter = 'a'; letter <= 'z'; letter++) {
-                        if (letter != org) {
-                            sb.setCharAt(j, letter);
-                            String newWord = sb.toString();
-                            if (set.remove(newWord)) {
-                                q.offer(newWord);
-                            }
+                        if (letter == org) {
+                            continue;
+                        }
+                        sb.setCharAt(j, letter);
+                        String newWord = sb.toString();
+                        if (set.remove(newWord)) {
+                            q.offer(newWord);
                         }
                     }
                     sb.setCharAt(j, org);
@@ -45,7 +47,6 @@ public class WordLadder {
     }
 
     public int ladderLength2(String beginWord, String endWord, List<String> wordList) {
-        // Write your solution here
         if (!wordList.contains(endWord)) {
             return 0;
         }
@@ -55,32 +56,12 @@ public class WordLadder {
 
         Set<String> dict = new HashSet<>(wordList);
 
-        Map<String, List<String>> graph = new HashMap<>();
-        for (String word : dict) {
-            graph.put(word, new ArrayList<>());
-        }
-        for (String word : wordList) {
-            StringBuilder sb = new StringBuilder(word);
-            for (int i = 0; i < word.length(); i++) {
-                char org = word.charAt(i);
-                for (char ch = 'a'; ch <= 'z'; ch++) {
-                    if (ch != org) {
-                        sb.setCharAt(i, ch);
-                        String next = sb.toString();
-                        if (dict.contains(next)) {
-                            graph.get(word).add(next);
-                        }
-                    }
-                }
-                sb.setCharAt(i, org);
-            }
-        }
+        Map<String, Set<String>> graph = buildGraph(dict);
 
         Queue<String> q = new ArrayDeque<>();
         int steps = 1;
         q.offer(beginWord);
         dict.remove(beginWord);
-
         while (!q.isEmpty()) {
             int size = q.size();
             for (int i = 0; i < size; i++) {
@@ -96,8 +77,29 @@ public class WordLadder {
             }
             steps++;
         }
-
         return 0;
     }
+
+    private Map<String, Set<String>> buildGraph(Set<String> words) {
+        Map<String, Set<String>> map = new HashMap<>();
+        for (String word : words) {
+            StringBuilder sb = new StringBuilder(word);
+            for (int i = 0; i < word.length(); i++) {
+                char cur = word.charAt(i);
+                for (char ch = 'a'; ch <= 'z'; ch++) {
+                    if (ch == cur) {
+                        continue;
+                    }
+                    sb.setCharAt(i, ch);
+                    if (words.contains(sb.toString())) {
+                        map.computeIfAbsent(word, k -> new HashSet<>()).add(sb.toString());
+                    }
+                    sb.setCharAt(i, cur);
+                }
+            }
+        }
+        return map;
+    }
+
 
 }

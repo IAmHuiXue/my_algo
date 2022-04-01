@@ -1,9 +1,10 @@
 package stack.basic_calculator;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.*;
 
-/**  https://leetcode.com/problems/basic-calculator-ii/*/
+/**
+ * https://leetcode.com/problems/basic-calculator-ii/
+ */
 
 public class BasicCalculatorII {
 
@@ -37,6 +38,47 @@ public class BasicCalculatorII {
                 //   continue;
                 // }
             }
+        }
+        int res = 0;
+        while (!stack.isEmpty()) {
+            res += stack.pollFirst();
+        }
+        return res;
+    }
+
+    public int calculateMyWay(String s) {
+        // +, -, *, /
+        Deque<Integer> stack = new ArrayDeque<>();
+        int i = 0;
+        char[] array = s.toCharArray();
+        Set<Character> set = new HashSet<>(Arrays.asList('+', '-', '*', '/'));
+        char operator = '+';
+        while (i < array.length) {
+            if (array[i] == ' ') {
+                i++;
+                continue;
+            }
+            if (set.contains(array[i])) {
+                operator = array[i++];
+                continue;
+            }
+            int num = 0;
+            while (i < array.length && Character.isDigit(array[i])) {
+                num = 10 * num + array[i++] - '0';
+            }
+            if (operator == '+') {
+                stack.offerFirst(num);
+                continue;
+            }
+            if (operator == '-') {
+                stack.offerFirst(-num);
+                continue;
+            }
+            if (operator == '*') {
+                stack.offerFirst(stack.pollFirst() * num);
+                continue;
+            }
+            stack.offerFirst(stack.pollFirst() / num);
         }
         int res = 0;
         while (!stack.isEmpty()) {

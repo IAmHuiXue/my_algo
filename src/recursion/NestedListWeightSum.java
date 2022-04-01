@@ -22,6 +22,21 @@ public class NestedListWeightSum {
             }
         }
     }
+
+    public int depthSumAnotherWay(List<NestedInteger> nestedList) {
+        return depthSumHelper(nestedList, 1);
+    }
+    private int depthSumHelper(List<NestedInteger> nestedList, int depth) {
+        int sum = 0;
+        for (NestedInteger n : nestedList) {
+            if (n.isInteger()) {
+                sum += depth * n.getInteger();
+            } else {
+                sum += depthSumHelper(n.getList(), depth + 1);
+            }
+        }
+        return sum;
+    }
 }
 
 // This is the interface that allows for creating nested lists.

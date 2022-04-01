@@ -1,4 +1,4 @@
-package for_fun;
+package trick;
 
 /**
  * https://leetcode.com/problems/search-a-2d-matrix-ii/

@@ -1,4 +1,4 @@
-package string;
+package divide_and_conquer;
 
 /**
  https://leetcode.com/problems/longest-common-prefix/
@@ -24,9 +24,9 @@ public class LongestCommonPrefix {
     }
     
     private String longestCommonPrefix(String left, String right) {
-        int min = Math.min(left.length(), right.length());
+        int minLen = Math.min(left.length(), right.length());
         int count = 0;
-        for (int i = 0; i < min; i++) {
+        for (int i = 0; i < minLen; i++) {
             if (left.charAt(i) != right.charAt(i)) {
                 break;
             }

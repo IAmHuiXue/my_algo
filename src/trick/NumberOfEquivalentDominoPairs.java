@@ -1,4 +1,4 @@
-package for_fun;
+package trick;
 
 import java.util.HashMap;
 import java.util.Map;

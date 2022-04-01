@@ -1,4 +1,4 @@
-package for_fun;
+package trick;
 
 public class Employee {
     private int baseSalary;

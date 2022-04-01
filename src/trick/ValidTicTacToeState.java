@@ -1,4 +1,4 @@
-package for_fun;
+package trick;
 
 /**
  * https://leetcode.com/problems/valid-tic-tac-toe-state/

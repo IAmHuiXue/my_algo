@@ -1,4 +1,4 @@
-package for_fun;
+package trick;
 
 /** https://leetcode.com/problems/robot-bounded-in-circle/ */
 // test

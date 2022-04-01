@@ -1,4 +1,4 @@
-package for_fun;
+package trick;
 
 import java.text.NumberFormat;
 import java.util.Scanner;
