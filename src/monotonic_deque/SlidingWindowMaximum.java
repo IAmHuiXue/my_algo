@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
 
-/** https://leetcode.com/problems/sliding-window-maximum/ */
+/**
+ * https://leetcode.com/problems/sliding-window-maximum/
+ */
 
 public class SlidingWindowMaximum {
     public int[] maxSlidingWindow(int[] nums, int k) {
@@ -16,28 +18,24 @@ public class SlidingWindowMaximum {
         // in the current sliding window
 
         // store index
-        Deque<Integer> dq = new ArrayDeque<>();
-        List<Integer> result = new ArrayList<>();
+
+        // maintain a deque to store the index of the elements in a monotonic decreasing order
+        int[] res = new int[nums.length - k + 1];
+        int index = 0;
+        Deque<Integer> deque = new ArrayDeque<>();
         for (int i = 0; i < nums.length; i++) {
-            // firstly deal with head
-            if (!dq.isEmpty() && i - dq.peekFirst() >= k) {
-                dq.pollFirst();
+            while (!deque.isEmpty() && nums[deque.peekLast()] <= nums[i]) {
+                deque.pollLast();
             }
-            // secondly, check tail
-            while (!dq.isEmpty() && nums[dq.peekLast()] < nums[i]) {
-                dq.pollLast();
+            deque.offerLast(i);
+            while (i - deque.peekFirst() + 1 > k) {
+                deque.pollFirst();
             }
-            // third, add cur element
-            dq.offerLast(i);
-            // at last, get the current result
             if (i >= k - 1) {
-                result.add(nums[dq.peekFirst()]);
+                res[index++] = nums[deque.peekFirst()];
             }
         }
-        int[] finalResult = new int[result.size()];
-        for (int i = 0; i < finalResult.length; i++) {
-            finalResult[i] = result.get(i);
-        }
-        return finalResult;
+        return res;
+
     }
 }
