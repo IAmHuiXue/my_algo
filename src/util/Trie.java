@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Trie {
-    private TrieNode root;
+    private final TrieNode root;
 
     public Trie() {
         this(null);
@@ -62,24 +62,22 @@ public class Trie {
     public List<String> findAllWordsWithPrefix(String prefix) {
         List<String> result = new ArrayList<>();
         TrieNode cur = searchPrefix(prefix);
-        if (cur != null) {
-            findAllWordsWithPrefix(cur, new StringBuilder(prefix), result);
-        }
+        findAllWordsWithPrefix(cur, new StringBuilder(prefix), result);
         return result;
     }
 
     private void findAllWordsWithPrefix(TrieNode cur, StringBuilder curPath, List<String> result) {
-        // no need to check cur is null
-        // cur will not be null, or say in the for loop, if there is no more child TrieNode exists
-        // no further dfs will be called.
+        if (cur == null) {
+            return;
+        }
 
         if (cur.isWord) {
             result.add(curPath.toString());
         }
 
-        for (Map.Entry<Character, TrieNode> child : cur.children.entrySet()) {
-            curPath.append(child.getKey());
-            findAllWordsWithPrefix(child.getValue(), curPath, result);
+        for (char c : cur.children.keySet()) {
+            curPath.append(c);
+            findAllWordsWithPrefix(cur.children.get(c), curPath, result);
             curPath.deleteCharAt(curPath.length() - 1);
         }
     }

@@ -12,6 +12,7 @@ public class VerticalOrderTraversalOfBinaryTreeII {
         if (root == null) {
             return result;
         }
+        // Cell can carry row and col info in addition to TreeNode
         Queue<Cell> queue = new ArrayDeque<>();
         Map<Integer, List<Cell>> colsToNode = new HashMap<>();
         queue.offer(new Cell(root, 0, 0));
@@ -63,5 +64,41 @@ public class VerticalOrderTraversalOfBinaryTreeII {
             }
             return Integer.compare(this.node.val, anotherC.node.val);
         }
+    }
+
+    public List<List<Integer>> verticalTraversalDFS(TreeNode root) {
+        // key=col, value=list<int[] -> {node.val, row}>
+        Map<Integer, List<int[]>> map = new HashMap<>();
+        preOrder(root, map, 0, 0);
+        List<Integer> keys = new ArrayList<>(map.keySet());
+
+        Collections.sort(keys);
+        List<List<Integer>> res = new ArrayList<>();
+        for (int k : keys) {
+            List<int[]> list = map.get(k);
+            list.sort((a, b) -> {
+                int rA = a[1];
+                int rB = b[1];
+                if (rA != rB) {
+                    return Integer.compare(rA, rB);
+                }
+                return Integer.compare(a[0], b[0]);
+            });
+            List<Integer> tmp = new ArrayList<>();
+            for (int[] i : list) {
+                tmp.add(i[0]);
+            }
+            res.add(tmp);
+        }
+        return res;
+    }
+
+    void preOrder(TreeNode root, Map<Integer, List<int[]>> map, int row, int col) {
+        if (root == null) {
+            return;
+        }
+        map.computeIfAbsent(col, k -> new ArrayList<>()).add(new int[]{root.val, row});
+        preOrder(root.left, map, row + 1, col - 1);
+        preOrder(root.right, map, row + 1, col + 1);
     }
 }

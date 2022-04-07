@@ -54,11 +54,7 @@ public class SearchSuggestionsSystem {
                 prefix.append(c);
                 List<String> res = trie.findAllWordsWithPrefix(prefix.toString());
                 Collections.sort(res);
-                if (res.size() > 3) {
-                    result.add(res.subList(0, 3));
-                } else {
-                    result.add(res);
-                }
+                result.add(res.subList(0, Math.min(res.size(), 3)));
             }
             return result;
         }
