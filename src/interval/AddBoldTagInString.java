@@ -18,15 +18,6 @@ import java.util.List;
 //    After merge, we got [0,6], so we know "aaabbc" needs to be surrounded by tag.
 
 public class AddBoldTagInString {
-    static class Interval {
-        int start, end;
-
-        public Interval(int s, int e) {
-            start = s;
-            end = e;
-        }
-    }
-
     public String addBoldTag(String s, String[] dict) {
         List<Interval> list = new ArrayList<>();
         for (String str : dict) {
