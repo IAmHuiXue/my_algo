@@ -24,13 +24,16 @@ public class SlidingWindowMaximum {
         int index = 0;
         Deque<Integer> deque = new ArrayDeque<>();
         for (int i = 0; i < nums.length; i++) {
+            // maintain the monotonic decreasing property
             while (!deque.isEmpty() && nums[deque.peekLast()] <= nums[i]) {
                 deque.pollLast();
             }
             deque.offerLast(i);
-            while (i - deque.peekFirst() + 1 > k) {
+            // maintain the validity of the max value
+            while (!deque.isEmpty() && i - deque.peekFirst() + 1 > k) {
                 deque.pollFirst();
             }
+            // when the size reaches k, start to record the result
             if (i >= k - 1) {
                 res[index++] = nums[deque.peekFirst()];
             }
