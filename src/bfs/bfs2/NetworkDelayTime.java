@@ -27,30 +27,30 @@ public class NetworkDelayTime {
         // to record the min distance from node k to all the other nodes
         // 这里用 map 而不是定长 array 的好处是，后面可以通过 map 的 size 来确定是否 reach 到了所有其他的点
         Map<Integer, Integer> costs = new HashMap<>();
-
+        int res = 0;
         while (!minHeap.isEmpty()) {
             Cell cur = minHeap.poll();
             // this is BFS2, therefore we should check one's expand state as soon as we poll it out
-            if (!costs.containsKey(cur.node)) { // it has not been expanded before
-                costs.put(cur.node, cur.time);
-                for (Cell nei : graph.getOrDefault(cur.node, new ArrayList<>())) {
-                    if (!costs.containsKey(nei.node)) { // only generate the nei node if it has not been expanded yet
-                        minHeap.offer(new Cell(nei.node, cur.time + nei.time));
-                    }
+            // if it has been expanded before
+            if (costs.containsKey(cur.node)) {
+                continue;
+            }
+            costs.put(cur.node, cur.time);
+            res = Math.max(res, cur.time);
+            for (Cell nei : graph.getOrDefault(cur.node, new ArrayList<>())) {
+                if (!costs.containsKey(nei.node)) { // only generate the nei node if it has not been expanded yet
+                    minHeap.offer(new Cell(nei.node, cur.time + nei.time));
                 }
             }
         }
-
         // if not all the nodes can be traversed, aka visited, return -1 per the problem required
         if (costs.size() != n) {
             return -1;
         }
-
         // loop through the costs map to find the node that costs the most time -> becomes the result
-        int res = 0;
-        for (int cost : costs.values()) {
-            res = Math.max(res, cost);
-        }
+//        for (int cost : costs.values()) {
+//            res = Math.max(res, cost);
+//        }
         return res;
     }
 

@@ -8,11 +8,11 @@ import java.util.Map;
  */
 
 public class LRUCache {
-    private Map<Integer, Node> records;
+    private Map<Integer, Node> nodeMap;
     // 以下对于 head 和 tail 的用法就是
     // 两个 pointer 相当于两个 dummy
-    private final Node head = new Node(0, 0); // add to head
-    private final Node tail = new Node(0, 0); // evict from tail
+    private final Node head = new Node(-1, -1); // add to head
+    private final Node tail = new Node(-1, -1); // evict from tail
     private final int capacity;
 
     static class Node {
@@ -28,45 +28,49 @@ public class LRUCache {
     }
 
     public LRUCache(int capacity) {
-        records = new HashMap<>();
+        nodeMap = new HashMap<>();
         this.capacity = capacity;
         head.next = tail;
         tail.prev = head;
     }
 
     public int get(int key) {
-        Node node = records.get(key);
+        Node node = nodeMap.get(key);
         if (node == null) {
             return -1;
         }
-        evict(node);
-        addHead(node);
+        update(node);
         return node.value;
     }
 
     public void put(int key, int value) {
-        Node node = records.get(key);
+        Node node = nodeMap.get(key);
         if (node != null) {
             node.value = value;
-            evict(node);
-        } else {
-            node = new Node(key, value);
-            if (records.size() == capacity) {
-                evict(tail.prev);
-            }
+            update(node);
+            return;
         }
+        if (nodeMap.size() == capacity) {
+            evict(tail.prev);
+        }
+        node = new Node(key, value);
+        addHead(node);
+    }
+
+    private void update(Node node) {
+        evict(node);
         addHead(node);
     }
 
     private void evict(Node node) {
-        records.remove(node.key);
+        nodeMap.remove(node.key); // O(1) remember to remove it from nodeMap
         node.next.prev = node.prev;
         node.prev.next = node.next;
         node.next = node.prev = null;
     }
 
     private void addHead(Node node) {
-        records.put(node.key, node);
+        nodeMap.put(node.key, node); // remember to put it in nodeMap
         head.next.prev = node;
         node.next = head.next;
         head.next = node;

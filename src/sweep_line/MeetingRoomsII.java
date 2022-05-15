@@ -1,4 +1,4 @@
-package interval;
+package sweep_line;
 
 import java.util.*;
 
@@ -34,7 +34,34 @@ public class MeetingRoomsII {
         }
     }
 
-    static class CountEnds {
+    static class ClassicSweepLine {
+        public int minMeetingRooms(int[][] intervals) {
+            List<int[]> list = new ArrayList<>();
+            for (int[] i : intervals) {
+                list.add(new int[]{i[0], 1});
+                list.add(new int[]{i[1], -1});
+            }
+            // Key: if a[0] == b[0], we need to return a[1] - b[1] not b[1] - a[1]!
+            // Due to the logic, if a meeting ends at time i and another meeting starts at time i, we do not need to open
+            // a new meeting room. In this case we should firstly calculate the end time before counting the start time
+            list.sort((a, b) -> a[0] == b[0] ? a[1] - b[1] : a[0] - b[0]);
+            int max = 0;
+            int cur = 0;
+            for (int[] i : list) {
+                if (i[1] > 0) {
+                    cur++;
+                    max = Math.max(cur, max);
+                } else {
+                    cur--;
+
+                }
+
+            }
+            return max;
+        }
+    }
+
+    static class FancySweepLine {
         // 就是数飞机的那道题。实际上是求最多 overlap 的个数
         public int minMeetingRooms(int[][] intervals) {
             List<Integer> starts = new ArrayList<>();

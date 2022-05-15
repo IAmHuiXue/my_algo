@@ -46,7 +46,7 @@ public class CheapestFlightsWithinKStops {
             int[] prices = new int[n];
             Arrays.fill(prices, Integer.MAX_VALUE);
 
-            PriorityQueue<Cell> minHeap = new PriorityQueue<>((a, b) -> Integer.compare(a.price, b.price));
+            PriorityQueue<Cell> minHeap = new PriorityQueue<>();
             minHeap.offer(new Cell(src, k, 0));
             prices[src] = 0;
 

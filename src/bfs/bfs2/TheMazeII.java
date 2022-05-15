@@ -1,7 +1,9 @@
 package bfs.bfs2;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.PriorityQueue;
+import java.util.Set;
 
 /**
  * https://leetcode.com/problems/the-maze-ii/
@@ -33,7 +35,6 @@ public class TheMazeII {
         q.offer(new int[]{start[0], start[1], 0});
         while (!q.isEmpty()) {
             int[] cur = q.poll();
-            // because of BFS2, we can early return
             if (cur[0] == destination[0] && cur[1] == destination[1]) {
                 return cur[2];
             }
@@ -64,7 +65,7 @@ public class TheMazeII {
 
                 // bfs2 特点3： 只有在还没有被 expand 过的时候才 generate 进 queue
 
-                // only poll neighbor node if it has not been expanded!
+                // technically, we do not need to check the if-statement for bfs2, but doing this will reduce redundant processing.
                 if (distance[nr][nc] > distance[cur[0]][cur[1]] + count) {
                     q.offer(new int[]{nr, nc, distance[cur[0]][cur[1]] + count});
                 }
@@ -72,4 +73,46 @@ public class TheMazeII {
         }
         return -1;
     }
+
+    private int dijkstra2(int[][] maze, int[] start, int[] destination) {
+        int m = maze.length;
+        int n = maze[0].length;
+
+        // Maintaining a distance[] is not necessary. The key is to record the nodes that have been expanded, so that
+        // based on the rule of dijkstra, we don't need to re-generate / expand the same nodes.
+        // Here for demonstration, we use a Set.
+        Set<String> visited = new HashSet<>();
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> Integer.compare(a[2], b[2]));
+        pq.offer(new int[]{start[0], start[1], 0});
+        while (!pq.isEmpty()) {
+            int[] cur = pq.poll();
+            if (cur[0] == destination[0] && cur[1] == destination[1]) {
+                return cur[2];
+            }
+            // do not process the nodes having been expanded
+            // trick, set.add() -> we only add the nodes into the set when expanding it now
+            if (!visited.add(cur[0] + "," + cur[1])) {
+                continue;
+            }
+            for (int[] dir : DIRS) {
+                int nr = cur[0] + dir[0];
+                int nc = cur[1] + dir[1];
+                int count = 1;
+                while (nr >= 0 && nr < m && nc >= 0 && nc < n && maze[nr][nc] == 0) {
+                    nr += dir[0];
+                    nc += dir[1];
+                    count++;
+                }
+                nr -= dir[0];
+                nc -= dir[1];
+                count--;
+                // technically, we do not need to check the if-statement for bfs2, but doing this will reduce redundant processing.
+                if (!visited.contains(nr + "," + nc)) {
+                    pq.offer(new int[]{nr, nc, cur[2] + count});
+                }
+            }
+        }
+        return -1;
+    }
+
 }

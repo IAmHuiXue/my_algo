@@ -2,13 +2,14 @@ package bfs;
 
 import java.util.*;
 
+/** https://leetcode.com/problems/bus-routes/ */
 public class BusRoutes {
     public int numBusesToDestination(int[][] routes, int source, int target) {
         // in this problem, a bus is unique equivalent to a route
         // 0th ~ (n-1)th bus
         int n = routes.length;
         // routes[i] represents the routes for i-th bus
-        // <key=stop, value=bus>
+        // <key=stop, value=set of buses that stop heret >
         Map<Integer, Set<Integer>> to_routes = new HashMap<>();
         for (int i = 0; i < routes.length; i++) {
             for (int j : routes[i]) {

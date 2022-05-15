@@ -10,11 +10,18 @@ import java.util.Map;
 // in order to ensure O(1) operating get(), put(), we cannot use structure such as TreeMap or PQ
 
 public class LFUCache {
+    public static void main(String[] args) {
+        LFUCache l = new LFUCache(0);
+        l.put(0, 0);
+        System.out.println(l.get(0));
+
+    }
     private Map<Integer, Node> nodeMap;
 
     // 在 lfu 里，每一个 node 存在一个 list 里面，而有不同多个 list，按照 frequency 来区分：
     // 同时每个 list 里面 the least recently used node 在 tail
-    private Map<Integer, DLList> countMap;
+    // <key=count, value=list>
+    private Map<Integer, DLList> freqMap;
     private int limit;
     private int leastFreq;
 
@@ -35,8 +42,8 @@ public class LFUCache {
     static class DLList {
         // 以下对于 head 和 tail 的用法就是
         // 两个 pointer 相当于两个 dummy, size 来控制实际 node 个数
-        final Node head = new Node(0, 0); // add to head
-        final Node tail = new Node(0, 0); // remove from tail
+        final Node head = new Node(-1, -1); // add to head
+        final Node tail = new Node(-1, -1); // remove from tail
         int size;
 
         public DLList() {
@@ -71,8 +78,9 @@ public class LFUCache {
 
     public LFUCache(int capacity) {
         nodeMap = new HashMap<>();
-        countMap = new HashMap<>();
+        freqMap = new HashMap<>();
         limit = capacity;
+        leastFreq = Integer.MAX_VALUE;
     }
 
     public int get(int key) {
@@ -89,33 +97,29 @@ public class LFUCache {
         if (node != null) {
             node.value = value;
             update(node);
-        } else {
-            node = new Node(key, value);
-            nodeMap.put(key, node);
-            if (nodeMap.size() > limit) {
-                DLList leastFreqList = countMap.get(leastFreq);
-                nodeMap.remove(leastFreqList.removeLast().key);
-            }
-            leastFreq = 1; // because the newly added node's freq is 1
-            countMap.computeIfAbsent(leastFreq, k -> new DLList()).addHead(node);
-//            DLList leastFreqList = countMap.getOrDefault(leastFreq, new DLList());
-//            leastFreqList.addHead(node);
-//            countMap.putIfAbsent(leastFreq, leastFreqList);
+            return;
         }
+
+        node = new Node(key, value);
+        if (limit == nodeMap.size()) {
+            DLList leastFreqList = freqMap.get(leastFreq);
+            nodeMap.remove(leastFreqList.removeLast().key);
+        }
+        nodeMap.put(key, node);
+        leastFreq = 1; // because the newly added node's freq is 1
+        freqMap.computeIfAbsent(leastFreq, k -> new DLList()).addHead(node);
     }
 
     private void update(Node node) {
         // node needs to be updated with the new frequency -> switched to another DLList
-        DLList oldList = countMap.get(node.count);
+        DLList oldList = freqMap.get(node.count);
         oldList.remove(node);
         if (node.count == leastFreq && oldList.size == 0) {
             leastFreq++; // update leastFreq is needed
+            freqMap.remove(node.count);
         }
         node.count++;
-        countMap.computeIfAbsent(node.count, k -> new DLList()).addHead(node);
-//        DLList newList = countMap.getOrDefault(node.count, new DLList());
-//        newList.addHead(node);
-//        countMap.put(node.count, newList);
+        freqMap.computeIfAbsent(node.count, k -> new DLList()).addHead(node);
     }
 
 /**

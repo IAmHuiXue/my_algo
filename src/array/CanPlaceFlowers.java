@@ -1,6 +1,8 @@
 package array;
 
-/** https://leetcode.com/problems/can-place-flowers/ */
+/**
+ * https://leetcode.com/problems/can-place-flowers/
+ */
 
 public class CanPlaceFlowers {
     public boolean canPlaceFlowers(int[] flowerbed, int n) {
@@ -19,4 +21,5 @@ public class CanPlaceFlowers {
         }
         return false;
     }
+    // O(n)
 }

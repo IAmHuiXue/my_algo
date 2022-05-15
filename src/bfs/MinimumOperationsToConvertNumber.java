@@ -32,11 +32,8 @@ public class MinimumOperationsToConvertNumber {
                     q.offer(val ^ num);
                 }
             }
-
             res++;
         }
-
         return -1;
     }
-
 }

@@ -1,11 +1,13 @@
 package amazon;
 
-/** https://leetcode.com/problems/flip-string-to-monotone-increasing/ */
+/**
+ * https://leetcode.com/problems/flip-string-to-monotone-increasing/
+ */
 
 public class FlipStringToMonotoneIncreasing {
     public int minFlipsMonoIncr(String s) {
-        // Basically we go through string and found out how much 1 before index i must be flipped to 0 and how much 0
-        // after index need to be flipped to 1. adds them up and get min for result
+        // Basically we go through string and found out how many '1' before index i must be flipped to '0' and how many '0'
+        // after index i need to be flipped to '1'. adds them up and get min for result
         int n = s.length();
         int[] dp = new int[n + 1];
         // dp[i] represents from index 0 to index i inclusive, the num of 1's that needs to be flipped

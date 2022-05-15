@@ -11,7 +11,6 @@ public class RangeAddition {
     // The optimal time complexity is O(k + n)
     public int[] getModifiedArray(int length, int[][] updates) {
         int[] res = new int[length];
-        Arrays.fill(res, 0);
         for (int[] update : updates) {
             int start = update[0];
             int end = update[1];

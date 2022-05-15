@@ -18,30 +18,32 @@ public class CutOffTreesForGolfEvent {
         // use a pq to help to sort the cutting order of all the trees based on their height
         // int[]{a=row, b=col, c=height}
         PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[2] - b[2]);
-
+        // traverse the entire matrix to get all the tree pos sorted
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
-                if (forest.get(i).get(j) > 1) {
-                    pq.offer(new int[]{i, j, forest.get(i).get(j)});
+                int height = forest.get(i).get(j);
+                if (height > 1) {
+                    pq.offer(new int[]{i, j, height});
                 }
             }
         }
 
-        int[] start = new int[]{0, 0};
+        int[] curStart = new int[]{0, 0};
         int steps = 0;
         while (!pq.isEmpty()) {
             int[] cur = pq.poll();
-            int curSteps = minStep(forest, start, cur, m, n, new boolean[m][n]);
+            int curSteps = minStep(forest, curStart, cur, m, n, new boolean[m][n]);
             if (curSteps < 0) {
                 return -1;
             }
             steps += curSteps;
-            start[0] = cur[0];
-            start[1] = cur[1];
+            curStart[0] = cur[0];
+            curStart[1] = cur[1];
         }
         return steps;
     }
 
+    /** to get the min steps travelling from start to end, -1 if cannot reach */
     private int minStep(List<List<Integer>> forest, int[] start, int[] end, int m, int n, boolean[][] visited) {
         int steps = 0;
         // int[]{a=row, b=col}

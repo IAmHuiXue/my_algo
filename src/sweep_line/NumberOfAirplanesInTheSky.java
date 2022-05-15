@@ -1,4 +1,4 @@
-package interval;
+package sweep_line;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -28,7 +28,8 @@ public class NumberOfAirplanesInTheSky {
             list.add(new int[]{interval.end, -1}); // -1 represents land
         }
 
-        Collections.sort(list, (a, b) -> a[0] == b[0] ? Integer.compare(a[1], b[1]) : Integer.compare(a[0], b[0]));
+        // 先算降落，再算起飞
+        list.sort((a, b) -> a[0] == b[0] ? Integer.compare(a[1], b[1]) : Integer.compare(a[0], b[0]));
         int max = 0;
         int count = 0;
         for (int[] point : list) {
