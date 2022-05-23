@@ -3,7 +3,7 @@ package prefix_sum;
 import java.util.HashMap;
 import java.util.Map;
 
-/** https://leetcode.com/problems/count-nice-pairs-in-an-array/*/
+/** <a href="https://leetcode.com/problems/count-nice-pairs-in-an-array/">https://leetcode.com/problems/count-nice-pairs-in-an-array/</a>*/
 
 public class CountNicePairsInAnArray {
     public int countNicePairs(int[] nums) {

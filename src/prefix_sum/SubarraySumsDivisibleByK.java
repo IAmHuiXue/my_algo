@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * https://leetcode.com/problems/subarray-sums-divisible-by-k/
+ * <a href="https://leetcode.com/problems/subarray-sums-divisible-by-k/">https://leetcode.com/problems/subarray-sums-divisible-by-k/</a>
  */
 
 public class SubarraySumsDivisibleByK {

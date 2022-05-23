@@ -1,7 +1,7 @@
 package string;
 
 /**
- * https://leetcode.com/problems/maximum-repeating-substring/
+ * <a href="https://leetcode.com/problems/maximum-repeating-substring/">https://leetcode.com/problems/maximum-repeating-substring/</a>
  */
 
 public class MaximumRepeatingSubstring {

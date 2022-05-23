@@ -3,6 +3,8 @@ package string;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
+/** <a href="https://leetcode.com/problems/simplify-path/">https://leetcode.com/problems/simplify-path/</a> */
+
 public class SimplifyPath {
     public String simplifyPath(String path) {
         /*

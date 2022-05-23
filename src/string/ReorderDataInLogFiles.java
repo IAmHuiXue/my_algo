@@ -3,7 +3,7 @@ package string;
 import java.util.Arrays;
 import java.util.Comparator;
 
-/** https://leetcode.com/problems/reorder-data-in-log-files/ */
+/** <a href="https://leetcode.com/problems/reorder-data-in-log-files/">https://leetcode.com/problems/reorder-data-in-log-files/</a> */
 
 public class ReorderDataInLogFiles {
     public String[] reorderLogFiles(String[] logs) {
@@ -29,7 +29,7 @@ public class ReorderDataInLogFiles {
                 // letter-log comes before digit-log
                 return 1;
             }
-            if (!isDigit1 && isDigit2) {
+            if (!isDigit1) {
                 return -1;
             }
             // case 3: both are digit
@@ -61,7 +61,7 @@ public class ReorderDataInLogFiles {
 //                if (!isDigit1 && isDigit2)
 //                    // the letter-log comes before digit-logs
 //                    return -1;
-//                else if (isDigit1 && !isDigit2)
+//                else if (isDigit1)
 //                    return 1;
 //                else
 //                    // case 3). both logs are digit-log

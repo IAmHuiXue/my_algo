@@ -1,6 +1,6 @@
 package string;
 
-/** https://leetcode.com/problems/longest-palindromic-substring/ */
+/** <a href="https://leetcode.com/problems/longest-palindromic-substring/">https://leetcode.com/problems/longest-palindromic-substring/</a> */
 
 public class LongestPalindromicSubstring {
     public String longestPalindrome(String s) {

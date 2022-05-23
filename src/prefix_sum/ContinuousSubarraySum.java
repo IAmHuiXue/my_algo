@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 /**
- * https://leetcode.com/problems/continuous-subarray-sum/
+ * <a href="https://leetcode.com/problems/continuous-subarray-sum/">https://leetcode.com/problems/continuous-subarray-sum/</a>
  */
 
 public class ContinuousSubarraySum {

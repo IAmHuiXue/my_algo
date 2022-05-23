@@ -3,7 +3,7 @@ package interval;
 import java.util.ArrayList;
 import java.util.List;
 
-/** https://leetcode.com/problems/employee-free-time/ */
+/** <a href="https://leetcode.com/problems/employee-free-time/">https://leetcode.com/problems/employee-free-time/</a> */
 
 public class EmployeeFreeTime {
     public List<Interval> employeeFreeTime(List<List<Interval>> schedule) {

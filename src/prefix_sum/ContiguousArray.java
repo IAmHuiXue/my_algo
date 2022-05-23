@@ -3,7 +3,7 @@ package prefix_sum;
 import java.util.HashMap;
 import java.util.Map;
 
-/** https://leetcode.com/problems/contiguous-array/ */
+/** <a href="https://leetcode.com/problems/contiguous-array/">https://leetcode.com/problems/contiguous-array/</a> */
 
 public class ContiguousArray {
     public int findMaxLength(int[] nums) {

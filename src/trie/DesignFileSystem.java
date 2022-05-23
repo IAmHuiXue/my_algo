@@ -3,7 +3,7 @@ package trie;
 import java.util.HashMap;
 import java.util.Map;
 
-/** https://leetcode.com/problems/design-file-system/ */
+/** <a href="https://leetcode.com/problems/design-file-system/">https://leetcode.com/problems/design-file-system/</a> */
 
 public class DesignFileSystem {
     TrieNode root;
@@ -24,26 +24,24 @@ public class DesignFileSystem {
     }
 
     public boolean createPath(String path, int value) {
-        String[] segments = path.split("/");
+        String[] segments = resolvePath(path);
         TrieNode cur = root;
-        for (int i = 1; i < segments.length; i++) {
-            TrieNode next = cur.children.get(segments[i]);
-            if (next == null) {
-                if (i == segments.length - 1) {
-                    next = new TrieNode(value, segments[i]);
-                    cur.children.put(segments[i], next);
-                    return true;
-                }
+        for (int i = 1; i < segments.length - 1; i++) {
+            cur = cur.children.get(segments[i]);
+            if (cur == null) {
                 return false;
             }
-            cur = next;
         }
-        // if the path has already existed
-        return false;
+        String lastPath = segments[segments.length - 1];
+        if (cur.children.containsKey(lastPath)) { // if the existing path already exits
+            return false;
+        }
+        cur.children.put(lastPath, new TrieNode(value, segments[segments.length - 1]));
+        return true;
     }
 
     public int get(String path) {
-        String[] segments = path.split("/");
+        String[] segments = resolvePath(path);
         TrieNode cur = root;
         for (int i = 1; i < segments.length; i++) {
             cur = cur.children.get(segments[i]);
@@ -52,6 +50,10 @@ public class DesignFileSystem {
             }
         }
         return cur.value;
+    }
+
+    String[] resolvePath(String path) {
+        return path.split("/");
     }
 
 

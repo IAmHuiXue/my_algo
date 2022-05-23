@@ -1,6 +1,6 @@
 package string;
 
-/** https://leetcode.com/problems/string-compression/ */
+/** <a href="https://leetcode.com/problems/string-compression/">https://leetcode.com/problems/string-compression/</a> */
 
 public class StringCompression {
     public int compress(char[] chars) {

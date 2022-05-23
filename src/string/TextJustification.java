@@ -3,7 +3,9 @@ package string;
 import java.util.ArrayList;
 import java.util.List;
 
-/** https://leetcode.com/problems/text-justification/ */
+/**
+ * <a href="https://leetcode.com/problems/text-justification/">https://leetcode.com/problems/text-justification/</a>
+ */
 
 public class TextJustification {
     public static void main(String[] args) {
@@ -14,7 +16,8 @@ public class TextJustification {
     static final int LEN_OF_SINGLE_SPACE = 1;
 
     public List<String> fullJustify(String[] words, int maxWidth) {
-        int left = 0; List<String> result = new ArrayList<>();
+        int left = 0;
+        List<String> result = new ArrayList<>();
         while (left < words.length) {
             int right = findRight(left, words, maxWidth);
             result.add(justify(left, right, words, maxWidth));

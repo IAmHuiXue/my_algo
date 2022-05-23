@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.PriorityQueue;
 
 /**
- * https://leetcode.com/problems/find-median-from-data-stream/
+ * <a href="https://leetcode.com/problems/find-median-from-data-stream/">https://leetcode.com/problems/find-median-from-data-stream/</a>
  */
 
 public class FindMedianFromDataStream {
@@ -20,14 +20,14 @@ public class FindMedianFromDataStream {
         if (even) {
             return (minHeap.peek() + maxHeap.peek()) / 2.0;
         }
-        return minHeap.peek();
+        return minHeap.peek() * 1.0;
     }
 
     public void addNum(int num) {
         if (even) {
             // 设计的是当 even 的时候将下一个元素放在 minHeap 里
             // 因为需要严格保证的每个minHeap 里所有元素都要大于等于 maxHeap
-            // 因此先将下一个元素放进 maxHeap 里，再从max 里面 poll 出最大的放回给 min
+            // 因此先将下一个元素放进 maxHeap 里，再从 max 里面 poll 出最大的放回给 min
             // 反之亦然
             maxHeap.offer(num);
             minHeap.offer(maxHeap.poll());

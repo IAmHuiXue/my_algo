@@ -5,7 +5,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-/** https://leetcode.com/problems/isomorphic-strings/ */
+/**
+ * <a href="https://leetcode.com/problems/isomorphic-strings/">https://leetcode.com/problems/isomorphic-strings/</a>
+ */
 
 public class IsomorphicStrings {
     public boolean isIsomorphic(String s, String t) {

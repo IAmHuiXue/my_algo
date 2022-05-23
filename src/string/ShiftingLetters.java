@@ -1,6 +1,8 @@
 package string;
 
-/** https://leetcode.com/problems/shifting-letters/ */
+/**
+ * <a href="https://leetcode.com/problems/shifting-letters/">https://leetcode.com/problems/shifting-letters/</a>
+ */
 
 public class ShiftingLetters {
     public String shiftingLetters(String s, int[] shifts) {

@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * https://leetcode.com/problems/add-bold-tag-in-string/
+ * <a href="https://leetcode.com/problems/add-bold-tag-in-string/">https://leetcode.com/problems/add-bold-tag-in-string/</a>
  */
 
 //     you find the index of each string in dict, convert to an interval, you will get

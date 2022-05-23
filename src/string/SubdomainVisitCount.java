@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/** https://leetcode.com/problems/subdomain-visit-count/ */
+/** <a href="https://leetcode.com/problems/subdomain-visit-count/">https://leetcode.com/problems/subdomain-visit-count/</a> */
 
 public class SubdomainVisitCount {
     public List<String> subdomainVisits(String[] cpdomains) {

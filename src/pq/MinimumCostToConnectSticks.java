@@ -3,7 +3,7 @@ package pq;
 import java.util.PriorityQueue;
 
 /**
- * https://leetcode.com/problems/minimum-cost-to-connect-sticks/
+ * <a href="https://leetcode.com/problems/minimum-cost-to-connect-sticks/">https://leetcode.com/problems/minimum-cost-to-connect-sticks/</a>
  */
 
 public class MinimumCostToConnectSticks {
