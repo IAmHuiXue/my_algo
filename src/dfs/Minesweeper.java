@@ -1,6 +1,6 @@
 package dfs;
 
-/** https://leetcode.com/problems/minesweeper/*/
+/** <a href="https://leetcode.com/problems/minesweeper/">https://leetcode.com/problems/minesweeper/</a>*/
 
 public class Minesweeper {
     static int[][] dirs = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}, {1, 1}, {-1, -1}, {1, -1}, {-1, 1}};

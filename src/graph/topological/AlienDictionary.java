@@ -2,7 +2,7 @@ package graph.topological;
 
 import java.util.*;
 
-/** https://leetcode.com/problems/alien-dictionary/ */
+/** <a href="https://leetcode.com/problems/alien-dictionary/">https://leetcode.com/problems/alien-dictionary/</a> */
 
 public class AlienDictionary {
     public String alienOrder(String[] words) {
@@ -14,6 +14,8 @@ public class AlienDictionary {
         return topologicalSort(graph, incomingEdges);
     }
     boolean build(Map<Character, List<Character>> graph, Map<Character, Integer> incomingEdges, String[] words) {
+        // 1. we do this so that we can use graph.size() or incomingEdges.size() to represent the total num of all the characters
+        // otherwise, since this is a directed graph, not putting every char seen explicitly will possibly miss chars.
         for (String word : words) {
             for (char c : word.toCharArray()) {
                 incomingEdges.putIfAbsent(c, 0);
@@ -58,6 +60,9 @@ public class AlienDictionary {
                 int num = incomingEdges.get(nei);
                 num--;
                 incomingEdges.put(nei, num);
+                // why do we not need to use Set to de-dup?
+                // if a char is previously visited, meaning its incomingEdges = 0, and if we are revisiting it now,
+                // its incomingEdges will be negative, so it will not be offered into the q.
                 if (num == 0) {
                     q.offer(nei);
                 }
