@@ -1,6 +1,6 @@
 package prefix_sum;
 
-/** https://leetcode.com/problems/range-sum-query-2d-immutable/ */
+/** <a href="https://leetcode.com/problems/range-sum-query-2d-immutable/">...</a> */
 
 public class RangeSumQuery2DImmutable {
     private int[][] prefixSum;
@@ -12,10 +12,8 @@ public class RangeSumQuery2DImmutable {
         prefixSum = new int[rows + 1][cols + 1];
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-
                 // prefixSum of (i, j) =
                 // prefixSum of (i, j - 1) + prefixSum of (i - 1, j) + matrix of (i, j) - prefixSum of (i - 1, j - 1)
-
                 prefixSum[i + 1][j + 1] =
                         prefixSum[i + 1][j] + prefixSum[i][j + 1] + matrix[i][j] - prefixSum[i][j];
             }

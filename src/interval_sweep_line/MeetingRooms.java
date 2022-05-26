@@ -1,8 +1,8 @@
-package interval;
+package interval_sweep_line;
 
 import java.util.Arrays;
 
-/** https://leetcode.com/problems/meeting-rooms/ */
+/** <a href="https://leetcode.com/problems/meeting-rooms/">Meeting Rooms</a> */
 
 public class MeetingRooms {
     public boolean canAttendMeetings(int[][] intervals) {

@@ -1,6 +1,6 @@
 package trick;
 
-/** https://leetcode.com/problems/design-tic-tac-toe/ */
+/** <a href="https://leetcode.com/problems/design-tic-tac-toe/">...</a> */
 
 public class DesignTicTacToe {
     private int[][] grid;

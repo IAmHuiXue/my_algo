@@ -1,10 +1,10 @@
-package interval;
+package interval_sweep_line;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/** https://leetcode.com/problems/remove-interval/ */
+/** <a href="https://leetcode.com/problems/remove-interval/">...</a> */
 public class RemoveInterval {
     public List<List<Integer>> removeInterval(int[][] intervals, int[] toBeRemoved) {
         List<List<Integer>> res = new ArrayList<>();

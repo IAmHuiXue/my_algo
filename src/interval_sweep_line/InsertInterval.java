@@ -1,9 +1,9 @@
-package interval;
+package interval_sweep_line;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/** https://leetcode.com/problems/insert-interval/ */
+/** <a href="https://leetcode.com/problems/insert-interval/">...</a> */
 
 public class InsertInterval {
 
@@ -19,17 +19,19 @@ public class InsertInterval {
         for (int[] cur : intervals) {
             if (newInterval == null || cur[1] < newInterval[0]) {
                 res.add(cur);
-            } else if (cur[0] > newInterval[1]) {
+                continue;
+            }
+            if (cur[0] > newInterval[1]) {
                 res.add(newInterval);
                 res.add(cur);
                 newInterval = null;
-            } else {
-                // now cur has overlap with newInterval
-                // update newInterval
-                newInterval[0] = Math.min(newInterval[0], cur[0]);
-                newInterval[1] = Math.max(newInterval[1], cur[1]);
-                // do not add this updated newInterval yet, because we need to check if and the next interval
+                continue;
             }
+            // now cur has overlap with newInterval
+            // update newInterval
+            newInterval[0] = Math.min(newInterval[0], cur[0]);
+            newInterval[1] = Math.max(newInterval[1], cur[1]);
+            // do not add this updated newInterval yet, because we need to check if and the next interval
         }
         // edge case -> if in the end newInterval has not been added, it should then stay at the end.
         if (newInterval != null) {

@@ -1,4 +1,4 @@
-package interval;
+package interval_sweep_line;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +34,7 @@ public class EmployeeFreeTime {
         }
         // get the time slots between the adjacent busy times
         total.clear();
-        for (int i = 1; i < merge.size(); i++) {
+        for (int i = 1; i < merge.size(); i++) { // skip the first and the last merged intervals
             total.add(new Interval(merge.get(i - 1).end, merge.get(i).start));
         }
         return total;

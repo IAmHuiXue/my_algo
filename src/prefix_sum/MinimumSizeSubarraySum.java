@@ -1,4 +1,4 @@
-package sliding_window;
+package prefix_sum;
 
 /** <a href="https://leetcode.com/problems/minimum-size-subarray-sum/">...</a> */
 

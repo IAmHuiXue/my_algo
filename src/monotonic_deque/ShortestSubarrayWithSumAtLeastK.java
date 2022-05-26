@@ -3,12 +3,14 @@ package monotonic_deque;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-/** https://leetcode.com/problems/shortest-subarray-with-sum-at-least-k/ */
+/** <a href="https://leetcode.com/problems/shortest-subarray-with-sum-at-least-k/">...</a> */
 
 public class ShortestSubarrayWithSumAtLeastK {
     static class Dq {
 
-        /** 核心：在 deque 里面 maintain 一个单调递增 的 prefix 的 元素的 index */
+        /** 核心：在 deque 里面 maintain 一个单调递增 的 prefixSum 的 元素的 index */
+
+        // https://leetcode.com/problems/shortest-subarray-with-sum-at-least-k/discuss/143726/C%2B%2BJavaPython-O(N)-Using-Deque
 
         public int shortestSubarray(int[] nums, int k) {
             int N = nums.length;
@@ -30,29 +32,5 @@ public class ShortestSubarrayWithSumAtLeastK {
             return res <= N ? res : -1;
         }
     }
-
-    static class PrefixSum {
-        public static int shortestSubarray(int[] nums, int k) {
-            if (nums.length == 1) {
-                return nums[0] >= k ? 1 : -1;
-            }
-            int[] preSum = new int[nums.length];
-            for (int i = 0; i < nums.length; i++) {
-                preSum[i] = i == 0 ? nums[i] : preSum[i - 1] + nums[i];
-            }
-
-            // need to find from i to j, preSum[j] - preSum[i] + nums[i] >= k and min(j - i + 1);
-            int shortest = Integer.MAX_VALUE;
-            for (int j = 1; j < nums.length; j++) {
-                for (int i = 0; i <= j; i++) {
-                    if (preSum[j] - preSum[i] + nums[i] >= k) {
-                        shortest = Math.min(shortest, j - i + 1);
-                    }
-                }
-            }
-            return shortest == Integer.MAX_VALUE? -1 : shortest;
-        }
-    }
-
 
 }

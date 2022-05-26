@@ -1,4 +1,4 @@
-package interval;
+package interval_sweep_line;
 
 public class Interval {
     int start;

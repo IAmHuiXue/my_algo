@@ -1,10 +1,10 @@
-package interval;
+package interval_sweep_line;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/** https://leetcode.com/problems/merge-intervals/ */
+/** <a href="https://leetcode.com/problems/merge-intervals/">...</a> */
 public class MergeIntervals {
     public int[][] merge(int[][] intervals) {
         // SORT the intervals by the starting value of each interval

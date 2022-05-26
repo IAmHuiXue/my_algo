@@ -1,19 +1,18 @@
-package sweep_line;
+package interval_sweep_line;
 
 import java.util.*;
 
 /**
- * https://leetcode.com/problems/meeting-rooms-ii/
+ * <a href="https://leetcode.com/problems/meeting-rooms-ii/">...</a>
  */
 
 public class MeetingRoomsII {
     static class PQ {
         public int minMeetingRooms(int[][] intervals) {
-            // Check for the base case. If there are no intervals, return 0
             if (intervals.length == 0) {
                 return 0;
             }
-            // pq 存的是所有 meeting room 的结束时间，最早结束的时间为 pq 栈顶元素
+            // pq 存的是所有 meeting room 的结束时间，最早结束的时间为 pq 栈顶元素, pq 的 size 就是当前时间下需要开设的最少 room 数
             PriorityQueue<Integer> allocator = new PriorityQueue<>();
             // Sort the intervals by start time
             Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
@@ -45,17 +44,17 @@ public class MeetingRoomsII {
             // Due to the logic, if a meeting ends at time i and another meeting starts at time i, we do not need to open
             // a new meeting room. In this case we should firstly calculate the end time before counting the start time
             list.sort((a, b) -> a[0] == b[0] ? a[1] - b[1] : a[0] - b[0]);
+            // 当两个 meeting 有 overlap，那么就要开设一个新的 room
+            // 所以 count 这里记录的是当下时刻的 overlap 数，也就是当下需要开设的 room 数
             int max = 0;
-            int cur = 0;
+            int count = 0;
             for (int[] i : list) {
                 if (i[1] > 0) {
-                    cur++;
-                    max = Math.max(cur, max);
+                    count++;
+                    max = Math.max(count, max);
                 } else {
-                    cur--;
-
+                    count--;
                 }
-
             }
             return max;
         }

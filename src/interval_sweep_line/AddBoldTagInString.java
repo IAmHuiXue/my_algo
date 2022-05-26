@@ -1,8 +1,7 @@
-package interval;
+package interval_sweep_line;
 
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**

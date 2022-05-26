@@ -1,4 +1,4 @@
-package prefix_sum;
+package prefix_sum.trick;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +19,7 @@ public class ContiguousArray {
         Map<Integer, Integer> map = new HashMap<>();
         map.put(0, -1); // 为了不错过第一个 element
         for (int i = 0; i < nums.length; i++) {
-            prefixSum += nums[i]; // 两个 prefixSum sum == 0， 所以中间夹的部分一定和为 0
+            prefixSum += nums[i];
             if (map.containsKey(prefixSum)) {
                 res = Math.max(res, i - map.get(prefixSum));
             } else {

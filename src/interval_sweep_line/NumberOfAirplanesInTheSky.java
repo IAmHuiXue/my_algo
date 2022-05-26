@@ -1,24 +1,14 @@
-package sweep_line;
+package interval_sweep_line;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 /**
- * https://www.lintcode.com/problem/391/
+ * <a href="https://www.lintcode.com/problem/391/">...</a>
  */
 
 public class NumberOfAirplanesInTheSky {
-
-    static class Interval {
-        int start;
-        int end;
-
-        Interval(int start, int end) {
-            this.start = start;
-            this.end = end;
-        }
-    }
 
     public int countOfAirplanesBetter(List<Interval> airplanes) {
 
@@ -60,22 +50,22 @@ public class NumberOfAirplanesInTheSky {
         }
         Collections.sort(starts);
         Collections.sort(ends);
+        int max = 0;
         int count = 0;
-        int curCount = 0;
         int i = 0, j = 0;
         while (i < starts.size()) {
             if (starts.get(i) < ends.get(j)) {
                 i++;
-                curCount++;
-                count = Math.max(count, curCount);
+                count++;
+                max = Math.max(max, count);
             } else if (starts.get(i) > ends.get(j)) {
                 j++;
-                curCount--;
+                count--;
             } else {
                 i++;
                 j++;
             }
         }
-        return count;
+        return max;
     }
 }

@@ -24,6 +24,7 @@ public class SubarraySumsDivisibleByK {
         map.put(0, 1); // !
         int prefixSum = 0, count = 0;
         for (int num : nums) {
+            /* https://leetcode.com/problems/subarray-sums-divisible-by-k/discuss/217985/JavaC%2B%2BPython-Prefix-Sum */
             prefixSum = (prefixSum + num % k + k) % k; //为了避免 num < 0
             count += map.getOrDefault(prefixSum, 0);
             map.put(prefixSum, map.getOrDefault(prefixSum, 0) + 1);
