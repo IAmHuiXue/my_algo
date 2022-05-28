@@ -3,7 +3,7 @@ package two_sum;
 import java.util.HashMap;
 import java.util.Map;
 
-/** https://leetcode.com/problems/pairs-of-songs-with-total-durations-divisible-by-60/ */
+/** <a href="https://leetcode.com/problems/pairs-of-songs-with-total-durations-divisible-by-60/">...</a> */
 
 public class PairsOfSongsWithTotalDurationsDivisible {
 

@@ -1,104 +1,104 @@
-//package trie;
-//
-//import java.util.*;
-//
-///**
-// * https://leetcode.com/problems/design-search-autocomplete-system/
-// */
-//
-//public class DesignSearchAutocompleteSystem {
-//    private StringBuilder sb;
-//    private TrieNode root;
-//
-//    static class TrieNode {
-//        Map<Character, TrieNode> children;
-//        Map<String, Integer> counts;
-//        boolean isSentence;
-//        int times;
-//
-//        TrieNode() {
-//            children = new HashMap<>();
-//            counts = new HashMap<>();
-//        }
-//    }
-//
-//    public DesignSearchAutocompleteSystem(String[] sentences, int[] times) {
-//        root = new TrieNode();
-//        sb = new StringBuilder();
-//        for (int i = 0; i < sentences.length; i++) {
-//            addSen(sentences[i], times[i]);
-//        }
-//    }
-//
-//    private void addSen(String word) {
-//        addSen(word, 1);
-//    }
-//
-//    private void addSen(String word, int time) {
-//        TrieNode cur = root;
-//        for (char ch : word.toCharArray()) {
-//            cur.children.putIfAbsent(ch, new TrieNode());
-//            cur = cur.children.get(ch);
-//        }
-//        cur.isSentence = true;
-//        cur.times = time;
-//    }
-//
-//    private TrieNode searchPrefix() {
-//        TrieNode cur = root;
-//        for (char ch : sb.toString().toCharArray()) {
-//            if (cur.children.get(ch) == null) {
-//                return null;
-//            }
-//            cur = cur.children.get(ch);
-//        }
-//        return cur;
-//    }
-//
-//    private List<String> findTopSentencesWithPrefix() {
-//        List<String> result = new ArrayList<>();
-//        TrieNode cur = searchPrefix();
-//        if (cur != null) {
-//            findAllSentencesWithPrefix(root, new StringBuilder(prefix), result);
-//        }
-//        result.sort((a, b) -> {
-//            @Override
-//
-//        });
-//        PriorityQueue<Map.Entry<String, Integer>> pq = new PriorityQueue<>((a, b) -> (a.getValue() == b.getValue() ?
-//                a.getKey().compareTo(b.getKey()) : Integer.compare(b.getValue(), a.getValue())));
-//        pq.addAll(cur.counts.entrySet());
-//        List<String> res = new ArrayList<>();
-//        int k = 3;
-//        while (!pq.isEmpty() && k > 0) {
-//            res.add((String) pq.poll().getKey());
-//            k--;
-//        }
-//        return result;
-//    }
-//
-//    private void findAllWordsWithPrefix(TrieNode cur, StringBuilder curPath, List<String> result) {
-//        if (cur.isSentence) {
-//            if (result.size() == 3) {
-//
-//            }
-//            result.add(curPath.toString());
-//        }
-//
-//        for (Map.Entry<Character, TrieNode> child : cur.children.entrySet()) {
-//            findAllWordsWithPrefix(child.getValue(), curPath.append(child.getKey()), result);
-//            curPath.deleteCharAt(curPath.length() - 1);
-//        }
-//    }
-//
-//
-//    public List<String> input(char c) {
-//        if (c == '#') {
-//            addSen(sb.toString());
-//            sb.setLength(0);
-//            return new ArrayList<>();
-//        }
-//        sb.append(c);
-//        return findTopSentencesWithPrefix();
-//    }
-//}
+package trie;
+
+import java.util.*;
+
+/**
+ * <a href="https://leetcode.com/problems/design-search-autocomplete-system/">...</a>
+ */
+
+public class DesignSearchAutocompleteSystem {
+    TrieNode root;
+    StringBuilder prefix;
+
+    static class TrieNode {
+        boolean isSentence;
+        int times;
+        Map<Character, TrieNode> children = new HashMap<>();
+    }
+
+    static class Pair {
+        String sentence;
+        int times;
+
+        Pair(String s, int t) {
+            sentence = s;
+            times = t;
+        }
+    }
+
+    public DesignSearchAutocompleteSystem(String[] sentences, int[] times) {
+        prefix = new StringBuilder();
+        root = new TrieNode();
+        for (int i = 0; i < sentences.length; i++) {
+            String s = sentences[i];
+            int time = times[i];
+            addSentence(s, time);
+        }
+    }
+
+    void addSentence(String sentence, int time) {
+        TrieNode cur = root;
+        for (char c : sentence.toCharArray()) {
+            cur = cur.children.computeIfAbsent(c, k -> new TrieNode());
+        }
+        cur.isSentence = true;
+        cur.times += time; // ! if the sentence was previously added, when adding it again, we just append the time.
+    }
+
+    public List<String> input(char c) {
+        List<String> res = new ArrayList<>();
+        if (c == '#') {
+            addSentence(prefix.toString(), 1);
+            prefix.setLength(0);
+            return res;
+        }
+        prefix.append(c);
+        List<Pair> tmp = findAllSentences(prefix.toString());
+        tmp.sort((a, b) -> {
+            int diff = b.times - a.times;
+            if (diff == 0) {
+                return a.sentence.compareTo(b.sentence);
+            }
+            return diff;
+        });
+        for (Pair p : tmp) {
+            if (res.size() == 3) {
+                break;
+            }
+            res.add(p.sentence);
+        }
+        return res;
+    }
+
+    private List<Pair> findAllSentences(String s) {
+        List<Pair> res = new ArrayList<>();
+        TrieNode cur = findPrefix(s);
+        if (cur != null) {
+            dfs(res, cur, new StringBuilder(s));
+        }
+        return res;
+    }
+
+    private TrieNode findPrefix(String s) {
+        TrieNode cur = root;
+        for (char c : s.toCharArray()) {
+            cur = cur.children.get(c);
+            if (cur == null) {
+                break;
+            }
+        }
+        return cur;
+    }
+
+    private void dfs(List<Pair> res, TrieNode cur, StringBuilder sb) {
+        if (cur.isSentence) {
+            res.add(new Pair(sb.toString(), cur.times));
+        }
+        for (char c : cur.children.keySet()) {
+            sb.append(c);
+            dfs(res, cur.children.get(c), sb);
+            sb.deleteCharAt(sb.length() - 1);
+        }
+    }
+
+}

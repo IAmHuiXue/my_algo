@@ -56,27 +56,28 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class CountPatterns {
-    Set<Character> set = new HashSet<>(Arrays.asList('a', 'e', 'i', 'o', 'u', 'y'));
-    int res;
+    static final Set<Character> SET = new HashSet<>(Arrays.asList('a', 'e', 'i', 'o', 'u', 'y'));
+
     int binaryPatternMatching(String pattern, String s) {
+        int[] res = new int[1];
         if (pattern.length() > s.length()) {
-            return res;
+            return res[0];
         }
         for (int i = 0; i <= s.length() - pattern.length(); i++) {
-            helper(i, s, pattern);
+            helper(i, s, pattern, res);
         }
-        return res;
+        return res[0];
     }
 
-    void helper(int index, String s, String pattern) {
+    void helper(int index, String s, String pattern, int[] res) {
         for (int i = 0; i < pattern.length(); i++) {
             char cur = s.charAt(i + index);
             char p = pattern.charAt(i);
-            if (p == '0' && !set.contains(cur) || p == '1' && set.contains(cur)) {
+            if (p == '0' && !SET.contains(cur) || p == '1' && SET.contains(cur)) {
                 return;
             }
         }
-        res++;
+        res[0]++;
     }
 
     // todo: 优化方法

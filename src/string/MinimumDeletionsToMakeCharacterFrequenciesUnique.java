@@ -15,7 +15,7 @@ public class MinimumDeletionsToMakeCharacterFrequenciesUnique {
         // the set will store the individual freq of each character, and when there is a same freq,
         // reduce it until it is not the same with anyone in the set.
         Set<Integer> used = new HashSet<>();
-        for (int i = 0; i < 26; ++i) {
+        for (int i = 0; i < 26; i++) {
             //todo: how to prove that this way can get the least res?
             while (freq[i] > 0 && !used.add(freq[i])) { // if add() success, skip
                 freq[i]--;

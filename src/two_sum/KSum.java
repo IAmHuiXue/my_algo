@@ -71,7 +71,7 @@ public class KSum {
             }
             return res;
         }
-        // time: O(n^k)
+        // time: O(n^(k-1))
     }
 
     static class DFSBruteForce {

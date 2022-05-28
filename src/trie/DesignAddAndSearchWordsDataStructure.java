@@ -1,7 +1,7 @@
 package trie;
 
 /**
- * https://leetcode.com/problems/design-add-and-search-words-data-structure/
+ * <a href="https://leetcode.com/problems/design-add-and-search-words-data-structure/">...</a>
  */
 
 public class DesignAddAndSearchWordsDataStructure {

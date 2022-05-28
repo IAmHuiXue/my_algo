@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * https://leetcode.com/problems/two-sum-iii-data-structure-design/
+ * <a href="https://leetcode.com/problems/two-sum-iii-data-structure-design/">...</a>
  */
 
 public class TwoSumIIIDataStructureDesign {

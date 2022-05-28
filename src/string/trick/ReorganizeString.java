@@ -1,4 +1,6 @@
-package string;
+package string.trick;
+
+/** <a href="https://leetcode.com/problems/reorganize-string/">...</a> */
 
 public class ReorganizeString {
     public static void main(String[] args) {
@@ -43,7 +45,7 @@ a b a c a d b d b // fill in "d" at position 5, 7
         }
         for (int i = 0; i < hash.length; i++) {
             while (hash[i] > 0) {
-                if (idx >= res.length) {
+                if (idx >= res.length) { // !
                     idx = 1;
                 }
                 res[idx] = (char) (i + 'a');

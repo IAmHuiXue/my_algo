@@ -1,6 +1,6 @@
 package string;
 
-/** https://leetcode.com/problems/reverse-vowels-of-a-string/ */
+/** <a href="https://leetcode.com/problems/reverse-vowels-of-a-string/">...</a> */
 
 public class ReverseVowelsOfAString {
     public String reverseVowels(String s) {

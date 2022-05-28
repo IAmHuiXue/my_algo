@@ -1,7 +1,7 @@
 package string;
 
 
-/** https://leetcode.com/problems/rotate-string/ */
+/** <a href="https://leetcode.com/problems/rotate-string/">...</a> */
 
 public class RotateString {
     public boolean rotateString(String A, String B) {

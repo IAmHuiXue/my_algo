@@ -4,16 +4,11 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-/** https://leetcode.com/problems/goat-latin */
+/** <a href="https://leetcode.com/problems/goat-latin">...</a> */
 
 public class GoatLatin {
     static class WithStringBuilder {
         public String toGoatLatin(String sentence) {
-//            Set<Character> set = new HashSet<>();
-//            String vowels = "aeiouAEIOU";
-//            for (char ch : vowels.toCharArray()) {
-//                set.add(ch);
-//            }
             Set<Character> set = new HashSet<>(Arrays.asList('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'));
             StringBuilder sb = new StringBuilder();
             String[] words = sentence.split("\\s");

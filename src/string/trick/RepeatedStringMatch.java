@@ -1,7 +1,7 @@
-package string;
+package string.trick;
 
 /**
- * https://leetcode.com/problems/repeated-string-match/
+ * <a href="https://leetcode.com/problems/repeated-string-match/">...</a>
  */
 
 public class RepeatedStringMatch {

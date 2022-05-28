@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/** https://leetcode.com/problems/group-shifted-strings/ */
+/** <a href="https://leetcode.com/problems/group-shifted-strings/">...</a> */
 
 public class GroupShiftedStrings {
     public List<List<String>> groupStrings(String[] strings) {
