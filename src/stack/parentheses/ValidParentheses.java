@@ -1,4 +1,4 @@
-package stack;
+package stack.parentheses;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * https://leetcode.com/problems/valid-parentheses/
+ * <a href="https://leetcode.com/problems/valid-parentheses/">...</a>
  */
 
 public class ValidParentheses {

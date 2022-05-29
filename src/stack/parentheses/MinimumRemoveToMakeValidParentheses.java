@@ -1,11 +1,11 @@
-package stack;
+package stack.parentheses;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.HashSet;
 import java.util.Set;
 
-/** https://leetcode.com/problems/minimum-remove-to-make-valid-parentheses/ */
+/** <a href="https://leetcode.com/problems/minimum-remove-to-make-valid-parentheses/">...</a> */
 
 public class MinimumRemoveToMakeValidParentheses {
     public String minRemoveToMakeValid(String s) {

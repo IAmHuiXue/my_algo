@@ -2,7 +2,7 @@ package monotonic_stack;
 
 import java.util.*;
 
-/** https://leetcode.com/problems/buildings-with-an-ocean-view/ */
+/** <a href="https://leetcode.com/problems/buildings-with-an-ocean-view/">...</a> */
 
 public class BuildingsWithAnOceanView {
     static class Optimized {

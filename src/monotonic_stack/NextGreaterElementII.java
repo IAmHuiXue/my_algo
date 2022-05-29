@@ -1,8 +1,31 @@
 package monotonic_stack;
 
-/** https://leetcode.com/problems/next-greater-element-ii/ */
+import java.util.ArrayDeque;
+import java.util.Arrays;
+import java.util.Deque;
+
+/** <a href="https://leetcode.com/problems/next-greater-element-ii/">...</a> */
 
 public class NextGreaterElementII {
+
+    public int[] nextGreaterElementsDoubleSize(int[] nums) {
+        // trick: loop twice
+        // [1, 2, 3, 4, 3] -> [1, 2, 3, 4, 3, 1, 2, 3, 4, 3], should cover the requirement
+        int[] tmp = new int[2 * nums.length];
+        for (int i = 0; i < nums.length; i++) {
+            tmp[i] = tmp[i + nums.length] = nums[i];
+        }
+        int[] res = new int[tmp.length];
+        Deque<Integer> stack = new ArrayDeque<>();
+        for (int i = tmp.length - 1; i >= 0; i--) {
+            while (!stack.isEmpty() && tmp[i] >= stack.peekFirst()) {
+                stack.pollFirst();
+            }
+            res[i] = stack.isEmpty() ? -1 : stack.peekFirst();
+            stack.offerFirst(tmp[i]);
+        }
+        return Arrays.copyOf(res, nums.length);
+    }
 
     // 不是很直观
     // public int[] nextGreaterElements(int[] nums) {

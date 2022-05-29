@@ -1,9 +1,9 @@
-package stack;
+package stack.parentheses;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-/** https://leetcode.com/problems/minimum-add-to-make-parentheses-valid/solution/ */
+/** <a href="https://leetcode.com/problems/minimum-add-to-make-parentheses-valid/">...</a> */
 
 public class MinimumAddToMakeParenthesesValid {
     public int minAddToMakeValidStack(String s) {

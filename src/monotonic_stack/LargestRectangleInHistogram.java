@@ -3,7 +3,7 @@ package monotonic_stack;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-/** https://leetcode.com/problems/largest-rectangle-in-histogram/ */
+/** <a href="https://leetcode.com/problems/largest-rectangle-in-histogram/">...</a> */
 
 public class LargestRectangleInHistogram {
 

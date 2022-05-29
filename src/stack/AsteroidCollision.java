@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
 
-/** https://leetcode.com/problems/asteroid-collision/ */
+/** <a href="https://leetcode.com/problems/asteroid-collision/">...</a> */
 
 public class AsteroidCollision {
     public int[] asteroidCollision(int[] asteroids) {
@@ -30,7 +30,7 @@ public class AsteroidCollision {
                 if (stack.peekFirst() > Math.abs(a)) {
                     break;
                 }
-                // stack.top <= a
+                // stack.top <= abs(a)
                 int p = stack.pollFirst();
                 // if p = Math.abs(a), we need to stop comparing further
                 if (p == Math.abs(a)) {

@@ -3,7 +3,7 @@ package stack;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-/** https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string-ii/ */
+/** <a href="https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string-ii/">...</a> */
 
 public class RemoveAllAdjacentDuplicatesInStringII {
     public String removeDuplicates(String s, int k) {
@@ -18,7 +18,7 @@ public class RemoveAllAdjacentDuplicatesInStringII {
             int incremented = counts.pollFirst() + 1;
             if (incremented == k) {
                 sb.delete(i - k + 1, i + 1);
-                i -= k;
+                i -= k; // !
             } else {
                 counts.offerFirst(incremented);
             }

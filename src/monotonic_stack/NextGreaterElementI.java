@@ -3,7 +3,7 @@ package monotonic_stack;
 import java.util.HashMap;
 import java.util.Map;
 
-/** https://leetcode.com/problems/next-greater-element-i/ */
+/** <a href="https://leetcode.com/problems/next-greater-element-i/">...</a> */
 
 public class NextGreaterElementI {
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {

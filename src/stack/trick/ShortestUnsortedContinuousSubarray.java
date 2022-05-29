@@ -1,4 +1,4 @@
-package stack;
+package stack.trick;
 
 import java.util.ArrayDeque;
 import java.util.Arrays;
@@ -6,7 +6,7 @@ import java.util.Deque;
 import java.util.Stack;
 
 /**
- * https://leetcode.com/problems/shortest-unsorted-continuous-subarray/
+ * <a href="https://leetcode.com/problems/shortest-unsorted-continuous-subarray/">...</a>
  */
 
 public class ShortestUnsortedContinuousSubarray {
@@ -14,18 +14,20 @@ public class ShortestUnsortedContinuousSubarray {
         public int findUnsortedSubarray(int[] nums) {
             // stack stores indices
             Deque<Integer> stack = new ArrayDeque<>();
-            int l = nums.length, r = 0;
+            int l = nums.length - 1, r = 0;
             // 左到右 scan 一遍，找左边界 -> 即第一个前面有比它本身还大的元素
             for (int i = 0; i < nums.length; i++) {
-                while (!stack.isEmpty() && nums[stack.peekFirst()] > nums[i])
+                while (!stack.isEmpty() && nums[stack.peekFirst()] > nums[i]) {
                     l = Math.min(l, stack.pollFirst());
+                }
                 stack.offerFirst(i);
             }
             stack.clear();
             // 右到左 scan 一遍，找右边界 -> 即第一个后面有比它还小的元素
             for (int i = nums.length - 1; i >= 0; i--) {
-                while (!stack.isEmpty() && nums[stack.peekFirst()] < nums[i])
+                while (!stack.isEmpty() && nums[stack.peekFirst()] < nums[i]) {
                     r = Math.max(r, stack.pollFirst());
+                }
                 stack.offerFirst(i);
             }
             return r - l > 0 ? r - l + 1 : 0;

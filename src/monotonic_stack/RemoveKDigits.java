@@ -3,7 +3,7 @@ package monotonic_stack;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-/** https://leetcode.com/problems/remove-k-digits/ */
+/** <a href="https://leetcode.com/problems/remove-k-digits/">...</a> */
 
 public class RemoveKDigits {
     public String removeKDigits(String num, int k) {
@@ -13,7 +13,7 @@ public class RemoveKDigits {
             char cur = num.charAt(i);
             while (!stack.isEmpty() && k > 0 && cur < stack.peekFirst()) {
                 stack.pollFirst();
-                k--;
+                k--; // todo: how to make sure the later num will not make it smaller after k is used up?
             }
             stack.offerFirst(cur);
         }
