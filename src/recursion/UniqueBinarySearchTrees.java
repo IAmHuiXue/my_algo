@@ -1,6 +1,6 @@
 package recursion;
 
-/** https://leetcode.com/problems/unique-binary-search-trees/ */
+/** <a href="https://leetcode.com/problems/unique-binary-search-trees/">...</a> */
 
 public class UniqueBinarySearchTrees {
     class WithOutMemo {

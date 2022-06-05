@@ -3,7 +3,7 @@ package bfs;
 import java.util.*;
 
 /**
- * https://leetcode.com/problems/cut-off-trees-for-golf-event/
+ * <a href="https://leetcode.com/problems/cut-off-trees-for-golf-event/">...</a>
  */
 public class CutOffTreesForGolfEvent {
     static final int[][] DIRS = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
@@ -31,14 +31,14 @@ public class CutOffTreesForGolfEvent {
         int[] curStart = new int[]{0, 0};
         int steps = 0;
         while (!pq.isEmpty()) {
-            int[] cur = pq.poll();
-            int curSteps = minStep(forest, curStart, cur, m, n, new boolean[m][n]);
+            int[] curEnd = pq.poll();
+            int curSteps = minStep(forest, curStart, curEnd, m, n, new boolean[m][n]);
             if (curSteps < 0) {
                 return -1;
             }
             steps += curSteps;
-            curStart[0] = cur[0];
-            curStart[1] = cur[1];
+            curStart[0] = curEnd[0];
+            curStart[1] = curEnd[1];
         }
         return steps;
     }

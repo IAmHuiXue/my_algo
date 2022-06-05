@@ -1,4 +1,4 @@
-package dfs;
+package dfs.trick;
 
 /**
  * <a href="https://leetcode.com/problems/longest-increasing-path-in-a-matrix/">https://leetcode.com/problems/longest-increasing-path-in-a-matrix/</a>
@@ -34,6 +34,6 @@ public class LongestIncreasingPathInAMatrix {
                 cache[i][j] = Math.max(cache[i][j], dfs(matrix, x, y, cache));
             }
         }
-        return ++cache[i][j];
+        return ++cache[i][j]; // !
     }
 }

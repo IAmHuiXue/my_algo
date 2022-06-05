@@ -5,7 +5,7 @@ import javafx.util.Pair;
 import java.util.*;
 
 /**
- * https://leetcode.com/problems/critical-connections-in-a-network/
+ * <a href="https://leetcode.com/problems/critical-connections-in-a-network/">...</a>
  */
 
 public class CriticalConnectionsInANetwork {
@@ -15,7 +15,6 @@ public class CriticalConnectionsInANetwork {
      * this problem is to find all critical edges
      *
      * Amazon may have another problem to find all "cut node"
-     *
      *
      * SCC -> strongly connected components
      *

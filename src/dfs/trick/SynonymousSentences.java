@@ -1,19 +1,19 @@
-package dfs;
+package dfs.trick;
 
 import java.util.*;
 
-/** https://leetcode.com/problems/synonymous-sentences/ */
+/** <a href="https://leetcode.com/problems/synonymous-sentences/">...</a> */
 
 // dfs within dfs
 
 public class SynonymousSentences {
     public List<String> generateSentences(List<List<String>> synonyms, String text) {
-        String[] words = text.split(" ");
         Map<String, List<String>> graph = new HashMap<>();
         for (List<String> pair : synonyms) {
             graph.computeIfAbsent(pair.get(0), k -> new ArrayList<>()).add(pair.get(1));
             graph.computeIfAbsent(pair.get(1), k -> new ArrayList<>()).add(pair.get(0));
         }
+        String[] words = text.split(" ");
         List<String> result = new ArrayList<>();
         dfs(result, new StringBuilder(), words, 0, graph);
         return result;

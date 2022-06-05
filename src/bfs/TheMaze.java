@@ -3,7 +3,7 @@ package bfs;
 import java.util.ArrayDeque;
 import java.util.Queue;
 
-/** https://leetcode.com/problems/the-maze/ */
+/** <a href="https://leetcode.com/problems/the-maze/">...</a> */
 
 public class TheMaze {
     static final int[][] DIRS = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};

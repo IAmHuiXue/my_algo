@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
-/** https://leetcode.com/problems/maximum-units-on-a-truck/ */
+/** <a href="https://leetcode.com/problems/maximum-units-on-a-truck/">...</a> */
 
 public class MaximumUnitsOnATruck {
     public int maximumUnits(int[][] boxTypes, int truckSize) {

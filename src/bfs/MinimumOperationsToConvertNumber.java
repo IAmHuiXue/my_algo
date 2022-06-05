@@ -6,7 +6,7 @@ import java.util.Queue;
 import java.util.Set;
 
 /**
- * https://leetcode.com/problems/minimum-operations-to-convert-number/
+ * <a href="https://leetcode.com/problems/minimum-operations-to-convert-number/">...</a>
  */
 
 public class MinimumOperationsToConvertNumber {
@@ -22,6 +22,8 @@ public class MinimumOperationsToConvertNumber {
                 if (val == goal) {
                     return res;
                 }
+                // condition from the problem:
+                // 0 <= x <= 1000
                 if ((!(val >= 0 && val <= 1000)) || set.contains(val)) {
                     continue;
                 }

@@ -2,6 +2,8 @@ package data_structure;
 
 import java.util.*;
 
+/** <a href="https://leetcode.com/problems/design-snake-game/">...</a> */
+
 public class DesignSnakeGame {
     public static void main(String[] args) {
         SnakeGame sg = new SnakeGame(3, 3, new int[][]{{2, 0}, {0, 0}, {0, 2}, {2, 2}});

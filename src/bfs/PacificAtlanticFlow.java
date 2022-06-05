@@ -69,7 +69,9 @@ public class PacificAtlanticFlow {
                 int nr = cur[0] + dir[0];
                 int nc = cur[1] + dir[1];
 
-                if (nr >= 0 && nc >= 0 && nr < m && nc < n && !visited.contains(nr + "," + nc) && matrix[cur[0]][cur[1]] <= matrix[nr][nc]) {
+                if (nr >= 0 && nc >= 0 && nr < m && nc < n &&
+                        !visited.contains(nr + "," + nc) &&
+                        matrix[cur[0]][cur[1]] <= matrix[nr][nc]) {
                     cache[nr][nc]++;
                     q.offer(new int[]{nr, nc});
                     visited.add(nr + "," + nc);

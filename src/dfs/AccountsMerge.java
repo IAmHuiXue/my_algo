@@ -2,7 +2,7 @@ package dfs;
 
 import java.util.*;
 
-/** https://leetcode.com/problems/accounts-merge/ */
+/** <a href="https://leetcode.com/problems/accounts-merge/">...</a> */
 
 public class AccountsMerge {
 
@@ -15,7 +15,9 @@ public class AccountsMerge {
             int accountSize = account.size();
 
             // Building adjacency list
-            // Adding edge between FIRST email to all other emails in the account
+            // Trick: do not use Name to represent the graph node as there could be duplicates in this problem
+            // Choose one of the emails as the node:
+            // the rest of the emails are in this email's neighbour list, and this email is in their neighbour's lists
             String accountFirstEmail = account.get(1);
             for (int j = 2; j < accountSize; j++) {
                 String accountEmail = account.get(j);

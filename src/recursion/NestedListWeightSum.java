@@ -3,7 +3,7 @@ package recursion;
 import java.util.List;
 
 /**
- * https://leetcode.com/problems/nested-list-weight-sum/
+ * <a href="https://leetcode.com/problems/nested-list-weight-sum/">...</a>
  */
 
 public class NestedListWeightSum {
@@ -26,6 +26,7 @@ public class NestedListWeightSum {
     public int depthSumAnotherWay(List<NestedInteger> nestedList) {
         return depthSumHelper(nestedList, 1);
     }
+
     private int depthSumHelper(List<NestedInteger> nestedList, int depth) {
         int sum = 0;
         for (NestedInteger n : nestedList) {

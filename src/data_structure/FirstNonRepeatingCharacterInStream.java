@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * https://app.laicode.io/app/problem/288?plan=3
+ * <a href="https://app.laicode.io/app/problem/288?plan=3">...</a>
  */
 
 public class FirstNonRepeatingCharacterInStream {

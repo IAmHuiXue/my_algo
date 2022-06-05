@@ -16,6 +16,15 @@ public class LFUCache {
         System.out.println(l.get(0));
 
     }
+
+    // given the key, find the node via nodeMap;
+    // from the node, we can find the original freq
+    // from the original freq, we can find which DLList it resides via freqMap
+    // we can then remove the node from the original DLList and add it to the new DLList incrementing the freq
+
+    // with the leastFreq pointer, we can locate the corresponding DLList via freqMap and remove the LFU + LRU node from it
+
+
     private Map<Integer, Node> nodeMap;
 
     // 在 lfu 里，每一个 node 存在一个 list 里面，而有不同多个 list，按照 frequency 来区分：
@@ -115,7 +124,7 @@ public class LFUCache {
         DLList oldList = freqMap.get(node.count);
         oldList.remove(node);
         if (node.count == leastFreq && oldList.size == 0) {
-            leastFreq++; // update leastFreq is needed
+            leastFreq++;
             freqMap.remove(node.count);
         }
         node.count++;

@@ -5,7 +5,7 @@ import util.TreeNode;
 import java.util.ArrayList;
 import java.util.List;
 
-/** https://leetcode.com/problems/unique-binary-search-trees-ii/ */
+/** <a href="https://leetcode.com/problems/unique-binary-search-trees-ii/">...</a> */
 
 public class UniqueBinarySearchTreesII {
     public List<TreeNode> generateTrees(int n) {

@@ -3,7 +3,7 @@ package bfs.bfs2;
 import java.util.*;
 
 /**
- * https://leetcode.com/problems/network-delay-time/
+ * <a href="https://leetcode.com/problems/network-delay-time/">...</a>
  */
 
 public class NetworkDelayTime {

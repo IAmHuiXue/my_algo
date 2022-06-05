@@ -1,12 +1,11 @@
-package dfs;
+package dfs.trick;
 
 import java.util.Arrays;
 
-/** https://leetcode.com/problems/minimum-number-of-work-sessions-to-finish-the-tasks/ */
+/** <a href="https://leetcode.com/problems/minimum-number-of-work-sessions-to-finish-the-tasks/">...</a> */
 
 public class MinimumNumberOfWorkSessionsToFinishTasks {
     public int minSessions(int[] tasks, int sessionTime) {
-
         Arrays.sort(tasks); // 剪枝
         int[] result = new int[]{tasks.length};
         // int[] sessions -> trick
@@ -18,12 +17,12 @@ public class MinimumNumberOfWorkSessionsToFinishTasks {
     }
 
     private void dfs(int[] tasks, int[] result, int index, int sessionTime, int[] sessions, int sessionCount) {
-        if (sessionCount >= result[0]) { // 剪枝
+        if (index < 0) {
+            result[0] = Math.min(result[0], sessionCount);
             return;
         }
 
-        if (index < 0) {
-            result[0] = sessionCount;
+        if (sessionCount >= result[0]) { // 剪枝
             return;
         }
 

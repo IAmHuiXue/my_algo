@@ -2,7 +2,7 @@ package graph;
 
 import java.util.*;
 
-/** https://leetcode.com/problems/redundant-connection/ */
+/** <a href="https://leetcode.com/problems/redundant-connection/">...</a> */
 
 public class RedundantConnection {
     public int[] findRedundantConnection(int[][] edges) {

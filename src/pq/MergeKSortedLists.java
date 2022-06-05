@@ -4,7 +4,7 @@ import util.ListNode;
 
 import java.util.PriorityQueue;
 
-/** https://leetcode.com/problems/merge-k-sorted-lists/ */
+/** <a href="https://leetcode.com/problems/merge-k-sorted-lists/">...</a> */
 
 public class MergeKSortedLists {
     public ListNode mergeKLists(ListNode[] lists) {

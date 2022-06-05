@@ -4,7 +4,7 @@ import java.util.ArrayDeque;
 import java.util.Queue;
 
 /**
- * https://leetcode.com/problems/shortest-path-to-get-food/
+ * <a href="https://leetcode.com/problems/shortest-path-to-get-food/">...</a>
  */
 
 public class ShortestPathToGetFood {
@@ -47,7 +47,9 @@ public class ShortestPathToGetFood {
                 int nextX = cur.x + dir[0];
                 int nextY = cur.y + dir[1];
                 // not out of bound, not barrier, and not visited
-                if (nextX >= 0 && nextX < m && nextY >= 0 && nextY < n && grid[nextX][nextY] != 'X' && !visited[nextX][nextY]) {
+                if (nextX >= 0 && nextX < m && nextY >= 0 && nextY < n &&
+                        grid[nextX][nextY] != 'X' &&
+                        !visited[nextX][nextY]) {
                     queue.offer(new Cell(nextX, nextY, cur.dis + 1));
                     visited[nextX][nextY] = true;
                 }
@@ -86,7 +88,9 @@ public class ShortestPathToGetFood {
                     int nextX = cur[0] + dir[0];
                     int nextY = cur[1] + dir[1];
                     // not out of bound, not barrier, and not visited
-                    if (nextX >= 0 && nextX < m && nextY >= 0 && nextY < n && grid[nextX][nextY] != 'X' && !visited[nextX][nextY]) {
+                    if (nextX >= 0 && nextX < m && nextY >= 0 && nextY < n &&
+                            grid[nextX][nextY] != 'X' &&
+                            !visited[nextX][nextY]) {
                         queue.offer(new int[]{nextX, nextY});
                         visited[nextX][nextY] = true;
                     }

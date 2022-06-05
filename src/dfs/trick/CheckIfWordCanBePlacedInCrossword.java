@@ -1,7 +1,7 @@
-package dfs;
+package dfs.trick;
 
 /**
- * https://leetcode.com/problems/check-if-word-can-be-placed-in-crossword/
+ * <a href="https://leetcode.com/problems/check-if-word-can-be-placed-in-crossword/">...</a>
  */
 
 public class CheckIfWordCanBePlacedInCrossword {

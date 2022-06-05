@@ -1,9 +1,7 @@
 package amazon;
 
-import java.util.Arrays;
-
 /**
- * https://leetcode.com/problems/range-addition/
+ * <a href="https://leetcode.com/problems/range-addition/">...</a>
  */
 
 public class RangeAddition {

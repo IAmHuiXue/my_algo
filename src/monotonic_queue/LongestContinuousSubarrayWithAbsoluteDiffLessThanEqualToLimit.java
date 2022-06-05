@@ -1,9 +1,9 @@
-package monotonic_deque;
+package monotonic_queue;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-/** https://leetcode.com/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/ */
+/** <a href="https://leetcode.com/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/">...</a> */
 
 public class LongestContinuousSubarrayWithAbsoluteDiffLessThanEqualToLimit {
     public int longestSubarray(int[] nums, int limit) {

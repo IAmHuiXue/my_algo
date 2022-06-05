@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * https://leetcode.com/problems/different-ways-to-add-parentheses/
+ * <a href="https://leetcode.com/problems/different-ways-to-add-parentheses/">...</a>
  */
 
 public class DifferentWaysToAddParentheses {

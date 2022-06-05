@@ -1,8 +1,8 @@
-package dfs;
+package dfs.trick;
 
 import java.util.Arrays;
 
-/** https://leetcode.com/problems/find-minimum-time-to-finish-all-jobs/ */
+/** <a href="https://leetcode.com/problems/find-minimum-time-to-finish-all-jobs/">...</a> */
 
 public class FindMinimumTimeToFinishAllJobs {
 
@@ -28,12 +28,12 @@ public class FindMinimumTimeToFinishAllJobs {
             curMinSum = Math.max(curMinSum, curSum);
         }
 
-        if (curMinSum >= result[0]) { // 剪枝：当前结果如果已经大于 global，停止 go further
+        if (index < 0) {
+            result[0] = Math.min(result[0], curMinSum);
             return;
         }
 
-        if (index < 0) {
-            result[0] = curMinSum;
+        if (curMinSum >= result[0]) { // 剪枝：当前结果如果已经大于 global，停止 go further
             return;
         }
 

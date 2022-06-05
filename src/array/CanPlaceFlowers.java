@@ -1,7 +1,7 @@
 package array;
 
 /**
- * https://leetcode.com/problems/can-place-flowers/
+ * <a href="https://leetcode.com/problems/can-place-flowers/">...</a>
  */
 
 public class CanPlaceFlowers {

@@ -3,7 +3,7 @@ package sliding_window.classic;
 import java.util.HashMap;
 import java.util.Map;
 
-/** https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters/ */
+/** <a href="https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters/">...</a> */
 
 public class LongestSubstringWithAtMostKDistinctCharacters {
     public static int lengthOfLongestSubstringKDistinct(String s, int k) {

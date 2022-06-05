@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * https://leetcode.com/problems/search-suggestions-system/
+ * <a href="https://leetcode.com/problems/search-suggestions-system/">...</a>
  */
 
 public class SearchSuggestionsSystem {

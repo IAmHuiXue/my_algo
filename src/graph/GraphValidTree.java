@@ -2,7 +2,7 @@ package graph;
 
 import java.util.*;
 
-/** https://app.laicode.io/app/problem/497?plan=25 */
+/** <a href="https://app.laicode.io/app/problem/497?plan=25">...</a> */
 
 public class GraphValidTree {
     /**
@@ -10,7 +10,7 @@ public class GraphValidTree {
     write a function to check whether these edges make up a valid tree.
     <p>
     Note: you can assume that no duplicate edges will appear in edges. Since all edges are undirected,
-    [0, 1] is the same as [1, 0]and thus will not appear together in edges.
+    [0, 1] is the same as [1, 0] and thus will not appear together in edges.
      */
 
     public boolean validTree(int n, int[][] edges) {

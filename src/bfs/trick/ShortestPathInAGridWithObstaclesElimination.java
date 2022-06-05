@@ -1,11 +1,10 @@
-package bfs;
+package bfs.trick;
 
 import java.util.ArrayDeque;
-import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * https://leetcode.com/problems/shortest-path-in-a-grid-with-obstacles-elimination/
+ * <a href="https://leetcode.com/problems/shortest-path-in-a-grid-with-obstacles-elimination/">...</a>
  */
 
 public class ShortestPathInAGridWithObstaclesElimination {

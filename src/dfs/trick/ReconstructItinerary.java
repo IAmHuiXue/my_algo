@@ -1,17 +1,15 @@
-package dfs;
+package dfs.trick;
 
 import java.util.*;
 
-/** https://leetcode.com/problems/reconstruct-itinerary/ */
+/** <a href="https://leetcode.com/problems/reconstruct-itinerary/">...</a> */
 
 public class ReconstructItinerary {
 
-    /** 使用 postorder traversal 的一个好例子
-     *  因为
-     */
+    /** 使用 postorder traversal 的一个好例子 */
 
     public List<String> findItinerary(List<List<String>> tickets) {
-        Map<String, PriorityQueue<String>> graph = new HashMap<>();
+        Map<String, PriorityQueue<String>> graph = new HashMap<>(); // sorted by lexical order
         for (List<String> ticket : tickets) {
             graph.computeIfAbsent(ticket.get(0), k -> new PriorityQueue<>()).add(ticket.get(1));
         }

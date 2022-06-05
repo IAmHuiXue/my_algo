@@ -3,13 +3,13 @@ package data_structure;
 import java.util.*;
 
 /**
- * https://leetcode.com/problems/design-in-memory-file-system/
+ * <a href="https://leetcode.com/problems/design-in-memory-file-system/">...</a>
  */
 
 public class DesignInMemoryFileSystem {
 
     // in this design, an entry could be a file, or a directory.
-    // a directory can contain files and or sub-directories
+    // a directory can contain files and or subdirectories
     // a file needs to have contents, while a directory does not need
 
     static class Entry {
@@ -48,7 +48,7 @@ public class DesignInMemoryFileSystem {
 
     public void mkdir(String path) {
         // traverse from the root until the last entry
-        // if any sub-directory does not exist, create one and continue
+        // if any subdirectory does not exist, create one and continue
         Entry e = root;
         String[] d = resolvePath(path);
         for (int i = 1; i < d.length; i++) {
@@ -64,7 +64,7 @@ public class DesignInMemoryFileSystem {
 
     public void addContentToFile(String filePath, String content) {
         // traverse from the root until the last entry
-        // if any sub-directory does not exist, create one and continue
+        // if any subdirectory does not exist, create one and continue
         // at the last one, make it a file
         Entry e = root;
         String[] d = resolvePath(filePath);

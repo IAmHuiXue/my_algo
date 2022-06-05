@@ -3,7 +3,7 @@ package bfs;
 import java.util.*;
 
 /**
- * https://leetcode.com/problems/open-the-lock/
+ * <a href="https://leetcode.com/problems/open-the-lock/">...</a>
  */
 
 public class OpenTheLock {

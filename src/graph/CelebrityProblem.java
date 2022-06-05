@@ -1,11 +1,14 @@
 package graph;
 
 /**
- * https://app.laicode.io/app/problem/344?plan=25
+ * <a href="https://app.laicode.io/app/problem/344?plan=25">...</a>
  */
 
 public class CelebrityProblem {
     public int celebrity(int[][] matrix) {
+        // definition of a celebrity:
+        // 1. He does not know any other person.
+        // 2. All the other persons know him.
         int n = matrix.length;
         // count how many knows it
         int[] numKnownByOthers = new int[n];

@@ -1,12 +1,10 @@
-package monotonic_deque;
+package monotonic_queue;
 
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.Deque;
-import java.util.List;
 
 /**
- * https://leetcode.com/problems/sliding-window-maximum/
+ * <a href="https://leetcode.com/problems/sliding-window-maximum/">...</a>
  */
 
 public class SlidingWindowMaximum {
@@ -30,7 +28,7 @@ public class SlidingWindowMaximum {
             }
             deque.offerLast(i);
             // maintain the validity of the max value
-            while (!deque.isEmpty() && i - deque.peekFirst() + 1 > k) {
+            while (!deque.isEmpty() && i - deque.peekFirst() >= k) {
                 deque.pollFirst();
             }
             // when the size reaches k, start to record the result
@@ -39,6 +37,5 @@ public class SlidingWindowMaximum {
             }
         }
         return res;
-
     }
 }

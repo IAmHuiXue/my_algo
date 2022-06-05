@@ -1,9 +1,9 @@
-package sliding_window;
+package sliding_window.classic;
 
 import java.util.HashSet;
 import java.util.Set;
 
-/** https://leetcode.com/problems/longest-substring-without-repeating-characters/ */
+/** <a href="https://leetcode.com/problems/longest-substring-without-repeating-characters/">...</a> */
 
 public class LongestSubstringWithoutRepeatingCharacters {
     static class WhileLoop {
@@ -33,22 +33,8 @@ public class LongestSubstringWithoutRepeatingCharacters {
                     set.remove(s.charAt(left++)); // 2. 出
                 }
                 longest = Math.max(longest, right - left + 1); // 3. 算
-//                longest = Math.max(longest, set.size());
             }
             return longest;
-
-//            Set<Character> set = new HashSet<>();
-//            int i = 0, j = 0;
-//            char[] array = s.toCharArray();
-//            int res = 0;
-//            while (j < array.length) {
-//                while (set.contains(array[j])) {
-//                    set.remove(array[i++]);
-//                }
-//                set.add(array[j++]);
-//                res = Math.max(res, j - i);
-//            }
-//            return res;
         }
     }
 

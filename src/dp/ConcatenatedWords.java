@@ -1,8 +1,8 @@
-package amazon;
+package dp;
 
 import java.util.*;
 
-/** https://leetcode.com/problems/concatenated-words/ */
+/** <a href="https://leetcode.com/problems/concatenated-words/">...</a> */
 
 public class ConcatenatedWords {
     public List<String> findAllConcatenatedWordsInADict(String[] words) {
@@ -25,7 +25,7 @@ public class ConcatenatedWords {
         dp[0] = true;
         for (int i = 1; i < dp.length; i++) {
             for (int j = 0; j < i; j++) {
-                // !
+                // A concatenated word is defined as a string that is composed entirely of at least TWO shorter words in the given array.
                 if (j == 0 && i == dp.length - 1) {
                     continue;
                 }

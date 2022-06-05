@@ -4,7 +4,7 @@ package dfs;
 import java.util.HashSet;
 import java.util.Set;
 
-/** https://leetcode.com/problems/most-stones-removed-with-same-row-or-column/ */
+/** <a href="https://leetcode.com/problems/most-stones-removed-with-same-row-or-column/">...</a> */
 
 public class MostStonesRemoved {
     public int removeStones(int[][] stones) {

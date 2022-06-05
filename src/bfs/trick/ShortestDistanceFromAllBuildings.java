@@ -1,11 +1,11 @@
-package bfs;
+package bfs.trick;
 
 import java.util.ArrayDeque;
 
 import java.util.Queue;
 
 /**
- * https://leetcode.com/problems/shortest-distance-from-all-buildings/
+ * <a href="https://leetcode.com/problems/shortest-distance-from-all-buildings/">...</a>
  */
 
 public class ShortestDistanceFromAllBuildings {

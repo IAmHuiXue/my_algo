@@ -3,7 +3,7 @@ package bfs;
 import java.util.ArrayDeque;
 import java.util.Queue;
 
-/** https://leetcode.com/problems/rotting-oranges/ */
+/** <a href="https://leetcode.com/problems/rotting-oranges/">...</a> */
 
 public class RottingOranges {
     int[][] grid;

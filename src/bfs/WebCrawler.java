@@ -3,11 +3,10 @@ package bfs;
 import java.util.*;
 
 /**
- * https://leetcode.com/problems/web-crawler/
+ * <a href="https://leetcode.com/problems/web-crawler/">...</a>
  */
 
 public class WebCrawler {
-
     // This is the HtmlParser's API interface.
     // You should not implement it, or speculate about its implementation
     protected interface HtmlParser {

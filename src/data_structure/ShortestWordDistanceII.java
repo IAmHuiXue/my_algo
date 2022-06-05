@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/** https://leetcode.com/problems/shortest-word-distance-ii/ */
+/** <a href="https://leetcode.com/problems/shortest-word-distance-ii/">...</a> */
 
 public class ShortestWordDistanceII {
     private Map<String, List<Integer>> map;

@@ -1,7 +1,7 @@
 package amazon;
 
 /**
- * https://leetcode.com/problems/flip-string-to-monotone-increasing/
+ * <a href="https://leetcode.com/problems/flip-string-to-monotone-increasing/">...</a>
  */
 
 public class FlipStringToMonotoneIncreasing {

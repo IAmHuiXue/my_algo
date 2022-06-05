@@ -3,7 +3,7 @@ package sliding_window.trick;
 import java.util.HashMap;
 import java.util.Map;
 
-/** https://leetcode.com/problems/longest-substring-with-at-least-k-repeating-characters/ */
+/** <a href="https://leetcode.com/problems/longest-substring-with-at-least-k-repeating-characters/">...</a> */
 
 public class LongestSubstringWithAtLeastKRepeatingCharacters {
     public int longestSubstring(String s, int k) {

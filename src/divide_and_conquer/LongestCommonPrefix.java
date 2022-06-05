@@ -1,8 +1,8 @@
 package divide_and_conquer;
 
 /**
- https://leetcode.com/problems/longest-common-prefix/
-*/
+ <a href="https://leetcode.com/problems/longest-common-prefix/">...</a>
+ */
 
 public class LongestCommonPrefix {
     // divide and conquer

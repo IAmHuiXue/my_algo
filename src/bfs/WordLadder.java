@@ -3,7 +3,7 @@ package bfs;
 import java.util.*;
 
 /**
- * https://leetcode.com/problems/word-ladder/
+ * <a href="https://leetcode.com/problems/word-ladder/">...</a>
  */
 
 public class WordLadder {
@@ -100,6 +100,5 @@ public class WordLadder {
         }
         return map;
     }
-
 
 }

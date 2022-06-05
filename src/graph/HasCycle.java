@@ -4,6 +4,9 @@ import java.util.*;
 
 public class HasCycle {
 
+    // directed graph 推荐使用 topological sort
+    // undirected graph 推荐使用 bfs
+
     static class GraphNode {
         int key;
         List<GraphNode> neighbors;
@@ -20,7 +23,7 @@ public class HasCycle {
      * 2. 进 queue 的规则，有向图是 node 的 incomingEdges 是 0 的时候，而无向图是 node 的 edges <= 1 的时候
      */
 
-    /** 用 DFS 可以查 有向图和无向图的成环情况，区别是
+    /** 用 DFS/BFS 可以查 有向图和无向图的成环情况，区别是
      * 1. 对于无向图，如果当前 node 存在 一个已经 visit 过的 neighbor node 且它不是 parent node，则有环 （避免 revisit parent node！）
      * 2. 对于有向图，
      */
@@ -131,9 +134,63 @@ public class HasCycle {
             }
         }
 
+        static class BFS {
+            // if we find a node that has been visited before (except its parent), there is then a cycle
+
+            public static boolean hasCycle(int n, int[][] connections) {
+                // here given n -> n nodes labeled from 0 - n - 1
+                // connections[i] -> connections[i][0] points to connections[i][1] & connections[i][1] points to connections[i][0]
+
+                List<List<Integer>> graph = new ArrayList<>();
+                for (int i = 0; i < n; i++) {
+                    graph.add(new ArrayList<>());
+                }
+                for (int[] edge : connections) {
+                    int one = edge[0];
+                    int two = edge[1];
+                    graph.get(one).add(two);
+                    graph.get(two).add(one);
+                }
+
+                // need 2 more containers
+                // 1. a set to record visited nodes
+                // 2. a container to record the parent of a node
+                // a hashmap can satisfy both requirements
+
+                // key=visitedNode, value=visitedFrom
+                Map<Integer, Integer> visited = new HashMap<>();
+                for (int node = 0; node < n; node++) {
+                    if (!visited.containsKey(node)) {
+                        visited.put(node, -1); // different connected components
+                        if (bfs(node, visited, graph)) {
+                            return false;
+                        }
+                    }
+                }
+                return true;
+            }
+
+            static boolean bfs(int node, Map<Integer, Integer> visited, List<List<Integer>> graph) {
+                Queue<Integer> q = new ArrayDeque<>();
+                q.offer(node);
+                while (!q.isEmpty()) {
+                    int cur = q.poll();
+                    for (int nei : graph.get(cur)) {
+                        if (!visited.containsKey(nei)) {
+                            q.offer(nei);
+                            visited.put(nei, cur);
+                        } else if (nei != visited.get(cur)) { // if nei has been visited but not the parent of cur
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+        }
+
         static class DFS {
 
-            // if we find a node that has been visited before, there is then a cycle
+            // if we find a node that has been visited before (except its parent), there is then a cycle
 
             public static boolean hasCycle(int n, int[][] connections) {
                 // here given n -> n nodes labeled from 0 - n - 1

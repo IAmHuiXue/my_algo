@@ -1,6 +1,6 @@
 package dfs;
 
-/** https://leetcode.com/problems/word-search/ */
+/** <a href="https://leetcode.com/problems/word-search/">...</a> */
 
 public class WordSearch {
     static final int[][] DIRS = {{0, 1}, {1, 0}, {-1, 0}, {0, -1}};
