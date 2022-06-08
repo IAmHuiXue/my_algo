@@ -1,5 +1,7 @@
 package monotonic_stack;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,17 +9,19 @@ import java.util.Map;
 
 public class NextGreaterElementI {
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
-        // key=elementValueOfNums2, value=indexOfNums2
-        // the purpose of the map is to build an indexing from nums1[i] to the corresponding index in nums2
         Map<Integer, Integer> map = new HashMap<>();
-        for (int i = 0; i < nums2.length; i++) {
-            map.put(nums2[i], i);
+        Deque<Integer> stack = new ArrayDeque<>();
+        for (int i = nums2.length - 1; i >= 0; i--) {
+            while (!stack.isEmpty() && stack.peekFirst() <= nums2[i]) {
+                stack.pollFirst();
+            }
+            map.put(nums2[i], stack.isEmpty() ? - 1 : stack.peekFirst());
+            stack.offerFirst(nums2[i]);
         }
-        int[] dict = NextGreaterElementZero.nextGreaterElement(nums2);
-        int[] result = new int[nums1.length];
-        for (int j = 0; j < nums1.length; j++) {
-            result[j] = dict[map.get(nums1[j])];
+        int[] res = new int[nums1.length];
+        for (int i = 0; i < res.length; i++) {
+            res[i] = map.get(nums1[i]);
         }
-        return result;
+        return res;
     }
 }

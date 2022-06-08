@@ -1,4 +1,4 @@
-package trick;
+package data_structure;
 
 public class Employee {
     private int baseSalary;

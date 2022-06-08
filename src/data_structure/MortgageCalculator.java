@@ -1,4 +1,4 @@
-package trick;
+package data_structure;
 
 import java.text.NumberFormat;
 import java.util.Scanner;

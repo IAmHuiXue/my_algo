@@ -2,7 +2,7 @@ package greedy;
 
 import java.util.Arrays;
 
-/** https://leetcode.com/problems/boats-to-save-people/ */
+/** <a href="https://leetcode.com/problems/boats-to-save-people/">...</a> */
 
 public class BoatsToSavePeople {
 

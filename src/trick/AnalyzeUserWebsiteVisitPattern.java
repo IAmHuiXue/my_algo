@@ -3,7 +3,7 @@ package trick;
 import java.util.*;
 
 /**
- * https://leetcode.com/problems/analyze-user-website-visit-pattern/
+ * <a href="https://leetcode.com/problems/analyze-user-website-visit-pattern/">...</a>
  */
 
 public class AnalyzeUserWebsiteVisitPattern {
@@ -17,11 +17,9 @@ public class AnalyzeUserWebsiteVisitPattern {
             timestamp = t;
             website = w;
         }
-
     }
 
     public List<String> mostVisitedPattern(String[] username, int[] timestamp, String[] website) {
-
         // Convert all the entry as visit object to ease of understand
         List<Visit> visitList = new ArrayList<>();
         for (int i = 0; i < username.length; i++) {
@@ -32,12 +30,14 @@ public class AnalyzeUserWebsiteVisitPattern {
         Collections.sort(visitList, (v1, v2) -> Integer.compare(v1.timestamp, v2.timestamp));
 
         //Collect list of websites for each user
+        // <userName, collectionOfWebsitesSortedByTime>
         Map<String, List<String>> userWebSitesMap = new HashMap<>();
         for (Visit v : visitList) {
             userWebSitesMap.computeIfAbsent(v.userName, k -> new ArrayList<>()).add(v.website);
         }
         int max = 0;
         List<String> result = new ArrayList<>();
+        // <pattern, freq>
         Map<List<String>, Integer> seqUserFreMap = new HashMap<>();
         // Now get all the values of all the users
         for (List<String> websitesList : userWebSitesMap.values()) {
@@ -46,13 +46,13 @@ public class AnalyzeUserWebsiteVisitPattern {
                 // Now update the frequency of the sequence ( increment by 1 for 1 user)
                 for (List<String> seq : sequencesSet) {
                     int freq = seqUserFreMap.getOrDefault(seq, 0);
-                    seqUserFreMap.put(seq, freq++ + 1);
+                    seqUserFreMap.put(seq, ++freq);
                     // we update the result as we go
                     if (max < freq) {
                         max = freq;
                         result = seq;
-                        // List does not have compareTo(), so convert it to string for comparison.
-                    } else if (max == freq && seq.toString().compareTo(result.toString()) < 0) {
+                        // trick: List does not have compareTo(), so convert it to string for comparison.
+                    } else if (max == freq && seq.toString().compareTo(result.toString()) < 0) { // lexical order
                         result = seq;
                     }
                 }
@@ -78,11 +78,7 @@ public class AnalyzeUserWebsiteVisitPattern {
         for (int i = 0; i < websitesList.size() - 2; i++) {
             for (int j = i + 1; j < websitesList.size() - 1; j++) {
                 for (int k = j + 1; k < websitesList.size(); k++) {
-                    List<String> list = new ArrayList<>();
-                    list.add(websitesList.get(i));
-                    list.add(websitesList.get(j));
-                    list.add(websitesList.get(k));
-                    setOfListSeq.add(list);
+                    setOfListSeq.add(Arrays.asList(websitesList.get(i), websitesList.get(j),websitesList.get(k)));
                 }
             }
         }

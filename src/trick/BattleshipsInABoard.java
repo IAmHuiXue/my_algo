@@ -1,7 +1,7 @@
 package trick;
 
 /**
- * https://leetcode.com/problems/battleships-in-a-board/
+ * <a href="https://leetcode.com/problems/battleships-in-a-board/">...</a>
  */
 
 public class BattleshipsInABoard {

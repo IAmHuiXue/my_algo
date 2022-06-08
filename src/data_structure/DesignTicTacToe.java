@@ -1,4 +1,4 @@
-package trick;
+package data_structure;
 
 /** <a href="https://leetcode.com/problems/design-tic-tac-toe/">...</a> */
 

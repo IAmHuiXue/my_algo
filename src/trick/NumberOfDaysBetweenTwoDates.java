@@ -1,7 +1,7 @@
 package trick;
 
 /**
- * https://leetcode.com/problems/number-of-days-between-two-dates/
+ * <a href="https://leetcode.com/problems/number-of-days-between-two-dates/">...</a>
  */
 
 public class NumberOfDaysBetweenTwoDates {
@@ -30,6 +30,6 @@ public class NumberOfDaysBetweenTwoDates {
     }
 
     private boolean isALeapYear(int year) { // ！
-        return (year % 4 == 0 && year % 100 != 0) || year % 400 == 0;
+        return year % 4 == 0 && year % 100 != 0 || year % 400 == 0;
     }
 }

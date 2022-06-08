@@ -1,9 +1,9 @@
-package trick;
+package string.trick;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/** https://leetcode.com/problems/sequential-digits/ */
+/** <a href="https://leetcode.com/problems/sequential-digits/">...</a> */
 
 public class SequentialDigits {
     public List<Integer> sequentialDigits(int low, int high) {

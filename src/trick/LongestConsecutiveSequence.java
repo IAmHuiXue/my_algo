@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * https://leetcode.com/problems/longest-consecutive-sequence/
+ * <a href="https://leetcode.com/problems/longest-consecutive-sequence/">...</a>
  */
 
 public class LongestConsecutiveSequence {

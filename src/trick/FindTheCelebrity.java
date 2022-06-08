@@ -1,7 +1,7 @@
 package trick;
 
 /**
- * https://leetcode.com/problems/find-the-celebrity/
+ * <a href="https://leetcode.com/problems/find-the-celebrity/">...</a>
  */
 
 public class FindTheCelebrity {

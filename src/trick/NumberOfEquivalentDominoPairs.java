@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * https://leetcode.com/problems/number-of-equivalent-domino-pairs/
+ * <a href="https://leetcode.com/problems/number-of-equivalent-domino-pairs/">...</a>
  */
 
 public class NumberOfEquivalentDominoPairs {

@@ -3,7 +3,7 @@ package trick;
 import java.util.ArrayList;
 import java.util.List;
 
-/** https://leetcode.com/problems/pancake-sorting/ */
+/** <a href="https://leetcode.com/problems/pancake-sorting/">...</a> */
 
 public class PancakeSorting {
 

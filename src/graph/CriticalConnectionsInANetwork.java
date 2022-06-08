@@ -1,7 +1,5 @@
 package graph;
 
-import javafx.util.Pair;
-
 import java.util.*;
 
 /**
@@ -26,7 +24,7 @@ public class CriticalConnectionsInANetwork {
 
     /*
         Edges that are not a part of the cycle end up being a single route from getting from one part
-        of the graph to the other. Why, you ask? Well if there were multiple ways, then our edge would be a part
+        of the graph to the other. Why? Well if there were multiple ways, then our edge would be a part
         of the cycle considering this is an undirected graph. Thus, edges not belonging to any cycle end up being
         a critical connection for the graph.
 

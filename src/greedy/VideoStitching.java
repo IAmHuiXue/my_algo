@@ -1,6 +1,6 @@
 package greedy;
 
-/** https://leetcode.com/problems/video-stitching/ */
+/** <a href="https://leetcode.com/problems/video-stitching/">...</a> */
 
 public class VideoStitching {
     //TODO:

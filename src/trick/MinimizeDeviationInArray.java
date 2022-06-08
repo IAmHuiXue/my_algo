@@ -3,7 +3,7 @@ package trick;
 import java.util.Collections;
 import java.util.PriorityQueue;
 
-/** https://leetcode.com/problems/minimize-deviation-in-array/ */
+/** <a href="https://leetcode.com/problems/minimize-deviation-in-array/">...</a> */
 
 public class MinimizeDeviationInArray {
     /*

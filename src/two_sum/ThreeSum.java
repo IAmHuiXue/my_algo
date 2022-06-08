@@ -19,6 +19,8 @@ public class ThreeSum {
             int j = i + 1; // pay attention to range of j
             int k = array.length - 1; // pay attention to range of k
             while (j < k) {
+                // the advantage of using if + continue here is that after updating j, it will always go back
+                // to the upper while loop to check if j is still < k
                 if (j > i + 1 && array[j] == array[j - 1]) { // j > i + 1!
                     j++;
                     continue;
